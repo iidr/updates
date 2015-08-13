@@ -1,0 +1,146 @@
+#grantform_container
+{	background-color: #FFF;
+}
+div.page-content h4
+{	font-size: 13px;
+	padding: 20px 0px 10px;
+}
+.contactform input[type=text] , .contactform input[type=email], .contactform textarea
+{	/*background-color: #EFEEE9;
+	border: 1px solid #EFEEE9;*/
+	background-color: #FFFFCC;
+	border: 1px solid #346799;
+	color: #000;
+	float: left;
+	font-size: 13px;
+	padding: 5px 9px;
+	display:inline-block;
+	width:296px;
+	float:left;
+}
+.contactform select
+{	/*background-color: #EFEEE9;
+	border: 1px solid #EFEEE9;*/
+	background-color: #FFFFCC;
+	border: 1px solid #346799;
+	color: #000;
+	font-size: 13px;
+	padding: 5px 8px;
+	margin-right:10px;
+}
+.grantTopHalfLeft
+{	float: left;
+	width: 450px;
+}
+.grantTopHalfRight
+{	float: right;
+	width: 450px;
+}
+.grantTopHalfLeft>div, .grantTopHalfRight>div, .grantFullWidth>div
+{	padding-bottom: 10px;
+}
+.grantFullWidth
+{	width: 900px;
+}
+.contactform .grantFullWidth label
+{	width: 300px;
+}
+.contactform .grantFullWidth input[type=text] , .contactform .grantFullWidth input[type=email], .contactform .grantFullWidth textarea
+{	width:500px;
+}
+.contactform .grantFullWidth textarea.grantRef
+{	height: 50px;
+}
+.contactform .grantFullWidth textarea.grantState
+{	height: 200px;
+}
+form input[type='text'].short
+{	width: 30px !important;
+}
+form input[type='text'].medium
+{	width: 90px !important;
+}
+
+form input[type='text'].number
+{	text-align: right !important;
+}
+.contactform .clearfix span, .grantFullWidth span
+{	display: block;
+	float: left;
+	padding: 5px 10px 0px 5px;
+}
+.grantFullWidth h3
+{	margin: 15px 0px 10px;
+	font-weight: bold;
+}
+.grantFullWidth h4
+{	font-size: 14px;
+	font-weight: bold;
+	margin: 0px 0px 10px;
+}
+.grantFullWidth table td, .grantFullWidth table th
+{	padding: 3px 5px;
+	vertical-align: top;
+}
+.grantFullWidth table td div.detailBlock
+{	padding: 10px 20px 0px;
+	border: 1px solid #D7D7D7;
+}
+.grantFullWidth table td div.detailBlock>div
+{	margin-bottom: 10px;
+}
+.grantFullWidth table tr.subheading td
+{	font-style: italic;
+	font-weight: bold;
+}
+.grantFullWidth table td.costLabel
+{	width: 370px;
+}
+.grantFullWidth table td.costLabel textarea
+{	width: 350px;
+	margin: 5px 0px 25px;
+}
+.grantFullWidth table td.costAmount
+{	width: 150px;
+	text-align: center;
+}
+.grantFullWidth table td.costAmount input[type='text']
+{	width: 80px !important;
+	text-align: right !important;
+	float: none !important;
+}
+.grantFullWidth table td.costAmount span.total_cost
+{	display: block;
+	width: 80px;
+	text-align: right;
+	margin: auto;
+	float: none;
+}
+.grantFullWidth table tr.totals td.costAmount
+{	padding-top: 10px;
+	border-top: 2px solid #044D64;	
+}
+.contactform input[type=text]:valid, .contactform input[type=password]:valid, .contactform textarea:valid, .contactform select:valid
+{	background-color: #EFEEE9;
+	border: 1px solid #EFEEE9;
+    /*background-color: #FFFFCC;
+	border: 1px solid #346799;*/
+}
+
+.contactform  input[type="submit"]
+{	/*background: #336699 url('../img/template/button_arrow.png') no-repeat right 14px center;*/
+	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 14px center;*/
+	background: #993333 url('../img/template/button_arrow.png') no-repeat right 14px center;
+	text-align:left; 
+	color:#fff; 
+	padding:11px 45px 11px 15px; 
+	cursor:pointer; 
+	font-size:14px; 
+	margin-top:10px;
+	margin-right: 40px;
+	border:none;
+	float:right;
+}
+.contactform input[type=text]:focus, .contactform textarea:focus, .contactform select:focus
+{	border: 1px solid #346799;
+}

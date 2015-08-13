@@ -1,0 +1,218 @@
+#pipContainer
+{	width: 655px;
+	margin-bottom: 20px;
+	padding: 20px;
+	background-color: #FFF;
+}
+#pipHeaderImage
+{	float: left;
+	width: 344px;
+	height: 400px;
+}
+#mainProdImageContainer
+{	margin: 0px 22px;
+}
+#pipHeaderImage .elastislide-wrapper
+{	box-shadow: none;
+}
+#pipHeaderImage ul li
+{	margin: 0px 10px 0px 0px;
+}
+
+#pipHeaderImage .elastislide-carousel ul li a img
+{	border: 1px solid #E2E2E2;
+}
+#pipHeaderImage .elastislide-carousel ul li:hover a img
+{	border: 1px solid #3C819F;
+}
+.prodPhotoChooser
+{	margin-top: 10px;
+}
+
+.prodPhotoChooser .elastislide-horizontal
+{	margin: 0px -18px;
+}
+.prodPhotoChooser .elastislide-horizontal nav span
+{	margin-top: -17px;
+}
+#pipHeaderDetails
+{	float: right;
+	width: 289px;
+	height: 400px;
+	overflow: hidden;
+}
+#pipHeaderDetails h1
+{	font-size: 36px;
+	color: #397F9F;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px 0px 10px;
+}
+#pipHeaderDetails #pipHeaderAuthor
+{	height: 40px;
+	font-size: 13px;
+}
+#pipHeaderDetails #pipHeaderCode
+{	height: 40px;
+	font-size: 10px;
+	color: #999999;
+}
+#pipHeaderDetails #pipHeaderPrice
+{	height: 100px;
+}
+#pipHeaderDetails #pipHeaderPrice>p
+{	color: #3B819F;
+	font-size: 24px;
+	margin: 0px;
+	padding: 0px;
+}
+#pipHeaderDetails #pipHeaderPrice form.courseBookButton
+{	border: none;
+	margin: 0px;
+}
+#pipHeaderDetails #pipHeaderPrice form.courseBookButton input[type="text"]
+{	padding: 10px;
+	width: 30px;
+	background-color: #EFEEE9;
+	border: none;
+	margin: 0px 10px 0px 0px
+}
+#pipHeaderDetails #pipHeaderPrice form.courseBookButton input[type="submit"]
+{	margin: 0px;
+	/*background: #3B819F url("../img/template/store_plus_trans.png") no-repeat scroll 94% center;*/
+	/*background: #800000 url("../img/template/store_plus_trans.png") no-repeat scroll 94% center;*/
+	background: #993333 url("../img/template/store_plus_trans.png") no-repeat scroll 94% center;
+}
+#pipHeaderDetails #pipHeaderSocial
+{	height: 50px;
+	font-size: 36px;
+}
+#pipHeaderDetails #pipHeaderSocial .social_links_insert
+{	float: right;
+	margin-right: 20px;
+	text-align: right;
+}
+#pipHeaderDetails #pipHeaderSocial .social_links_insert .fbPageLike
+{	margin-top: -30px;
+}
+#pipTabs
+{	width: 617px;
+	float: left;
+	margin: 20px 14px 0px;
+}
+#pipTabsSelector
+{	margin: 0px 8px;
+}
+#pipTabsSelector>ul>li
+{	float: left;
+	margin: 0px 1px;
+}
+#pipTabsSelector>ul>li a
+{	display: block;
+	padding: 10px 0px;
+	height: 16px;
+	width: 120px;
+	background-color: #EFEEE9;
+	font-weight: bold;
+	color: #3B819F;
+	text-align: center;
+	margin-bottom: -1px;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-ms-transition: none;
+	-o-transition: none;
+	transition: none;
+}
+#pipTabsSelector>ul>li a.selected
+{	background-color: #FFF;
+	border-top: 1px solid #E2E2DC;
+	border-left: 1px solid #E2E2DC;
+	border-right: 1px solid #E2E2DC;
+	width: 118px;
+}
+#pipTabsContent>div.pipTabsContent
+{	border-top: 1px solid #E2E2DC;
+	padding-top: 20px;
+}
+#pipTabsContent>div.pipTabsContent .pageTopText
+{	color: #000;
+	font-size: 14px;
+}
+.product_mm li
+{	margin-bottom: 20px;
+}
+.product_mm li h3
+{	
+}
+.storeBundles, .storeShelf, #prodReviewContainer
+{	width: 695px;
+	margin-bottom: 20px;
+}
+#prodReviewContainer
+{	background-color: #FFF;
+}
+
+.page-store .page-content .storeBundles h3, .page-store .page-content #prodReviewContainer h3
+{	background-color: #3B819F;
+	color: #FFFFFF;
+	padding: 10px 20px;
+}
+#prodReviewContainer h3>span
+{	float: left;
+}
+#prodReviewContainer h3>#prcRatingAv
+{	font-size: 12px;
+	padding-top: 10px;
+	margin-left: 10px;
+}
+#prodReviewContainer h3>#prcRatingAv
+{	font-size: 12px;
+	padding-top: 10px;
+	margin-left: 10px;
+}
+#prodReviewContainer h3>.rating
+{	margin: 10px 0px 0px 10px;
+}
+#prodReviewContainer h3>#prcYourReview
+{	float: right;
+}
+
+#prodReviewContainer h3>#prcYourReview p.reviewOpener
+{	padding: 0px;
+	line-height: normal;
+}
+#prodReviewContainer h3>#prcYourReview .reviewOpener a
+{	display: block;
+	text-align: center;
+	width: 140px;
+	padding: 10px 0px;
+	background: #469ABF;
+	color: #FFF;
+	font-size: 14px;
+	margin-top: 0px;
+}
+#prodReviewListContainer>ul>li
+{	padding: 20px 0px;
+	margin: 0px 15px;
+	border-bottom: 1px solid #EFEEE9;
+}
+#prodReviewListContainer>ul>li.prodrevMore
+{	font-size: 14px;
+	border-bottom: none;
+	text-align: right;
+}
+#prodReviewListContainer>ul>li .revListLeft
+{	float: left;
+	width: 240px;
+	color: #333333;
+}
+#prodReviewListContainer>ul>li .revListLeft h4
+{	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 6px;
+}
+#prodReviewListContainer>ul>li .revListRight
+{	float: right;
+	width: 400px;
+	color: #003446;
+}

@@ -1,0 +1,290 @@
+
+#sidebar-right, #sidebar-right *
+{	background-color: #f1f0ed;
+	color: #716b4a;
+}
+#sidebar-right h3
+{	background-color: #716b4a;
+	color: #FFF;
+	padding: 7px 15px;
+}
+#sidebar-right ul
+{	margin: 10px 10px 10px 20px;
+}
+#sidebar-right ul ul
+{	margin: 0px 0px 0px 15px;
+}
+#sidebar-right li
+{	font-size: 16px;
+	padding: 3px 0px;
+}
+#sidebar-right li:last-child
+{	padding-bottom: 0px;
+}
+#sidebar-right li.listShowMore
+{	text-align: right;
+	font-style: italic;
+	font-size: 12px;
+}
+
+.askQuestionList>li
+{	margin: 5px 0px 10px;
+	background: #FFF;
+}
+.askQuestionList>li .askImamLeft
+{	float: left;
+	padding: 20px 0px 20px 22px;
+	width: 453px;
+}
+.askQuestionList>li .askImamLeft h4
+{	color: #92A583;
+	font-size: 24px;
+	font-weight: normal;
+}
+.askQuestionList>li .askImamLeft p, .askQuestionList>li .askImamLeft p a
+{	color: #999999;
+	font-size: 14px;
+}
+.askQuestionList>li .askImamRight
+{	float: right;
+	padding: 20px 30px 20px 0px;
+	width: 140px;
+}
+.askImamRight a
+{	display: block;
+	width: 120px;
+	padding: 10px;
+	margin-bottom: 10px;
+	color: #FFF !important;
+	text-transform: uppercase;
+	text-align: center;
+	background: #92A583;
+	font-size: 14px;
+}
+.askImamRight a:last-child
+{	margin-bottom: 0px;
+}
+/*.askQuestionList>li h4
+{	font-weight: bold;
+	font-size: 13px;
+	line-height: 22px;
+	float: left;
+	width: 600px;
+}*/
+.askQuestionList>li .questionLogo
+{	float: left;
+	width: 25px;
+	height: 25px;
+	margin-right: 15px;
+	background: #716b4a url('../img/template/question_logo.png') no-repeat center center;
+}
+.askQuestionList>li .questionAnswerLink
+{	text-align: center;
+	font-style: italic;
+	font-weight: bold;
+}
+.askQuestionList>li .questionAnswerContainer
+{	display: none;
+}
+.askQuestionList>li .questionAnswerInner
+{	padding: 20px 30px;
+}
+a.jqmClose
+{	font-weight: bold;
+	color: #933;
+	display: block;
+	float: right;
+	padding: 0px 0px 5px
+}
+#rlp_modal_popup
+{	padding-bottom: 5px;
+	width: 640px;
+	margin-left: -320px;
+	top: 10px;
+	height: 600px; 
+}
+#rlpModalInner
+{	height: 500px;
+	overflow: auto;
+	width: 640px;
+}
+#rlpModalInner h4
+{	background: #716b4a url('../img/template/question_logo.png') no-repeat top left;
+	padding: 10px 10px 10px 50px;
+	font-size: 13px;
+	color: #FFF;
+	height: auto;
+}
+#rlpModalInner .qanswerText
+{	padding: 10px 20px;
+}
+#rlpModalInner .qanswerMM
+{	margin-bottom: 20px;
+	text-align: center;
+}
+
+#yourReviewContainer
+{	width: 635px;
+	padding-left: 0px;
+}
+#yourReviewContainer h3
+{	font-size: 14px;
+}
+#yourReviewContainer .reviewFormContainer
+{	width: 635px;
+	height: 150px;
+}
+#yourReviewContainer .reviewFormContainer form
+{	padding: 5px 0px;
+}
+#yourReviewContainer .reviewFormContainer .rfcOverlay
+{	width: 635px;
+	height: 150px;
+}
+#yourReviewContainer .reviewFormContainer .rfcOverlay #rfcOverlayInner
+{	width: 575px;
+	height: 110px;
+	padding-top: 40px
+}
+#yourReviewContainer form textarea
+{	width: 611px;
+	height: 50px;
+}
+#prodReviewListContainer
+{	float: none;
+	width: 635px;
+}
+#prodReviewListContainer>ul
+{	width: 600px;
+	margin-right: 0px;
+	padding: 10px;
+}
+
+#askTopicArchive ul li a
+{	display: block;
+	padding: 5px 0px 5px 20px;
+	font-size: 12px;
+	color: #92A583;
+}
+
+#askExpertHeader
+{	color: #FFF;
+	background-color: #92A583;
+	padding: 24px 33px;
+	font-size: 14px;
+	margin-top: 21px;
+}
+#askExpertHeader *
+{	color: #FFF;
+}
+#askExpertHeader .pageTopText, #askExpertHeader p
+{	padding: 5px 0px 10px;
+}
+#askExpertHeader .pageTopText
+{	font-size: 18px;
+	width: 580px;
+}
+#askExpertHeader .social_links_insert
+{	display: block;
+	float: right;
+	font-size: 36px;
+}
+
+#sidebar-submitq-wrapper
+{	background: #FFF;
+	margin: 10px 0px;
+}
+#sidebar-submitq-wrapper h3
+{	background-color: #92A583;
+	padding: 15px 23px;
+	margin: 7px 0px 0px;
+	color: #FFF;
+}
+#sidebar-submitq-wrapper #sidebar-submitq-content
+{	padding: 22px;
+	font-size: 14px;
+}
+#sidebar-submitq-wrapper #sidebar-submitq-content p
+{	padding: 0px;
+	margin: 0px 0px 20px;
+	font-family: Lato, Tahoma, Geneva, sans-serif;
+	font-size: 16px;
+}
+#sidebar-submitq-wrapper #sidebar-submitq-content p span
+{	font-weight: 300;
+}
+#sidebar-submitq-wrapper #sidebar-submitq-content #submitqButton
+{	display: block;
+	float: left;
+	padding: 10px 30px 10px 10px;
+	color: #FFF;
+	/*background: #800000 url('../img/template/button_arrow_white.png') no-repeat right 10px center;*/
+	/*background: #800000 url('../img/template/button_arrow_white.png') no-repeat 90% center;*/
+	background: #993333 url('../img/template/button_arrow_white.png') no-repeat 90% center;
+	font-size: 14px;
+	/*background: #92A583 url('../img/template/button_arrow_white.png') no-repeat right 10px center;*/
+}
+#ask_question_modal_popup
+{	width: 400px;
+	margin-left: -200px;
+}
+#ask_question_modal_inner form p
+{	clear: both;
+	width: 400px;
+}
+#ask_question_modal_inner form textarea
+{	width: 378px;
+	height: 50px;
+	margin-bottom: 10px;
+	padding: 5px 10px;
+}
+#ask_question_modal_inner form label
+{	display: block;
+	float: left;
+	font-size: 14px;
+	width: 100px;
+	margin: 0px 0px 10px 0px;
+}
+#ask_question_modal_inner form input[type="text"]
+{	display: block;
+	float: left;
+	font-size: 14px;
+	width: 238px;
+	margin: 0px 0px 10px 0px;
+	padding: 5px 10px;
+}
+#ask_question_modal_inner form a#asqSubmit
+{	display: block;
+	float: right;
+	padding: 10px 30px 10px 10px;
+	color: #FFF;
+	/*background: #92A583 url('../img/template/button_arrow_white.png') no-repeat right 10px center;*/
+	/*background: #800000 url('../img/template/button_arrow_white.png') no-repeat right 10px center;*/
+	background: #993333 url('../img/template/button_arrow_white.png') no-repeat right 10px center;
+	font-size: 14px;
+}
+
+#asqSuccess
+{	font-size: 20px;
+	text-align: center;
+}
+
+#asqFail
+{	font-size: 18px;
+	text-align: center;
+	color: #990000;
+}
+#askQuestionsContainer .pagination
+{	margin-right: 0px;
+}
+#topicHeader
+{	margin-top: 10px;
+}
+#topicHeader h3
+{	margin-top: 0px;
+}
+.social_links_insert .st_sharethis_custom
+{	background: url("../img/template/sharethis_st_grey.png") no-repeat scroll left top transparent;
+	padding: 0px 10px;
+	margin: 40px 0px 10px 0px;
+}

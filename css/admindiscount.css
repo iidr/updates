@@ -1,0 +1,13 @@
+#rlpModalInner li.ptselected{
+	font-weight: bold;
+	font-size: 14px;
+}
+
+#rlpModalInner li.ptselected ul{
+	font-weight: normal;
+}
+
+#rlpModalInner li.tktselected{
+	font-weight: bold;
+	font-size: 14px;
+}

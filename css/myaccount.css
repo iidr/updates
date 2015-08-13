@@ -1,0 +1,391 @@
+#myac_mainmenu
+{	margin-top: 8px;
+}
+#myac_mainmenu>ul>li
+{	float: left;
+	background: #003546 no-repeat 240px 40px;
+	width: 258px;
+	height: 147px;
+	margin: 0px 18px 18px 0px;
+	padding: 25px 25px 28px;
+	color: #FFF;
+	position: relative;
+}
+#myac_mainmenu>ul>li#myac_main_li_details
+{	background-image: url('../img/template/myac_main_default.png');
+}
+#myac_mainmenu>ul>li#myac_main_li_orders
+{	background-image: url('../img/template/myac_main_trolley.png');
+}
+#myac_mainmenu>ul>li#myac_main_li_bookings
+{	background-image: url('../img/template/myac_main_calendar.png');
+}
+#myac_mainmenu>ul>li#myac_main_li_refer
+{	background-image: url('../img/template/myac_main_refer.png');
+}
+#myac_mainmenu>ul>li:last-child
+{	margin-right: 0px;
+}
+#myac_mainmenu>ul>li a
+{	color: #FFF;
+}
+#myac_mainmenu>ul>li .myac_main_text
+{	width: 175px;
+}
+#myac_mainmenu>ul>li .myac_main_text h3
+{	font-size: 26px;
+}
+#myac_mainmenu>ul>li .myac_main_text p
+{	font-size: 14px;
+}
+#myac_mainmenu>ul>li .myac_main_button
+{	display: block;
+	position: absolute;
+	top: 133px;
+	left: 193px;
+	padding: 10px 15px;
+	width: 66px;
+	height: 19px;
+	font-size: 14px;
+	/*background: #336699 url('../img/template/button_arrow.png') no-repeat 80px center;*/
+	/*background: #800000 url('../img/template/button_arrow.png') no-repeat 80px center;*/
+	background: #993333 url('../img/template/button_arrow.png') no-repeat 80px center;
+}
+#myacMenu
+{	margin: 0px 0px 15px;
+}
+#myacMenu ul>li
+{	float: left;
+	margin: 0px 1px 2px 1px;
+}
+#myacMenu ul>li a
+{	color: #FFF;
+	background: #003546 no-repeat 194px top;
+	font-size: 16px;
+	display: block;
+	padding: 12px 50px 12px 15px;
+	width: 125px;
+	height: 26px;
+	position: relative;
+}
+#myacMenu ul>li a .myacMenuBG
+{	display: block;
+	background: no-repeat top left;
+	position: absolute;
+	right: 0px;
+	top: 12px;
+	background:;
+	height: 40px;
+	width: 40px;
+	opacity: 0.6;
+}
+#myacMenu ul>li#myac_sub_orders a .myacMenuBG
+{	background-image: url('../img/template/myac_sub_trolley.png');
+}
+#myacMenu ul>li#myac_sub_details a .myacMenuBG
+{	background-image: url('../img/template/myac_sub_default.png');
+}
+#myacMenu ul>li#myac_sub_refer a .myacMenuBG
+{	background-image: url('../img/template/myac_sub_refer.png');
+}
+#myacMenu ul>li#myac_sub_bookings a .myacMenuBG
+{	background-image: url('../img/template/myac_sub_calendar.png');
+}
+#myacMenu ul>li.selected a
+{	background-color: #3B819F;
+}
+#myacMenu ul>li.selected a .myacMenuBG
+{	opacity: 1;
+}
+
+#myAcContainer
+{	background: #FFF;
+}
+#myAcContainer h1, #myAcContainer #myacAffiliateContainer h2
+{	color: #FFF;
+	background-color: #3B819F;
+	font-size: 26px;
+	padding: 15px;
+}
+#myAcContainer h1 #myAcContainerRight, #myAcContainer #myacAffiliateContainer h2 #myAcAffHeaderRight
+{	display: block;
+	float: right;
+	font-size: 16px;
+	color: #FFF;
+	padding: 5px 0px;
+}
+#myAcContainer h1 #myAcContainerRight a, #myAcContainer #myacAffiliateContainer h2 #myAcAffHeaderRight a
+{	color: #FFF;
+}
+span.prodItemCode
+{	font-size: 10px;
+	margin-left: 10px;
+	color: #999999;
+}
+table.myacList
+{	border-collapse: collapse;
+	margin: 30px;
+}
+table.myacList>tbody>tr
+{	border-top: 1px solid #F0F0F0;
+}
+table.myacList>tbody>tr.myacListSubRow
+{	border: none;
+}
+table.myacList>tbody>tr:first-child
+{	border-top: none;
+}
+table.myacList>tbody>tr:last-child
+{	border-bottom: 1px solid #F0F0F0;
+}
+table.myacList th
+{	color: #3A809F;
+	padding: 12px 20px;
+	font-size: 14px;
+	text-align: left;
+}
+table.myacList td
+{	padding: 12px 20px;
+	text-align: left;
+	vertical-align: top;
+	font-size: 14px;
+}
+table.myacList td.thumbnail>div
+{	width: 110px;
+	height: 110px;
+	overflow: hidden;
+}
+table.myacList td.thumbnail>div img
+{	width: 110px;
+}
+table.myacList td.prodName
+{	font-size: 18px;
+}
+table.myacList td.prodName p.prodItemCode
+{	font-size: 10px;
+	color: #999999;
+	padding: 0px;
+	line-height: auto;
+}
+table.myacList td.num, table.myacList th.num
+{	text-align: right;
+}
+table.myacList td.orderTotal
+{	font-weight: bold;
+	color: #003546;
+}
+table.myacList td.orderItemList table td
+{	padding: 3px 5px;
+	vertical-align: top;
+}
+table.myacList td.orderItemList table td.oilType
+{	width: 50px;
+}
+table.myacList td span.oilItemid
+{	font-size: 12px;
+}
+table.myacList td.orderItemList table td.oilDesc
+{	width: 250px;
+}
+table.myacList td.orderItemList table td.oilPrice
+{	width: 50px;
+}
+
+
+table.itemsTable th, table.itemsTable td
+{	border: 1px solid #666;
+	padding: 5px 10px;
+	vertical-align: top;
+}
+table.itemsTable th
+{	border-color: #a22a2b;
+	background-color: #a22a2b;
+	color: #FFF;
+}
+table.itemsTable .num
+{	text-align: right;
+}
+.checkout-address-boxes .checkout-address-deliverybox
+{	padding: bottom: 30px;
+}
+.checkout-address-boxes .checkout-address-deliverybox h3
+{	background-color: #3B819F;
+	padding: 15px;
+}
+.checkout-address-boxes .checkout-address-deliverybox p
+{	color: #000;
+	padding: 0px;
+	font-size: 14px;
+	margin: 10px 30px;
+}
+
+#bookingDetails
+{	padding: 30px;
+}
+#bookingDetails>div
+{	margin: 20px 0px;
+	font-size: 16px;
+}
+#bookingDetails>div>span
+{	display: block;
+	float: left;
+	width: 180px;
+	padding: 0px 20px 0px 0px;
+	text-align: right;
+	color: #3A809F;
+}
+#bookingDetails>div>.bdContent
+{	float: left;
+	width: 700px;
+}
+#bdCourseMap
+{	width: 700px;
+	height: 300px;
+	margin-top: 20px;
+}
+#referForm
+{	margin: 30px;
+}
+#referForm p
+{	margin: 0px 0px 20px;
+	clear: both;
+}
+#referForm p label
+{	float: left;
+	text-align: right;
+	margin: 0px 20px 20px 0px;
+	font-size: 16px;
+	width: 200px;
+}
+#referForm p input
+{	float: left;
+	margin: 0px 10px 20px 0px;
+}
+#referForm p input[type='text'], #referForm p textarea
+{	background-color: #EFEEE9;
+	border: 1px solid #E7E7E7;
+	color: #000000;
+	display: inline-block;
+	float: left;
+	font-size: 13px;
+	padding: 5px 9px;
+	width: 300px;
+	margin-bottom: 20px;
+}
+#referForm p textarea
+{	height: 100px;
+}
+#referForm p input[type="submit"]
+{	background: #003747 url('../img/template/button_arrow.png') no-repeat 220px center;
+	border: medium none;
+	color: #FFFFFF;
+	cursor: pointer;
+	font-family: 'Belgrano',serif;
+	font-size: 13px;
+	padding: 11px 35px 11px 15px;
+	text-align: left;
+	width: 240px;
+}
+#breadcrumbs ul
+{	float: left;
+	margin-top: 10px;
+}
+#dbCrumbsRight
+{	float: right;
+	background: url('../img/template/dboard_bc_bg.png') no-repeat left center;
+	padding: 7px 0px 7px 30px;
+	font-family: Lato, Tahoma, Geneva, sans-serif;
+	font-size: 16px;
+}
+#dbCrumbsRight a
+{	color: #FFF;
+}
+
+.myacSubsList
+{	padding: 15px;
+}
+.myacSubsList table
+{	border: 1px solid #EEE;
+}
+.myacSubsList table th, .myacSubsList table td
+{	text-align:left;
+	padding: 5px 40px;
+	font-size: 16px;
+	border-bottom: 1px solid #EEE;
+}
+#affShareContainer
+{	position: relative;
+}
+#affShareContainer>a
+{	float: right;
+}
+#affShareContainer #affSharePopup
+{	position: absolute;
+	top: 35px;
+	right: -15px;
+	display: none;
+	border: 1px solid #3B819F;
+	background-color: #FFF;
+	padding: 20px;
+	color: #002B38;
+	width: 250px;
+	font-size: 14px;
+}
+#affShareContainer #affSharePopup .spListSuccessMessage, #affShareContainer #affSharePopup .spListFailMessage
+{	color: #009900;
+	font-weight: bold;
+	text-align: center;
+}
+#affShareContainer #affSharePopup .spListFailMessage
+{	color: #D20000;
+}
+#affShareContainer #affSharePopup a
+{	color: #002B38 !important;
+}
+.affShareContainerOpen #affSharePopup
+{	display: block !important;
+}
+#affShareContainer #affSharePopup form.spEmailForm input[type="text"], #affShareContainer #affSharePopup form.spEmailForm textarea
+{	width: 228px;
+	padding: 5px 10px;
+	background-color: #EFEEE9;
+    border: 1px solid #EFEEE9;
+}
+#affShareContainer #affSharePopup form.spEmailForm input[type="text"]:focus, #affShareContainer #affSharePopup form.spEmailForm textarea:focus
+{	border: 1px solid #346799;
+}
+#affShareContainer #affSharePopup form.spEmailForm input[type="submit"]
+{	/*background: #336699 url('../img/template/button_arrow.png') no-repeat right 10px center;*/
+	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 10px center;*/
+	background: #993333 url('../img/template/button_arrow.png') no-repeat right 10px center;
+	text-align:left; 
+	color:#fff; 
+	padding:5px 30px 5px 10px; 
+	cursor:pointer; 
+	font-size:14px; 
+	border:none;
+	float:right;
+}
+
+#affShareContainer #affSharePopup ul#spList li a
+{	display: block;
+	padding: 11px 0px 3px 40px;
+	height: 24px;
+}
+#affShareContainer #affSharePopup ul#spList li#spListFB a
+{	background: url("../img/template/sharethis_fb.png") no-repeat left center;
+}
+#affShareContainer #affSharePopup ul#spList li#spListEmail a
+{	background: url("../img/template/sharethis_em.png") no-repeat left center;
+}
+#affShareContainer #affSharePopup ul#spList li#spListTwitter a
+{	background: url("../img/template/sharethis_tw.png") no-repeat left center;
+}
+#affShareContainer #affSharePopup ul#spList li#spListLink a
+{	background: url("../img/template/sharethis_link.png") no-repeat left center;
+}
+#splLinkSelector input[type="text"]
+{	width: 250px;
+	border: none;
+	color: #000;
+}
