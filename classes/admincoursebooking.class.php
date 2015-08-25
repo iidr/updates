@@ -122,12 +122,11 @@ class AdminCourseBooking extends CourseBooking
 			$fields[] = 'course=' . $newcourse;
 			$fields[] = 'ticket=' . $newticket;
 			
-			$old_course = new Course($this->details['course']);
-			$oldPrice	= $old_course->tickets[$this->details['ticket']]['tprice'];
+			$oldPrice	= $this->ticket->details['tprice'];
 			$new_course = new Course($newcourse);
 			$newPrice	= $new_course->tickets[$newticket]['tprice'];
 			
-			echo 'Outstanding Price: ',$outstandingPrice	= floatval($oldPrice - $newPrice);
+			$outstandingPrice	= floatval($newPrice - $oldPrice);
 			
 			$changefields[] = 'course_new			='.(int)$newcourse;
 			$changefields[] = 'ticket_new			='.(int)$newticket;
@@ -145,30 +144,28 @@ class AdminCourseBooking extends CourseBooking
 					$change_sql = 'INSERT INTO bookingxfers SET ' . implode(', ', $changefields);
 					$this->db->Query($change_sql);
 					
-					if($outstandingPrice > 0 && $this->student->details["username"]!=''){
-						if($this->ValidEmail($this->student->details["username"])){
-							$fields = array();
-							$fields['site_url'] = $this->link->GetLink();
-							$fields['firstname'] = $this->student->details['firstname'];
-							$fields['booking_link_plain'] = $this->link->GetLink('booking.php?id'.$this->id);
-							$fields['booking_link'] = "<a href='". $fields['booking_link_plain'] ."'>". $fields['booking_link_plain'] ."</a>";
-							
-							$fields['old_course_title'] = $old_course->content['ctitle'].' '. $old_course->tickets[$this->details['ticket']]['tname'];
-							$fields['old_course_location'] = $old_course->GetVenue()->GetAddress(' ');
-							$fields['old_course_date'] = $this->OutputDate($old_course->details['starttime']);
-							
-							$fields['course_title'] = $new_course->content['ctitle'].' '. $new_course->tickets[$newticket]['tname'];
-							$fields['course_location'] = $new_course->GetVenue()->GetAddress(' ');;
-							$fields['course_date'] = $this->OutputDate($new_course->details['starttime']);
-							
-							$fields['outstanding_amount'] 	= $outstandingPrice;
-							$fields['outstanding_note'] 	= 'Please pay your outstanding amount for given course.';
-							
-							$t = new MailTemplate('booking_transfer');
-							$mail = new HTMLMail;
-							$mail->SetSubject($t->details['subject']);
-							$mail->Send('noor.mustafa@live.com', $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));
-						}				
+					if($this->ValidEmail($this->student->details["username"])){
+						$fields = array();
+						$fields['site_url'] = $this->link->GetLink();
+						$fields['firstname'] = $this->student->details['firstname'];
+						$fields['booking_link_plain'] = $this->link->GetLink('booking.php?id='.$this->id);
+						$fields['booking_link'] = "<a href='". $fields['booking_link_plain'] ."'>". $fields['booking_link_plain'] ."</a>";
+						
+						$fields['old_course_title'] = $this->course->content['ctitle'].' '. $this->course->ticket->details['tname'];
+						$fields['old_course_location'] = $this->course->GetVenue()->GetAddress(' ');
+						$fields['old_course_date'] = $this->OutputDate($this->course->details['starttime']);
+						
+						$fields['course_title'] = $new_course->content['ctitle'].' '. $new_course->tickets[$newticket]['tname'];
+						$fields['course_location'] = $new_course->GetVenue()->GetAddress(' ');;
+						$fields['course_date'] = $this->OutputDate($new_course->details['starttime']);
+						
+						$fields['outstanding_amount'] 	= number_format($outstandingPrice, 2).'&pound;';
+						$fields['outstanding_note'] 	= ($outstandingPrice > 0)?'Please pay your outstanding amount for given course.':'You will be returned back given amount.';
+						
+						$t = new MailTemplate('booking_transfer');
+						$mail = new HTMLMail;
+						$mail->SetSubject($t->details['subject']);
+						$mail->Send($this->student->details["username"], $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));
 					}					
 					return true;
 				}
@@ -232,24 +229,37 @@ class AdminCourseBooking extends CourseBooking
 		return $transfers;
 	} // end of fn GetTransfers
 	
-	public function TransfersTable()
-	{	if ($transfers = $this->GetTransfers())
-		{	echo '<table><tr><th>Transferred</th><th>From</th><th>To</th><th>By</th></tr>';
-			foreach ($transfers as $transfer)
-			{	$old_course = new Course($transfer['course_old']);
+	public function TransfersTable(){	
+		if($transfers = $this->GetTransfers()){		
+			echo '<table><tr><th>Transferred</th><th>From</th><th>To</th><th>Outstanding Balance</th><th>By</th></tr>';
+			foreach ($transfers as $transfer){	
+				$old_course = new Course($transfer['course_old']);
 				$new_course = new Course($transfer['course_new']);
 				$adminuser = new AdminUser($transfer['adminuser']);
 				//$this->VarDump($adminuser);
 				echo '<tr><td>', date('d M y @H:i', strtotime($transfer['changedate'])), '</td><td>', $this->InputSafeString($old_course->content['ctitle']), ' on ', date('d/m/y', strtotime($old_course->details['starttime']));
-				if (($venue = $old_course->GetVenue()) && $venue->id)
-				{	echo '<br />at ', $venue->GetShortDesc();
+				
+				if (($venue = $old_course->GetVenue()) && $venue->id){
+					echo '<br />at ', $venue->GetShortDesc();
 				}
+				
 				echo '</td><td>', $this->InputSafeString($new_course->content['ctitle']), ' on ', date('d/m/y', strtotime($new_course->details['starttime']));
-				if (($venue = $new_course->GetVenue()) && $venue->id)
-				{	echo '<br />at ', $venue->GetShortDesc();
+				
+				if (($venue = $new_course->GetVenue()) && $venue->id){
+					echo '<br />at ', $venue->GetShortDesc();
 				}
+				
+				echo '</td><td>';
+				
+				if($transfer['outstanding_balance']>0){
+				 	echo 'To Get : ',number_format($transfer['outstanding_balance'], 2);
+				}else{
+					echo 'To Pay : ',number_format(($transfer['outstanding_balance']*-1), 2);
+				}
+				
 				echo '</td><td>', $adminuser->username, '</td></tr>';
 			}
+			
 			echo '</table>';
 		}
 	} // end of fn TransfersTable

@@ -384,7 +384,7 @@ class Course extends Base implements Searchable
 	{
 		$courses = array();
 		
-		$sql = 'SELECT * FROM courses WHERE endtime>"' . $this->datefn->SQLDateTime() . '" AND live=1 ORDER BY starttime ASC';
+		$sql = 'SELECT * FROM courses WHERE endtime>"' . $this->datefn->SQLDateTime() . '" AND live=1 ORDER BY `endtime` ASC';
 		
 		if ($limit)
 		{	$sql .= ' LIMIT ' . (int)$limit;

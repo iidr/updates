@@ -475,6 +475,9 @@ class StoreOrder extends BlankItem
 									{	if ($itemdiscount['rowid'] == $rowid)
 										{	$disc_sql = 'INSERT INTO storeorderitemdiscounts SET itemid=' . $id . ', discid=' . $itemdiscount['discid'] . ', ticket=' . $itemdiscount['ticket'] . ', discamount=' . round($itemdiscount['amount'], 2);
 											$this->db->Query($disc_sql);
+											
+											$voucherQry = "UPDATE `discountcodes` SET `usecount`=`usecount`+1 WHERE `discid`='".$itemdiscount['discid']."';";
+											$this->db->Query($voucherQry);
 										}
 									}
 								}

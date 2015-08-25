@@ -163,7 +163,11 @@ class AdminProductReview extends ProductReview
 		}
 		
 		$years = array();
-		for ($y = 2000; $y <= date('Y'); $y++)
+		/*for ($y = 2000; $y <= date('Y'); $y++)
+		{	$years[] = $y;
+		}*/
+		
+		for ($y = 2000; $y <= 2025; $y++)
 		{	$years[] = $y;
 		}
 		if ($this->id)

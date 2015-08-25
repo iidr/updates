@@ -538,7 +538,8 @@ class FormLineDate extends FormLine
 		{	$this->years = $years;
 		} else // default to 5 years around this year
 		{	$ystart = date("Y") + (2000-date("Y"));
-			$yend = $ystart - (2000-date("Y"));
+			//$yend = $ystart - (2000-date("Y"));
+			$yend = 2025;
 			for ($y = $ystart; $y <= $yend; $y++)
 			{	$this->years[] = $y;
 			}
