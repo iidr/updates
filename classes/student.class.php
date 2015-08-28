@@ -1150,7 +1150,7 @@ class Student extends Base
 	public function SubscriptionDetails()
 	{	ob_start();
 		if ($subs = $this->GetCurrentSubs())
-		{	echo '<div class="myacSubsList"><h3>My subscription</h3><table><tr><th>Subscription</th><th>Subscription starts</th><th>Subscription expires</th></tr>';
+		{	echo '<div class="myacSubsList"><table><tr><th>Subscription</th><th>Subscription starts</th><th>Subscription expires</th></tr>';
 			foreach ($subs as $sub)
 			{	echo '<tr><td>Sub#', $sub['subid'], ' for ', (int)$sub['months'], ' months</td><td>', date('j M Y', strtotime($sub['created'])), '</td><td>', date('j M Y', strtotime($sub['expires'])), '</td></tr>';
 			}

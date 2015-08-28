@@ -390,8 +390,11 @@ class AdminCourseContent extends CourseContent
 	{	ob_start();
 		echo '<table><tr class="newlink"><th colspan="5"><a href="courseedit.php?ccid=', $this->id, '">Schedule new course</a></th></tr><tr><th>Schedule ID</th><th>Dates</th><th>Venue</th><th>Stock Control</th><th>Actions</th></tr>';
 		foreach ($this->courses as $course_row)
-		{	$course = new AdminCourse($course_row);
-			echo '<tr><td>', $course->id, '</td><td>', $course->DisplayDates(), '</td><td>', $course->GetVenue()->GetAddress(), '</td><td>', $course->StockControlText(), '</td><td><a href="courseedit.php?id=', $course->id, '">edit</a></td></tr>';
+		{	
+			if($course_row['cvenue']> 0 && ($course_row['starttime']!='0000-00-00' || $course_row['endtime']!='0000-00-00')){
+				$course = new AdminCourse($course_row);
+				echo '<tr><td>', $course->id, '</td><td>', $course->DisplayDates(), '</td><td>', $course->GetVenue()->GetAddress(), '</td><td>', $course->StockControlText(), '</td><td><a href="courseedit.php?id=', $course->id, '">edit</a></td></tr>';
+			}
 		}
 		echo '</table>';
 		return ob_get_clean();

@@ -360,6 +360,8 @@ class CourseContentListingPage extends BasePage
 			}
 		}
 		
+		$where[] = 'courses.cvenue>0';
+		
 		$sql = 'SELECT DISTINCT courses.* FROM ' . implode(',', $tables) . ' WHERE ' . implode(' AND ', $where) . ' ORDER BY ' . $order;
 		if ($result = $this->db->Query($sql))
 		{	while ($row = $this->db->FetchArray($result))
