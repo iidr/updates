@@ -106,29 +106,35 @@ class AccountPage extends BasePage
 		return $options;
 	} // end of fn MenuOptions
 		
-	protected function ReferralsTable()
-	{	ob_start();
-		if ($referrals = $this->user->GetReferrals())
-		{	if ($_GET['page'] > 1)
+	public function ReferralsTable(){
+		$referrals = $this->user->GetReferrals();
+		
+		//ob_start();
+		if (count($referrals)>0){
+			if ($_GET['page'] > 1)
 			{	$start = ($_GET['page'] - 1) * $this->refer_perpage;
 			} else
 			{	$start = 0;
 			}
+			
 			$end = $start + $this->refer_perpage;
 			
-			echo '<table class="myacList"><tr><th>Sent to</th><th>Referred</th><th>Your reward</th><th>Created</th><th>Used by you</th></tr>';
+			echo '<table class="myacList"><tr><th>Sent to</th><th>Referred</th><th>Message</th><th>Your reward</th><th>Created</th><th>Used by you</th></tr>';
 		
-			foreach ($referrals as $referral_row)
-			{	if (++$count > $start)
+			foreach ($referrals as $referral_row){	
+				if (++$count > $start)
 				{	if ($count > $end)
 					{	break;
 					}
 					
-					$referral = new ReferAFriend($referral_row);
-					//$this->VarDump($referral);
-					echo '<tr><td>', $this->InputSafeString($referral->details['refername']), ' (', $this->InputSafeString($referral->details['referemail']), ')</td><td>', date('d M Y', strtotime($referral->details['refertime'])), '</td>';
-					if ($reward_row = $referral->GetRewardForUser($this->user->id))
-					{	$reward = new ReferAFriendReward($reward_row);
+					$refName = ($referral_row['refername']!='N/A')?$referral_row['refername']:'';
+					
+					echo '<tr><td>', $this->InputSafeString($refName), ' (', $this->InputSafeString($referral_row['referemail']), ')</td><td>', date('d M Y', strtotime($referral_row['refertime'])), '</td><td>', $referral_row['refermessage'], '</td>';
+					
+					$reward_row = $this->user->GetAffRewards($this->user->id);
+					
+					if(count($reward_row)>0){
+						$reward = new ReferAFriendReward($reward_row);
 						echo '<td>&pound;', number_format($reward->details['amount'], 2), '</td><td>', date('d M Y', strtotime($reward->details['created'])), '</td><td>';
 						$used_amount = 0;
 						$lines = array();
@@ -142,8 +148,8 @@ class AccountPage extends BasePage
 						{	$lines[] = 'use by ' . date('d M Y', strtotime($reward->details['expires']));
 						}
 						echo implode('<br />', $lines), '</td>';
-					} else
-					{	echo '<td class="refTableNoReward">not generated</td><td></td><td></td>';
+					}else{	
+						echo '<td class="refTableNoReward" colspan="3" align="center">Not Generated</td>';
 					}
 					echo '</tr>';
 				}
@@ -156,12 +162,12 @@ class AccountPage extends BasePage
 				echo '<div class="pagination">', $pag->Display(), '</div><div class="clear"></div>';
 			}
 		}
-		return ob_get_clean();
+		//return ob_get_clean();
 		//print_r($this->user->GetReferrals());
 	} // end of fn ReferralsTable
 		
 	protected function AffRewardsTable()
-	{	ob_start();
+	{	//ob_start();
 		if ($rewards = $this->user->GetAffRewards())
 		{	if ($_GET['page'] > 1)
 			{	$start = ($_GET['page'] - 1) * $this->refer_perpage;
@@ -190,7 +196,7 @@ class AccountPage extends BasePage
 				echo '<div class="pagination">', $pag->Display(), '</div><div class="clear"></div>';
 			}
 		}
-		return ob_get_clean();
+		//return ob_get_clean();
 		//print_r($this->user->GetReferrals());
 	} // end of fn AffRewardsTable
 	

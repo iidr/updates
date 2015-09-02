@@ -445,6 +445,19 @@ class AdminCourse extends Course
 		return true;
 	} // end of fn BookingArrayFilterOK
 	
+	public function GetBookingDetails($orderItemID='')
+	{	$order_detail = array();
+		if($orderItemID!=''){
+			$sql = 'SELECT * FROM storeorderitems WHERE id=' . $orderItemID . ' ORDER BY id ASC';
+			if ($result = $this->db->Query($sql))
+			{	while ($row = $this->db->FetchArray($result))
+				{	$order_detail = $row;
+				}
+			}
+		}
+		return $order_detail;
+	} // end of fn GetBookings
+	
 	function ListBookingsTable($filter = array())
 	{	ob_start();
 	
@@ -457,6 +470,7 @@ class AdminCourse extends Course
 			{
 				$bookingrow['user_firstname'] = strtolower($bookingrow['user']['firstname']);
 				$bookingrow['user_surname'] = strtolower($bookingrow['user']['surname']);
+				$bookingrow['detail_info'] = $this->GetBookingDetails($bookingrow['orderitemid']);
 				$bookings_toshow[] = $bookingrow;
 			}
 		}
@@ -529,7 +543,7 @@ class AdminCourse extends Course
 		//echo '<li><a href="coursebookings_setmaillist.php?id=', $this->id, $link_para_string, '" target="_blank">send email to these</a></li>';
 		echo '</ul><div class="clear"></div></div><table><tr><th', $rowspantext, '>Order No.</th><th', $rowspantext, '>Name<br />Email</th><th', $rowspantext, '>Ticket</th><th', $rowspantext, '>Booked</th>',
 			//'<th', $rowspantext, '>Pay method</th><th', $rowspantext, '>Paid</th><th', $rowspantext, '>Pay status</th><th', $rowspantext, '>Booking<br />type</th>',
-			'<th', $rowspantext, '>Notes</th>';
+			'<th', $rowspantext, '>Order Value</th>';
 		if ($canattend)
 		{	echo '<th colspan="', count($dates = $this->GetDates(true)), '">Attended?</th>';
 		}
@@ -543,19 +557,19 @@ class AdminCourse extends Course
 		}
 		
 		$tickets = array();
-				
+		
 		foreach ($bookings_toshow as $bookingrow)
 		{	if (!$tickets[$bookingrow['ticket']])
 			{	$tickets[$bookingrow['ticket']] = $this->GetTicketFromBooking($bookingrow['ticket']);
 			}
 			$order = $this->GetOrderFromBooking($bookingrow);
-			echo '<tr class="stripe', $i++ % 2, '"><td>', $bookingrow['id'], '</td><td>', '<a href="member.php?id=', $bookingrow['student'], '">', $bookingrow['user']['firstname'], ' ', $bookingrow['user']['surname'], '</a>', '<br />';
+			echo '<tr class="stripe', $i++ % 2, '"><td>', $order['id'], '</td><td>', '<a href="member.php?id=', $bookingrow['student'], '">', $bookingrow['user']['firstname'], ' ', $bookingrow['user']['surname'], '</a>', '<br />';
 			if ($this->ValidEmail($bookingrow['user']['username']))
 			{	echo '<a href="mailto:', $bookingrow['user']['username'], '">', $bookingrow['user']['username'], '</a>';
 			} else
 			{	echo $bookingrow['user']['username'];
 			}
-			echo '</td><td>', $this->InputSafeString($tickets[$bookingrow['ticket']]['tname']), '</td><td><a href="order.php?id=', $order['id'], '">', date('d/m/y @ H:i', strtotime($order['orderdate'])), '</a></td><td class="bl_notes"><div>', nl2br($this->InputSafeString($bookingrow['adminnotes'])), '</div></td>';
+			echo '</td><td>', $this->InputSafeString($tickets[$bookingrow['ticket']]['tname']), '</td><td><a href="order.php?id=', $order['id'], '">', date('d/m/y @ H:i', strtotime($order['orderdate'])), '</a></td><td>',number_format(($bookingrow['detail_info']['totalpricetax']-$bookingrow['detail_info']['discount_total']),2),'</td>';
 			if ($canattend)
 			{	foreach ($dates as $stamp=>$date)
 				{	

@@ -1,5 +1,8 @@
 <?php 
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
+ini_set('display_errors', '0');  
+error_reporting(E_ALL ^(E_NOTICE|E_WARNING|E_STRICT));
+
 require_once('config/config.php'); 
 session_start();
 

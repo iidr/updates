@@ -37,8 +37,8 @@ class Student extends Base
 	{	
 		$row =  array();
 		if($email != ''){	
-			if ($result = $this->db->Query('SELECT * FROM students WHERE username="' . $email.'"'))
-			{	
+			$selQeuery = 'SELECT * FROM students WHERE username="' . $email.'"';
+			if ($result = $this->db->Query($selQeuery) && $this->db->NumRows($result)>0){	
 				$row = $this->db->FetchArray($result);
 			}
 		}
@@ -1042,32 +1042,33 @@ class Student extends Base
 	{	return false;
 	} // end of fn SubscriptionEnds
 	
-	public function GetReferrals()
-	{	$referrals = array();
-		$sql = 'SELECT * FROM referafriend WHERE referrer=' . (int)$this->id . ' ORDER BY refertime DESC';
-		if ($result = $this->db->Query($sql))
-		{	while ($row = $this->db->FetchArray($result))
-			{	$referrals[$row['rfid']] = $row;
+	public function GetReferrals(){	
+		$referrals = array();
+		$sql = 'SELECT * FROM referafriend WHERE referrer="' . (int)$this->id . '" ORDER BY refertime DESC';
+		$result = $this->db->Query($sql);
+		if ($this->db->NumRows($result)>0){
+			while ($row = $this->db->FetchArray($result)){	
+				$referrals[$row['rfid']] = $row;
 			}
 		}
 		return $referrals;
 	} // end of fn GetReferrals
 	
-	public function GetAffRewards()
-	{	$rewards = array();
-		$sql = 'SELECT * FROM affrewards WHERE sid=' . $this->id . ' ORDER BY created DESC';
-		if ($result = $this->db->Query($sql))
-		{	while ($row = $this->db->FetchArray($result))
-			{	$row['reward_used'] = array();
+	public function GetAffRewards(){
+		$rewards = array();
+		$sql = 'SELECT * FROM affrewards WHERE sid="' . $this->id . '" ORDER BY created DESC';
+		$result = $this->db->Query($sql);
+		if ($this->db->NumRows($result)>0){	
+			while ($row = $this->db->FetchArray($result)){
+				$row['reward_used'] = array();
 				$row['reward_left'] = $row['amount'];
-				$used_sql = 'SELECT * FROM  affrewardsused WHERE awid=' . $row['awid'] . ' ORDER BY usedtime ASC';
-				if ($used_result = $this->db->Query($used_sql))
-				{	while ($used_row = $this->db->FetchArray($used_result))
-					{	$row['reward_used'][$used_row['ruid']] = $used_row;
+				echo $used_sql = 'SELECT * FROM  affrewardsused WHERE awid=' . $row['awid'] . ' ORDER BY usedtime ASC';
+				if ($used_result = $this->db->Query($used_sql) && $this->db->NumRows($used_sql)>0){
+					while ($used_row = $this->db->FetchArray($used_result)){
+						$row['reward_used'][$used_row['ruid']] = $used_row;
 						$row['reward_left'] -= $used_row['usedamount'];
 					}
-				}
-				
+				}				
 				$rewards[$row['awid']] = $row;
 			}
 		}
