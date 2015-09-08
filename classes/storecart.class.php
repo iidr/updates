@@ -821,11 +821,11 @@ class StoreCart extends Base
 		}
 	} // end of fn UpdateDiscount
 
-	public function DeliveryOptions()
-	{	$country = new Country();
+	public function DeliveryOptions($countryID='',$productWeight=0.00)
+	{	$country = new Country($countryID);
 		$region = new DeliveryRegion($country->details['region']);
 		$options = array();
-		foreach ($region->GetOptions() as $option)
+		foreach ($region->GetOptions(true,$productWeight) as $option)
 		{	$options[] = new DeliveryOption($option);
 		}
 		return $options;
