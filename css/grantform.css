@@ -130,7 +130,7 @@ form input[type='text'].number
 .contactform  input[type="submit"]
 {	/*background: #336699 url('../img/template/button_arrow.png') no-repeat right 14px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 14px center;*/
-	background: #993333 url('../img/template/button_arrow.png') no-repeat right 14px center;
+	background: #800000 url('../img/template/button_arrow.png') no-repeat right 14px center;
 	text-align:left; 
 	color:#fff; 
 	padding:11px 45px 11px 15px; 

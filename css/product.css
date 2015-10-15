@@ -79,9 +79,7 @@
 }
 #pipHeaderDetails #pipHeaderPrice form.courseBookButton input[type="submit"]
 {	margin: 0px;
-	/*background: #3B819F url("../img/template/store_plus_trans.png") no-repeat scroll 94% center;*/
-	/*background: #800000 url("../img/template/store_plus_trans.png") no-repeat scroll 94% center;*/
-	background: #993333 url("../img/template/store_plus_trans.png") no-repeat scroll 94% center;
+	background: #B97474 url("../img/template/store_plus_trans.png") no-repeat scroll 94% center;
 }
 #pipHeaderDetails #pipHeaderSocial
 {	height: 50px;

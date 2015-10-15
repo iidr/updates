@@ -64,7 +64,7 @@ class AdminCourseBooking extends CourseBooking
 	function BookingInfo()
 	{	
 		$order = $this->GetOrder();
-		echo '<p>', $this->DisplayHistoryLink('bookings', $this->id), '</p><table class="adminDetailsHeader"><tr><td class="label">Booking made by</td><td>', '<a href="member.php?id=', $this->student->id, '">', $this->InputSafeString($this->student->details['firstname'] . ' ' . $this->student->details['surname']), '</a>', ' (email: <a href="mailto:', $this->student->details['username'], '">', $this->student->details['username'], '</a>)</td></tr><tr><td class="label">Booked on</td><td>', date('d/m/y @ H:i', strtotime($order['orderdate'])), '</td></tr><tr><td class="label">Course</td><td>', $this->InputSafeString($this->course->content['ctitle']), '<br />', date('d/m/y', strtotime($this->course->details['starttime'])), ' to ', date('d/m/y', strtotime($this->course->details['endtime'])), '</td></tr><tr><td class="label">Price</td><td>', number_format($this->order_item['pricetax'], 2);
+		echo '<p>', $this->DisplayHistoryLink('bookings', $this->id), '</p><table class="adminDetailsHeader"><tr><td class="label">Booking made by</td><td>', '<a href="member.php?id=', $this->student->id, '">', $this->InputSafeString($this->student->details['firstname'] . ' ' . $this->student->details['surname']), '</a>', ' (email: <a href="mailto:', $this->student->details['username'], '">', $this->student->details['username'], '</a>)</td></tr><tr><td class="label">Booked on</td><td>', date('d/m/y @ H:i', strtotime($order['orderdate'])), '</td></tr><tr><td class="label">Course</td><td>', $this->InputSafeString($this->course->content['ctitle']),'<br /><span class="prodItemCode">Code: ', $this->course->ProductID(), '</span><br />', date('d/m/y', strtotime($this->course->details['starttime'])), ' to ', date('d/m/y', strtotime($this->course->details['endtime'])), '</td></tr><tr><td class="label">Price</td><td>', number_format($this->order_item['pricetax'], 2);
 		if ($this->order_item['price'] != $this->order_item['pricetax'])
 		{	echo ' (before tax: ', number_format($this->order_item['price'], 2), ')';
 		}
@@ -237,13 +237,13 @@ class AdminCourseBooking extends CourseBooking
 				$new_course = new Course($transfer['course_new']);
 				$adminuser = new AdminUser($transfer['adminuser']);
 				//$this->VarDump($adminuser);
-				echo '<tr><td>', date('d M y @H:i', strtotime($transfer['changedate'])), '</td><td>', $this->InputSafeString($old_course->content['ctitle']), ' on ', date('d/m/y', strtotime($old_course->details['starttime']));
+				echo '<tr><td>', date('d M y @H:i', strtotime($transfer['changedate'])), '</td><td>', $this->InputSafeString($old_course->content['ctitle']),'<span class="prodItemCode">Code: ', $this->course->ProductID(), '</span> on ', date('d/m/y', strtotime($old_course->details['starttime']));
 				
 				if (($venue = $old_course->GetVenue()) && $venue->id){
 					echo '<br />at ', $venue->GetShortDesc();
 				}
 				
-				echo '</td><td>', $this->InputSafeString($new_course->content['ctitle']), ' on ', date('d/m/y', strtotime($new_course->details['starttime']));
+				echo '</td><td>', $this->InputSafeString($new_course->content['ctitle']),'<span class="prodItemCode">Code: ', $this->course->ProductID(), '</span> on ', date('d/m/y', strtotime($new_course->details['starttime']));
 				
 				if (($venue = $new_course->GetVenue()) && $venue->id){
 					echo '<br />at ', $venue->GetShortDesc();

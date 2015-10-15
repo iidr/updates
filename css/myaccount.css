@@ -49,7 +49,7 @@
 	font-size: 14px;
 	/*background: #336699 url('../img/template/button_arrow.png') no-repeat 80px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat 80px center;*/
-	background: #993333 url('../img/template/button_arrow.png') no-repeat 80px center;
+	background: #800000 url('../img/template/button_arrow.png') no-repeat 80px center;
 }
 #myacMenu
 {	margin: 0px 0px 15px;
@@ -357,7 +357,7 @@ table.itemsTable .num
 #affShareContainer #affSharePopup form.spEmailForm input[type="submit"]
 {	/*background: #336699 url('../img/template/button_arrow.png') no-repeat right 10px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 10px center;*/
-	background: #993333 url('../img/template/button_arrow.png') no-repeat right 10px center;
+	background: #800000 url('../img/template/button_arrow.png') no-repeat right 10px center;
 	text-align:left; 
 	color:#fff; 
 	padding:5px 30px 5px 10px; 

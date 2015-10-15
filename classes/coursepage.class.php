@@ -100,16 +100,18 @@ class CoursePage extends BasePage
 		}
 		
 		if ($buy_enabled && $tickets)
-		{	echo '<a class="course_booknow">Book this ', $this->course->content['ctype'], ' now</a>';
+		{	//echo '<a class="course_booknow">Book this ', $this->course->content['ctype'], ' now</a>';
+			echo '<a class="course_booknow">',($this->course->content['ctype']=='course')?$this->GetParameter("book_course_txt"):$this->GetParameter("book_event_txt"),'</a>';
 			if (!$popup_done)
 			{	$popup_done = true;
-				echo '<script type="text/javascript">$().ready(function(){$("body").append($(".jqmWindow")); $("#course_book_modal_popup").jqm({trigger:".course_booknow"});});</script><div id="course_book_modal_popup" class="jqmWindow"><a href="#" class="jqmClose submit">X</a><form class="courseBookButton" action="', $this->link->GetLink('cart.php'), '" method="post"><p><label>Ticket:</label><select name="add">';
+				echo '<script type="text/javascript">$().ready(function(){$("body").append($(".jqmWindow")); $("#course_book_modal_popup").jqm({trigger:".course_booknow"});});</script><div id="course_book_modal_popup" class="jqmWindow"><a href="#" class="jqmClose submit">X</a><form class="courseBookButton" action="', $this->link->GetLink('cart.php'), '" method="post"><p><label>Ticket:</label><select name="add" required="required">';
+				echo '<option value="">Please select your ticket…</option>';
 				foreach($tickets as $ticket)
 				{	
 					echo '<option value="', (int)$ticket->id, '" >', $this->InputSafeString($ticket->details['tname']), " - ", $this->formatPrice($ticket->details['tprice']), '</option>';
 					
 				}
-				echo '</select></p><p><label>Qty:</label><input type="text" name="qty" value="1" size="2" /></p><p><input type="hidden" name="type" value="course" /><input type="submit" name="add_cart" value="Book now" /></p><div class="clear"></div></form></div>';
+				echo '</select></p><p><label>Qty:</label><input type="text" name="qty" value="1" size="2" required="required" /></p><p><input type="hidden" name="type" value="course" /><input type="submit" name="add_cart" value="Book now" /></p><div class="clear"></div></form></div>';
 			}
 		}
 		

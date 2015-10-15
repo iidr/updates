@@ -1,0 +1,287 @@
+#prodReviewContainer
+{	margin-top: 10px;
+}
+#courseReviewContainer
+{	margin-top: 10px;
+	background-color: #000;
+}
+#courseReviewContainer h3
+{	color: #FFF;
+}
+.reviews_none
+{	color: #FFF;
+	font-size: 18px;
+}
+.reviewOpener a
+{	display: block;
+	width: 160px;
+	padding: 5px 25px 0px 0px;
+	margin: 20px 0px 0px;
+	background: url('../img/template/button_arrow.png') no-repeat bottom right;
+	color: #FFF;
+	font-size: 18px;
+}
+
+#review_modal_popup
+{	width: 400px;
+	margin-left: -220px;
+	padding: 20px;
+	background: #EFEEE9;
+}
+
+#reviewListContainer
+{	float: left;
+	width: 530px;
+	padding: 0px 30px 30px;
+}
+
+.reviews_wrapper
+{	width: 500px;
+	height: 220px;
+	position: relative;
+	overflow: hidden;
+	margin-left: 30px;
+}
+
+.reviews_wrapper .reviews_prev, .reviews_wrapper .reviews_next
+{	position: absolute;
+	width: 28px;
+	height: 190px;
+	top: 40px;
+	background: url('../img/template/button_arrow.png') no-repeat center;
+	z-index: 9999;
+	cursor: pointer;
+	zoom: 1;
+	filter: alpha(opacity=50);
+	opacity: 0.5;	
+}
+
+.reviews_wrapper .reviews_prev
+{	left: 5px;
+	background: url('../img/template/button_arrow_back.png') no-repeat center;
+}
+
+.reviews_wrapper .reviews_next
+{	right: 5px;
+}
+
+.reviews_wrapper .reviews_prev:hover, .reviews_wrapper .reviews_next:hover
+{	filter: alpha(opacity=100);
+	opacity: 1;	
+}
+
+.review_list li
+{	padding: 5px 50px 20px 0px;
+	width: 450px;
+	height: 195px;
+	overflow: hidden;
+	color: #FFF;
+}
+.review_list .review_text_container
+{	background: url('../img/template/white_quote.png') no-repeat top 5px left;
+	padding: 0px 0px 0px 50px;
+	width: 400px;
+	margin: 0px 0px 20px;	
+}
+.review_list li h4
+{	color: #FFF;
+	font-size: 18px;
+	font-weight: normal;
+	margin: 0px 0px 20px;
+}
+
+.review_list li .review_text
+{	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 12px;
+	font-style: italic;
+	width: 400px;
+	font-size: 14px;
+}
+.review_list li .review_author
+{	padding: 0px;
+	margin: 0px 0px 0px 50px;
+}
+#yourReviewContainer
+{	float: left;
+	width: 360px;
+	padding-left: 20px;
+}
+#yourReviewContainer .revFail
+{	font-style: italic;
+	color: #C00;
+	font-weight: bold;
+	padding: 3px 5px;
+	border: 1px solid #900;
+	text-align: center;
+}
+#yourReviewContainer .reviewFormContainer
+{	position: relative;
+	width: 360px;
+	height: 310px;
+}
+#yourReviewContainer .reviewFormContainer .rfcOverlay
+{	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 360px;
+	height: 310px;
+	cursor: pointer;
+}
+#yourReviewContainer .reviewFormContainer .rfcOverlay #rfcOverlayInner
+{	width: 300px;
+	height: 240px;
+	padding: 70px 30px 0px;
+	background: url('../img/template/grey_trans_bg.png') repeat top left;
+	display: none;
+	font-style: italic;
+	text-align: center;
+	font-size: 18px;
+	cursor: pointer;
+}
+#review_modal_popup form p
+{	margin: 0px;
+	padding: 10px 0px;
+}
+#review_modal_popup form label
+{	font-size: 14px;
+	margin-right: 20px;
+}
+#yourReviewContainer form input[type="text"], #review_modal_popup form input[type="text"]
+{	width: 350px;
+	padding: 5px 10px;
+	background-color: #dff0f7;
+}
+
+#yourReviewContainer form textarea, #review_modal_popup form textarea
+{	width: 350px;
+	height: 200px;
+	padding: 10px;
+	background-color: #dff0f7;
+}
+#review_modal_popup form select
+{	padding: 5px 5px 5px 10px;
+}
+#review_modal_popup form select option
+{	padding: 5px 5px 0px 10px;
+}
+#yourReviewContainer form .submitRating, #review_modal_popup form .submitRating
+{	margin: 5px 0px;
+}
+#yourReviewContainer form .submitRating input[type="radio"], #review_modal_popup form .submitRating input[type="radio"]
+{	margin-left: 10px;
+}
+#review_modal_popup form .submitRating .submitRatingStars
+{	display: inline-block;
+}
+#review_modal_popup form .submitRating .submitRatingStars .submitRatingStar
+{	float: left;
+	margin-right: 3px;
+	height: 12px;
+	width: 14px;
+	background: url('../img/template/rating_base_single.png') no-repeat center center;
+}
+#review_modal_popup form .submitRating .submitRatingStars .submitRatingStarOn
+{	background: url('../img/template/rating_star_single.png') no-repeat center center;
+}
+#yourReviewContainer form .addtobasket, #review_modal_popup form .addtobasket
+{	/*background: #3b819f url('../img/template/button_arrow.png') 94% center no-repeat;*/
+	background: #800000 url('../img/template/button_arrow.png') 94% center no-repeat;
+	margin: 0px;
+	float: right;
+}
+.reviewPlaceHolder
+{	font-style: italic;
+	padding: 0px 20px;
+	text-align: center;
+	font-size: 14px;
+}
+#courseGalleryContainer
+{	width: 360px;
+	float: right;
+}
+#courseReviewContainer #courseGalleryContainer h3
+{	padding-left: 5px;
+}
+#courseGalleryContainer div.courseGalSelection
+{	width: 330px;
+	height: 220px;
+	margin: 0px 30px 10px 0px;
+	cursor: pointer;
+}
+#courseGalleryContainer div.courseGalSelection>img
+{	margin: 5px;
+}
+#courseGalleryContainer div.courseGalCover
+{	width: 250px;
+	height: 200px;
+	position: relative;
+	margin-bottom: 10px;
+}
+#courseGalleryContainer div.courseGalCover a
+{	display: block;
+	position: absolute;
+	width: 225px;
+	height: 20px;
+	padding: 180px 0px 0px 25px;
+	left: 0px;
+	top: 0px;
+	background: url('../img/template/gallery_overlay.png') no-repeat bottom center;
+	color: #FFF;
+	font-size: 10px;
+}
+div#galHolder
+{	width: 250px;
+	height: 50px;
+	background: #AAA url('../img/template/gallery_holder.png') no-repeat center center;
+	text-align: center;
+	font-weight: bold;
+	color: #003546;
+	padding-top: 150px;
+}
+#gal_modal_popup
+{	width: 932px;
+	padding-bottom: 15px;
+	padding-top: 5px;
+	margin-left: -490px;
+	top: 200px;
+}
+#gal_modal_popup #galModalInner
+{	margin-top: 20px;
+}
+ul.elastislide-list>li p
+{	padding: 3px 0px 0px;
+	text-align: center;
+}
+.elastislide-wrapper nav span
+{	text-indent: 0px;
+	font-weight: bold;
+	font-size: 16px;
+	text-align: center;
+}
+#gal_photo_modal_popup
+{	width: 840px;
+	top: 5px;
+	padding: top: 5px;
+	height: 90%;
+	margin-left: -444px;
+}
+#gal_photo_modal_popup .submit
+{	display: block;
+	float: right;
+}
+#gal_photo_modal_popup #galPhotoModalInner
+{	width: 800px;
+	height: 100%;
+	overflow: auto;
+	text-align: center;
+}
+.revFail, .revSuccess
+{	font-weight: bold;
+	text-align: center;
+	color: #d20000;
+	font-size: 14px;
+	margin: 3px auto;
+}
+.revSuccess
+{	color: #009900;
+}

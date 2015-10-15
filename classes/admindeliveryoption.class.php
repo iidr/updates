@@ -120,8 +120,8 @@ class AdminDeliveryOption extends DeliveryOption
 		$form->AddTextInput('Description', 'description', $this->InputSafeString($data['description']), 'long', 255);
 		$form->AddSelect('Region', 'region', $data['region'], '', $this->RegionOptions(), false, true);
 		$form->AddTextInput('Price', 'price', number_format($data['price'], 2, '.', ''), 'short number', 10);
-		$form->AddTextInput('From Weight (grams)', 'from_weight', number_format($data['from_weight'], 2, '.', ''), 'short number', 10);
-		$form->AddTextInput('To Weight (grams)', 'to_weight', number_format($data['to_weight'], 2, '.', ''), 'short number', 10);
+		$form->AddTextInput('From Weight (kgs)', 'from_weight', number_format($data['from_weight'], 2, '.', ''), 'short number', 10);
+		$form->AddTextInput('To Weight (kgs)', 'to_weight', number_format($data['to_weight'], 2, '.', ''), 'short number', 10);
 		$form->AddTextInput('List order', 'listorder', (int)$data['listorder'], 'short number', 5);
 		$form->AddCheckBox('Live?', 'live', '1', $data['live']);
 		$form->AddSubmitButton('', $this->id ? 'Save Changes' : 'Create New Delivery Option', 'submit');

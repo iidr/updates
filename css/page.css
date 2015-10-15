@@ -32,40 +32,40 @@
 .page-content h1 .social_links_insert
 {	
 }
-.page-content h1 .social_links_insert span, .page-content h1 .social_links_insert>a
+/*.page-content h1 .social_links_insert span, .page-content h1 .social_links_insert>a
 {	padding:12px;
 	margin: 20px 10px 10px 0px;
-}
+}*/
 .page-content h1 .social_links_insert span:last-child, .page-content h1 .social_links_insert>a:last-child
 {	margin-right: 0px;
 }
 .page-content h1 .social_links_insert .st_facebook_custom
-{	background: url("../img/page_sm/sharethis_fb.png") no-repeat scroll left top transparent;
+{	background: url("../img/page_sm/sharethis_fb.png") no-repeat scroll left top transparent;width:32px;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 	/*padding:12px;
 	margin: 20px 5px 10px 0px;*/
 }
 .page-content h1 .social_links_insert .st_youtube_custom
-{	background: url("../img/page_sm/sharethis_yt.png") no-repeat scroll left top transparent;
+{	background: url("../img/page_sm/sharethis_yt.png") no-repeat scroll left top transparent;width:32px;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 	/*padding:12px;
 	margin: 20px 5px 10px 0px;*/
 }
 .page-content h1 .social_links_insert .st_twitter_custom
-{	background: url("../img/page_sm/sharethis_tw.png") no-repeat scroll left top transparent;
+{	background: url("../img/page_sm/sharethis_tw.png") no-repeat scroll left top transparent;width:32px;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 	/*padding:12px;
 	margin: 20px 5px 10px 0px;*/
 }
 .page-content h1 .social_links_insert .st_google_custom
-{	background: url("../img/page_sm/sharethis_google.png") no-repeat scroll left top transparent;
+{	background: url("../img/page_sm/sharethis_google.png") no-repeat scroll left top transparent;width:32px;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 	/*padding:12px;
 	margin: 20px 5px 10px 0px;*/
 }
 .page-content h1 .social_links_insert .st_sharethis_custom
-{	background: url("../img/page_sm/sharethis_st.png") no-repeat scroll left top transparent;
+{	background: url("../img/page_sm/sharethis_st.png") no-repeat scroll left top transparent;width:32px;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 	/*padding:12px;
 	margin: 20px 5px 10px 0px;*/
 }
 .page-content h1 .social_links_insert .st_email_custom
-{	background: url("../img/page_sm/sharethis_em.png") no-repeat scroll left top transparent;
+{	background: url("../img/page_sm/sharethis_em.png") no-repeat scroll left top transparent;width:32px;height:32px;display:inline-block;cursor:pointer;
 	/*padding:12px;
 	margin: 20px 5px 10px 0px;*/
 }
@@ -225,7 +225,7 @@ div.image img{ display:block;}
 #register_login input[type=submit]
 {	/*background: #336699 url('../img/template/button_arrow.png') no-repeat right 7px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 7px center;*/
-	background: #993333 url('../img/template/button_arrow.png') no-repeat right 7px center;
+	background: #800000 url('../img/template/button_arrow.png') no-repeat right 7px center;
 	text-align:left;
 	color:#fff;
 	padding:12px 40px 12px 10px;
@@ -290,7 +290,7 @@ div.image img{ display:block;}
 .contactform input[type='submit']
 {	/*background: #003747; */
 	/*background: #800000;*/ 
-	background:#993333;
+	background:#800000;
 	text-align:left; 
 	color:#fff; 
 	padding:11px 15px 11px 15px; 
@@ -315,7 +315,7 @@ div.image img{ display:block;}
 	color: #FFF;
 	/*background: #61ACD1 url('../img/template/button_arrow_white.png') no-repeat right 5px center;*/
 	/*background: #800000 url('../img/template/button_arrow_white.png') no-repeat right 5px center;*/
-	background: #993333 url('../img/template/button_arrow_white.png') no-repeat right 5px center;
+	background: #800000 url('../img/template/button_arrow_white.png') no-repeat right 5px center;
 	padding: 10px 30px 10px 10px;
 	margin: 10px 20px;
 	float: right;
@@ -346,6 +346,7 @@ div.image img{ display:block;}
 {	color: #FFF;
 	background-color: #7F94CC;
 	padding: 30px;
+	margin: -10px -20px;
 }
 #grants_header h2
 {	font-size: 18px;

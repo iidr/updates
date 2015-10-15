@@ -148,6 +148,18 @@ h3.hcoursetitle
 h3.hcoursetitle a
 {	color: #FFF;
 }
+
+#home-courses h3.hcoursetitle
+{	height: auto;
+	margin-bottom: 0px;
+	font-size: 20px;
+	font-weight: normal;
+	padding: 4px 0px 0px;
+	color: #FFF;
+}
+
+#home-courses h3.hcoursetitle a{color: #FFF;}
+
 .coursedate {
 	/*background: url('../img/template/icon-calendar.png') no-repeat top left;
 	padding-left: 30px;
@@ -317,9 +329,9 @@ h3.hcoursetitle a
 .background-inner-1 { background-color:#f8f7ed;}
 .background-inner-2 { background-color:#f3f2e0;}
 
-.page-about #breadcrumbs
-{	background: #59888C;
-}
+.page-about #breadcrumbs{background: #59888C;}
+.page-about .page-content .subpage-grid li .content a.readmore_link{background-color: #59888c !important;}
+.page-grants .page-content .subpage-grid li .content a.readmore_link{background-color: #7F94CC !important;}
 
 .menu .scheme-about a, .menu .scheme-about
 {	background-color: #59888C;
@@ -494,7 +506,7 @@ h3.hcoursetitle a
 .page-people #yourReviewContainer form .addtobasket, .page-people #review_modal_popup form .addtobasket
 {	/*background-color: #339999;*/
 	/*background-color: #800000;*/
-	background-color: #993333;
+	background-color: #800000;
 }
 
 .menu .scheme-multimedia a, .menu .scheme-multimedia { background-color: #666699; }
@@ -567,7 +579,7 @@ h3.hcoursetitle a
 }
 .page-grants .subpage-grid li .content a.readmore_link
 {	/*background-color: #800000;*/
-background-color: #993333;
+background-color: #800000;
 }
 
 .page-grants .page-content h2, .page-grants .page-content h3
@@ -648,6 +660,8 @@ background-color: #993333;
 {	background-color: #40ADA4;
 }
 
+.page-refer-a-friend #breadcrumbs { background: #cc9900; }
+.page-subscriptions #breadcrumbs { background: #A0522D; }
 
 /*** @header ******************/
 
@@ -1323,7 +1337,7 @@ background-color: #993333;
 .scheme-mailing form input.submit
 {	/*background: #003546 url('../img/template/button_arrow.png') 185px center no-repeat;*/
 	/*background: #800000 url('../img/template/button_arrow.png') 185px center no-repeat;*/
-	background: #993333 url('../img/template/button_arrow.png') 185px center no-repeat;
+	background: #800000 url('../img/template/button_arrow.png') 185px center no-repeat;
 	text-align:left;
 	color:#fff;
 	padding:11px;
@@ -1485,7 +1499,7 @@ background-color: #993333;
 {	display:block;
 	/*background: #CC9900 url('../img/template/button_arrow.png') no-repeat 155px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat 155px center;*/
-	background: #993333 url('../img/template/button_arrow.png') no-repeat 155px center;
+	background: #800000 url('../img/template/button_arrow.png') no-repeat 155px center;
 	padding: 15px 50px 15px 25px;
 	color: #FFF;
 	font-size: 12px;
@@ -1529,7 +1543,7 @@ background-color: #993333;
 {	display:block;
 	/*background: #A0522D url('../img/template/button_arrow.png') no-repeat 155px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat 155px center;*/
-	background: #993333 url('../img/template/button_arrow.png') no-repeat 155px center;
+	background: #800000 url('../img/template/button_arrow.png') no-repeat 155px center;
 	padding: 15px 50px 15px 25px;
 	color: #FFF;
 	font-size: 12px;
@@ -1693,6 +1707,7 @@ background-color: #993333;
 .sidebar-menu ul>li
 {	padding:5px 20px 5px 0px;
 	font-size: 18px;
+	color:#92a583;
 }
 .sidebar-menu ul>li ul>li
 {	font-size: 12px;
@@ -1756,7 +1771,7 @@ background-color: #993333;
 
 .subpage-grid li h3
 {	margin-top: 0px;
-	margin-left: 30px;
+	/*margin-left: 30px;*/
 	height: 40px;
 }
 
@@ -1790,7 +1805,7 @@ background-color: #993333;
 	height: 20px;
 	/*background: #59888C url('../img/template/button_arrow.png') no-repeat right 10px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 10px center;*/
-	background: #993333 url('../img/template/button_arrow.png') no-repeat right 10px center;
+	background: #800000 url('../img/template/button_arrow.png') no-repeat right 10px center;
 	color: #FFF;
 	font-size: 14px;
 }
@@ -2074,29 +2089,60 @@ blockquote.course-listing-blockquote:after { content: close-quote; font-size:30p
 }
 
 /* Validation */
-.page-content > .failmessage, .page-content > .successmessage
-{/*	display:none;
-	position:absolute;
-	top:0;
-	left:20%;*/
-	margin: 5px auto;
-	text-align: center;
-	width:550px;
-	padding:20px;
-	background: #f8f5f6;
-	color:#003747;
-	border:3px solid #f66;
-	box-shadow:0px 0px 11px #D4D4D4;
-	font-weight:bold;
-	z-index:10;
-	font-size: 14px;
+.page-content > .failmessage, .page-content > .successmessage {
+    margin: 11px auto;
+    text-align: left;
+    width: 821px;
+    padding: 20px 70px;
+    background: #CE3635 none repeat scroll 0% 0%;
+    color: #FFF;
+    box-shadow: 0px 0px 11px #D4D4D4;
+    font-weight: 400;
+    z-index: 10;
+    font-size: 16px;
+    position: relative;
+    letter-spacing: 0.5px;
 }
-.page-content > .failmessage
-{	border-color: #f66;
+
+.page-content > .failmessage::before {
+    content: "X";
+    width: 50px;
+    background: rgba(0, 0, 0, 0.2) none repeat scroll 0% 0%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    line-height: 59px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgba(255,255,255,0.5);
 }
-.page-content > .successmessage
-{	border-color: #090;
+
+.page-content > .successmessage::before {
+    content: "\f00c";
+ 	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-feature-settings: normal;
+	font-language-override: normal;
+	font-kerning: auto;
+	font-synthesis: weight style;
+	font-variant: normal;
+	font-size: inherit;
+	text-rendering: auto;
+    width: 50px;
+    background: rgba(0, 0, 0, 0.2) none repeat scroll 0% 0%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    line-height: 59px;
+	text-align:center;
 }
+
+.page-content > .successmessage{border-color: #090;background: #A7CE35}
+.page-content > .failmessage{border-color: #f66;}
 /* sidebars */
 
 /*testimonials */
@@ -2307,7 +2353,7 @@ div#user_reg_modal_popup
 .register-page #register_form .submit
 {	/*background: #336699 url('../img/template/button_arrow.png') no-repeat right 14px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 14px center;*/
-	background: #993333 url('../img/template/button_arrow.png') no-repeat right 14px center;
+	background: #800000 url('../img/template/button_arrow.png') no-repeat right 14px center;
 	text-align:left; 
 	color:#fff; 
 	padding:11px 45px 11px 15px; 
@@ -2326,7 +2372,7 @@ div#user_reg_modal_popup
 }
 .st_sharethis_custom
 {	background: url("../img/template/sharethis.png") no-repeat scroll left top transparent;
-	padding:0px 21px 0 0;
+	padding:0px;
 }
 .maillistsocialshare span, .maillistsocialshare>a
 {	-webkit-transition: all 0.2s ease-in-out;
@@ -2347,22 +2393,22 @@ div#user_reg_modal_popup
 {	opacity: 0.8;
 }
 .maillistsocialshare .st_facebook_custom, .social_links_insert .st_facebook_custom
-{	background: url("../img/template/sharethis_fb.png") no-repeat scroll left top transparent;
+{	background: url("../img/template/sharethis_fb.png") no-repeat scroll left top transparent;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 }
 .maillistsocialshare .st_youtube_custom, .social_links_insert .st_youtube_custom
-{	background: url("../img/template/sharethis_yt.png") no-repeat scroll left top transparent;
+{	background: url("../img/template/sharethis_yt.png") no-repeat scroll left top transparent;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 }
 .maillistsocialshare .st_twitter_custom, .social_links_insert .st_twitter_custom
-{	background: url("../img/template/sharethis_tw.png") no-repeat scroll left top transparent;
+{	background: url("../img/template/sharethis_tw.png") no-repeat scroll left top transparent;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 }
 .maillistsocialshare .st_google_custom, .social_links_insert .st_google_custom
-{	background: url("../img/template/sharethis_google.png") no-repeat scroll left top transparent;
+{	background: url("../img/template/sharethis_google.png") no-repeat scroll left top transparent;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 }
 .maillistsocialshare .st_sharethis_custom, .social_links_insert .st_sharethis_custom
-{	background: url("../img/template/sharethis_st.png") no-repeat scroll left top transparent;
+{	background: url("../img/template/sharethis_st.png") no-repeat scroll left top transparent;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 }
 .maillistsocialshare .st_email_custom, .social_links_insert .st_email_custom
-{	background: url("../img/template/sharethis_em.png") no-repeat scroll left top transparent;
+{	background: url("../img/template/sharethis_em.png") no-repeat scroll left top transparent;height:32px;display:inline-block;cursor:pointer;
 }
 
 #post_listing_container .pagination
@@ -2462,3 +2508,5 @@ ul.sideProdMenu li
 .TickBox1
 {	background: url('../img/template/tickbox1.png') no-repeat center center;
 }
+
+.prodItemCode {color: #999999; font-size: 10px; padding: 0;}

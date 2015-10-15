@@ -300,10 +300,20 @@ class BasePage extends BaseFunctions
 	{	ob_start();	
 		echo '<div id="home-courses" class="col2-wrapper scheme-courses" style="height:393px;"><h2><a href="', $this->link->GetLink('courses.php'), '">Upcoming courses</a></h2>';
         
-		if ($courses = Course::GetUpcomingCourses(2))
-		{	foreach ($courses as $key=>$course)
-			{	
-				echo '<div class="box"><p class="image"><a href="', $link = $this->link->GetCourseLink($course), '"><img src="', ($img = $course->HasImage('thumbnail')) ? $img : $course->GetDefaultImage('thumbnail'), '" alt="', $title = $this->InputSafeString($course->content['ctitle']), '" title="', $title, '" width="245px" /></a></p><div class="boxcontent ', $key == 1 ? 'none' : '', '"><h3 class="hcoursetitle"><a href="', $link, '">', $title, '</a></h3><p class="coursedate">', $course->GetDateVenue(), '</p></div><div class="clear"></div></div>';	
+		if($courses = Course::GetUpcomingCourses()){	
+			$i = 1;
+			foreach ($courses as $key=>$course){
+				if($course->content['display_day']<=7){				
+					$title = '';
+					$title = $this->InputSafeString($course->content['ctitle']);
+					echo '<div class="box"><p class="image"><a href="', $link = $this->link->GetCourseLink($course), '"><img src="', ($img = $course->HasImage('thumbnail')) ? $img : $course->GetDefaultImage('thumbnail'), '" alt="', $title, '" title="', $title, '" width="245px" /></a></p><div class="boxcontent ', $key == 1 ? 'none' : '', '"><h3 class="hcoursetitle"><a href="', $link, '">', $title, '</a></h3><br /><span class="prodItemCode">Code: ' . $course->ProductID() . '</span><p class="coursedate">', $course->GetDateVenue(), '</p></div><div class="clear"></div></div>';	
+					
+					if($i%2==0) break;				
+					$i++;
+					
+					$sql = 'UPDATE courses SET `home_display_date` = IF(`home_display_date`="0000-00-00","'. $this->datefn->SQLDate().'",`home_display_date`) WHERE cid="'.$course->details['cid'].'"';
+					$this->db->Query($sql);
+				}
 			}
 		}
 		

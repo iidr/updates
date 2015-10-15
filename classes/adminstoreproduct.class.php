@@ -48,7 +48,7 @@ class AdminStoreProduct extends StoreProduct
 		$form->AddTextInput('Price', 'price', number_format($data['price'], 2, '.', ''), 'number', 11);
 		$form->AddSelect('Tax rate', 'taxid', $data['taxid'], '', $this->TaxRatesForDropDown(), true, false);
 		$form->AddCheckBox('Delivery needed?', 'shipping', '1', $data['shipping']);
-		$form->AddTextInput('Weight (grams)', 'weight', number_format($data['weight'], 2, '.', ''), 'number', 11);
+		$form->AddTextInput('Weight (kgs)', 'weight', number_format($data['weight'], 2, '.', ''), 'number', 11);
 		$form->AddTextInput('Quantity', 'qty', (int)$data['qty'], 'number', 8);
 		$form->AddCheckBox('Current (available to buy)', 'live', '1', $data['live']);
 

@@ -206,14 +206,14 @@ class CourseContentListingPage extends BasePage
 						{	echo '<a href="', $link, '"><img src="', $src, '" alt="', $title, '" title="', $title, '" /></a>';
 						}
 						echo '</div><div class="courselist_details"><div class="courselist_details_inner">',
-							'<h2><a href="', $link, '">', $title, '</a></h2>',
+							'<h2><a href="', $link, '">', $title, '</a></h2>','&nbsp;<span class="prodItemCode">Code: ', $course->ProductID(), '</span>',
 							'<p class="series_slogan">', $this->InputSafeString($course->content['cslogan']), '</p><div class="clear"></div></div><p>', $course->GetDateVenue(', '), '</p><a class="series_button" href="', $link, '">View ', $this->ctype, '</a></div></li>';
 					} else
 					{	echo '<li><div class="courselist_image">';
 						if (($src = $course->HasImage('thumbnail')) || ($src = $course->GetDefaultImage('thumbnail')))
 						{	echo '<a href="', $link, '"><img src="', $src, '" alt="', $title, '" title="', $title, '" /></a>';
 						}
-						echo '</div><div class="courselist_details"><h2><a href="', $link, '">', $title, '</a></h2><p>', $this->InputSafeString($course->content['cslogan']), '</p></div><div class="courselist_date', ($slogan = $course->SpecialSlogan()) ? ' courselist_date_with_slogan' : '', '">', $course->GetDateVenue(', '), '</div>';
+						echo '</div><div class="courselist_details"><h2><a href="', $link, '">', $title, '</a></h2>','&nbsp;<span class="prodItemCode">Code: ', $course->ProductID(), '</span><p>', $this->InputSafeString($course->content['cslogan']), '</p></div><div class="courselist_date', ($slogan = $course->SpecialSlogan()) ? ' courselist_date_with_slogan' : '', '">', $course->GetDateVenue(', '), '</div>';
 						if ($slogan)
 						{	echo '<div class="courselist_slogan cl_slogan_', $this->InputSafeString($slogan['style']), '"><a href="', $link, '">', $this->InputSafeString($slogan['slogan']), '</a></div>';
 						}
@@ -379,7 +379,7 @@ class CourseContentListingPage extends BasePage
 	
 	public function GetLivePrevCount()
 	{	$counts = array();
-		$sql = 'SELECT IF(courses.starttime>"' . $this->datefn->SQLDateTime() . '", "upcoming", "previous") AS date_state, COUNT(courses.cid) AS courses_count FROM courses, coursecontent WHERE courses.ccid=coursecontent.ccid AND courses.live=1 AND coursecontent.ctype="' . $this->ctype . '" GROUP BY date_state';
+		$sql = 'SELECT IF(courses.endtime>="' . $this->datefn->SQLDate() . '", "upcoming", "previous") AS date_state, COUNT(courses.cid) AS courses_count FROM courses, coursecontent WHERE courses.ccid=coursecontent.ccid AND courses.live=1 AND courses.cvenue>0 AND coursecontent.ctype="' . $this->ctype . '" GROUP BY date_state';
 		if ($result = $this->db->Query($sql))
 		{	while ($row = $this->db->FetchArray($result))
 			{	$counts[$row['date_state']] = (int)$row['courses_count'];

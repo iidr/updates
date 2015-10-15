@@ -227,6 +227,7 @@ class AdminCourse extends Course
 		}
 		$form = new Form($_SERVER['SCRIPT_NAME'] . '?id=' . $this->id, 'course_edit');
 		$this->AddBackLinkHiddenField($form);
+		$form->AddRawText('<label>Product Code: </label><label>CE'.$this->id.'</label><br />');
 		$form->AddSelect('Course to schedule', 'ccid', $data['ccid'], '', $this->CourseContentDropdownList(), true, true);
 		
 		$form->AddSelect('Venue', 'cvenue', $data['cvenue'], '', $this->VenueList(), true, true);
@@ -388,8 +389,8 @@ class AdminCourse extends Course
 		}
 	} // end of fn RemoveGallery
 	
-	public function HeaderInfo()
-	{	return $this->InputSafeString($this->content['ctitle']);
+	public function HeaderInfo(){
+		return $this->InputSafeString($this->content['ctitle'].' (Product Code: CE'. $this->details['cid'].')');
 	} // end of fn HeaderInfo
 	
 	function ListBookings()

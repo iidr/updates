@@ -135,7 +135,22 @@ class AccountPage extends BasePage
 					
 					if(count($reward_row)>0){
 						$reward = new ReferAFriendReward($reward_row);
-						echo '<td>&pound;', number_format($reward->details['amount'], 2), '</td><td>', date('d M Y', strtotime($reward->details['created'])), '</td><td>';
+						$totalAmount 	= 0;
+						$expiryDate		= '';
+						
+						if(is_array($reward->details)){
+							foreach($reward->details as $key=>$value){
+								$totalAmount = $value['amount'];
+								$expiryDate = $value['expires'];
+								echo '<td>&pound;', number_format($value['amount'], 2), '</td><td>', date('d M Y', strtotime($value['created'])), '</td><td>';
+								break;	
+							}
+						}else{
+							$totalAmount 	= $reward->details['amount'];
+							$expiryDate 	= $reward->details['expires'];
+							echo '<td>&pound;', number_format($reward->details['amount'], 2), '</td><td>', date('d M Y', strtotime($reward->details['created'])), '</td><td>';
+						}
+						
 						$used_amount = 0;
 						$lines = array();
 						if ($used = $reward->GetUsed())
@@ -144,8 +159,8 @@ class AccountPage extends BasePage
 								$used_amount += $use['usedamount'];
 							}
 						}
-						if ($used_amount < $reward->details['amount'])
-						{	$lines[] = 'use by ' . date('d M Y', strtotime($reward->details['expires']));
+						if ($used_amount < $totalAmount){	
+							$lines[] = 'use by ' . date('d M Y', strtotime($expiryDate));
 						}
 						echo implode('<br />', $lines), '</td>';
 					}else{	

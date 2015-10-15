@@ -848,7 +848,7 @@ class Student extends Base
 			$end = $start + $this->bookings_perpage;
 			
 			$venues = array();
-			echo '<table class="myacList"><tr><th colspan="2">Course</th><th>Dates and Location</th><th>Amount</th><th>&nbsp;</th></tr>';
+			echo '<table class="myacList"><tr><th colspan="2">Course(s)</th><th>Date/Time/Location</th><th>Amount</th><th>Order/Booking Ref.</th></tr>';
 			foreach ($courses as $course)
 			{	if (++$count > $start)
 				{	if ($count > $end)
@@ -868,7 +868,11 @@ class Student extends Base
 					echo '</div></td><td class="prodName" rowspan="', $rowspan, '"><a href="', $course_link, '">', $course_title, '</a><p class="prodItemCode">Code: ', $course['course']->ProductID(), '</p></td><td rowspan="', $rowspan, '">', $course['course']->DateDisplayForDetails('<br />', 'D. jS M y', ' - ', '<br />'), '<br />', $venues[$course['course']->details['cvenue']], '</td>';
 					$bcount = 0;
 					foreach ($course['bookings'] as $booking)
-					{	echo $bcount++ ? '</tr><tr class="myacListSubRow">' : '', '<td>', $this->InputSafeString($booking->ticket->details['tprice']), '</td><td><a href="booking.php?id=', $booking->id, '">Order #', $booking->id, '</a></td>';
+					{	$total_discount = $totalpricetax = 0.00;
+						$total_discount = $booking->order_item['discount_total'];
+						$totalpricetax 	= $booking->order_item['totalpricetax'];
+						$totalpricetax -= $total_discount;
+						echo $bcount++ ? '</tr><tr class="myacListSubRow">' : '', '<td align="right">&pound;', $this->InputSafeString($totalpricetax), '</td><td><a href="booking.php?id=', $booking->id, '">',$booking->id,'</a></td>';
 					}
 					echo '</tr>';
 				}
@@ -900,14 +904,14 @@ class Student extends Base
 			}
 			$end = $start + $this->orders_perpage;
 			
-			echo '<table class="myacList"><tr><th>Date</th><th>Items</th><th>Total Cost</th><th></th></tr>';
+			echo '<table class="myacList"><tr><th>Date</th><th>Items</th><th>Total Cost</th><th>Order/Booking Ref</th></tr>';
 			foreach($orders as $o)
 			{	if (++$count > $start)
 				{	if ($count > $end)
 					{	break;
 					}
 					
-					echo '<tr><td>', date('j M y', strtotime($o->details['orderdate'])), '</td><td class="orderItemList">', $this->ItemsList($o), '</td><td class="num orderTotal">&pound;', number_format($o->GetRealTotal(), 2), '</td><td><a href="order.php?id=', $o->id, '">Order #', $o->id, '</a></td></tr>';
+					echo '<tr><td>', date('j M y', strtotime($o->details['orderdate'])), '</td><td class="orderItemList">', $this->ItemsList($o), '</td><td class="num orderTotal">&pound;', number_format($o->GetRealTotal(), 2), '</td><td><a href="order.php?id=', $o->id, '">', $o->id, '</a></td></tr>';
 				}
 			}
 			echo '</table>';
@@ -928,7 +932,7 @@ class Student extends Base
 		echo '<table>';
 		foreach ($order->GetItems() as $item)
 		{	
-			echo '<tr><td class="oilType">', $this->InputSafeString($item['ptype']), '<br /><span class="oilItemid">item #', $item['id'], '</span></td><td class="oilDesc">', (int)$item['qty'], ' &times; ', $this->InputSafeString($item['title']);
+			echo '<tr><td class="oilType">', $this->InputSafeString($item['ptype']), '<br /><span class="oilItemid">item #', $item['id'], '</span></td><td class="oilDesc">', (int)$item['qty'], ' &times; ', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title']));
 			switch ($item['ptype'])
 			{	case 'store':
 					$product = new StoreProduct($item['pid']);
@@ -1062,7 +1066,7 @@ class Student extends Base
 			while ($row = $this->db->FetchArray($result)){
 				$row['reward_used'] = array();
 				$row['reward_left'] = $row['amount'];
-				echo $used_sql = 'SELECT * FROM  affrewardsused WHERE awid=' . $row['awid'] . ' ORDER BY usedtime ASC';
+				$used_sql = 'SELECT * FROM  affrewardsused WHERE awid=' . $row['awid'] . ' ORDER BY usedtime ASC';
 				if ($used_result = $this->db->Query($used_sql) && $this->db->NumRows($used_sql)>0){
 					while ($used_row = $this->db->FetchArray($used_result)){
 						$row['reward_used'][$used_row['ruid']] = $used_row;

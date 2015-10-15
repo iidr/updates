@@ -382,8 +382,8 @@ class AdminCourseContent extends CourseContent
 		}
 	} // end of fn RemoveMultimedia
 	
-	public function HeaderInfo()
-	{	return $this->InputSafeString($this->details['ctitle']);
+	public function HeaderInfo(){	
+		return $this->InputSafeString($this->details['ctitle'].' (Product Code: CE'. $this->content['id'].')');
 	} // end of fn HeaderInfo
 	
 	public function ScheduleListing()

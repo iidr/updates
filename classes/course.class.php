@@ -10,7 +10,15 @@ class Course extends Base implements Searchable
 	protected $imagelocation = '';
 	protected $imagedir = '';
 	protected $liveonly = true;
-	protected $slogan_styles = array('whi_gre'=>'white on green', 'red_yel'=>'white on orange/red', 'pnk_mar'=>'white on maroon');
+	protected $slogan_styles = array(	'red_yel'=>'white on orange/red'
+										,'whi_gold'=>'white on gold'
+										,'whi_indigo'=>'white on indego'
+										,'whi_limgree'=>'white on lime green'
+										,'whi_teal'=>'white on teal'
+										,'whi_steelblue'=>'white on steel blue'
+										,'whi_blue'=>'white on blue'
+										,'whi_mar'=>'white on maroon'
+										,'whi_dimgre'=>'white on dim gray');
 	
 	function __construct($id = 0, $liveonly = true)
 	{	parent::__construct();
@@ -380,22 +388,19 @@ class Course extends Base implements Searchable
 		}
 	} // end of fn UpdateBookingQty
 	
-	public function GetUpcomingCourses($limit = 0)
-	{
-		$courses = array();
+	public function GetUpcomingCourses($limit = 0){
+		$courses = array();		
+		$sql = 'SELECT *,DATEDIFF("' . $this->datefn->SQLDate() . '",`home_display_date`) AS display_day FROM courses WHERE endtime > "' . $this->datefn->SQLDate() . '" AND live=1 ORDER BY `endtime` ASC';
 		
-		$sql = 'SELECT * FROM courses WHERE endtime>"' . $this->datefn->SQLDateTime() . '" AND live=1 ORDER BY `endtime` ASC';
-		
-		if ($limit)
-		{	$sql .= ' LIMIT ' . (int)$limit;
+		if($limit){	
+			$sql .= ' LIMIT ' . (int)$limit;
 		}
 		
 		if ($result = $this->db->Query($sql))
 		{	while ($row = $this->db->FetchArray($result))
 			{	$courses[] = new Course($row);
 			}
-		}
-		
+		}		
 		return $courses;
 	} // end of fn GetUpcomingCourses
 	
@@ -472,7 +477,8 @@ class Course extends Base implements Searchable
 	} // end of fn DateDisplayForDetails
 	
 	public function IsBookable()
-	{	if ($this->details['bookable'] && ($this->datefn->SQLDate() >= $this->details['starttime']) && ($this->datefn->SQLDate() <= $this->details['endtime']))
+	{	if ($this->details['bookable'] && ($this->details['starttime'] >= $this->datefn->SQLDate()) && ($this->details['endtime'] >=$this->datefn->SQLDate() || $this->details['endtime']=='0000-00-00'))
+		//if ($this->details['bookable'] && ($this->datefn->SQLDate() >= $this->details['starttime']) && ($this->datefn->SQLDate() <= $this->details['endtime']))
 		{	switch ($this->details['cstockmethod'])
 			{	case 0: // unlimited
 						return true;

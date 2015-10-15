@@ -108,7 +108,20 @@ class OrderListingPage extends AccountsMenuPage
 		$discounts = array();
 		$total_discounts = 0;
 		foreach ($order->GetItems() as $item)
-		{	echo '<tr><td class="oilType">', $this->InputSafeString($item['ptype']), '</td><td class="oilDesc">', (int)$item['qty'], ' &times; ', $this->InputSafeString($item['title']), '</td><td class="oilPrice num">', number_format($item['totalpricetax'], 2), '</td></tr>';
+		{	
+			echo '<tr><td class="oilType">', $this->InputSafeString($item['ptype']), '</td><td class="oilDesc">', (int)$item['qty'], ' &times; ', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title']));
+			switch ($item['ptype'])
+			{	case 'store':
+					$product = new StoreProduct($item['pid']);
+					echo '&nbsp;<span class="prodItemCode">Code: ', $product->ProductID(), '</span>', $product->ListDownloads($this), $product->ListPurchasedMM($this);
+					break;
+				case 'course':
+					$ticket = new CourseTicket($item['pid']);
+					$course = new Course($ticket->details['cid']);
+					echo '&nbsp;<span class="prodItemCode">Code: ', $course->ProductID(), '</span>';
+					break;
+			}
+		 	echo '</td><td class="oilPrice num">', number_format($item['totalpricetax'], 2), '</td></tr>';
 			foreach ($item['discounts'] as $item_discount)
 			{	if (!$discounts[$item_discount['discid']])
 				{	$discounts[$item_discount['discid']] = new DiscountCode($item_discount['discid']);
