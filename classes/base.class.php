@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('Europe/London');
+
 class Base
 {	var $db;
 	var $datefn;

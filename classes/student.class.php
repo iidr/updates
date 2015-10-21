@@ -904,7 +904,7 @@ class Student extends Base
 			}
 			$end = $start + $this->orders_perpage;
 			
-			echo '<table class="myacList"><tr><th>Date</th><th>Items</th><th>Total Cost</th><th>Order/Booking Ref</th></tr>';
+			echo '<table class="myacList"><tr><th>Date</th><th>Item(s)</th><th>Total Paid</th><th>Order/Booking Ref</th></tr>';
 			foreach($orders as $o)
 			{	if (++$count > $start)
 				{	if ($count > $end)

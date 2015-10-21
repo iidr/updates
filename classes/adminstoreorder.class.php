@@ -154,7 +154,7 @@ class AdminStoreOrder extends StoreOrder
 		}
 		echo '</td></tr>';
 		if ($this->details['pptransid'])
-		{	echo '<tr><td class="label">&nbsp;</td><td>cancel this order<input type="checkbox" id="cancelPmtCheck" onchange="SavePaymentChanged();" /><td></tr>';
+		{	echo '<tr><td class="label">&nbsp;</td><td>Cancel this order<input type="checkbox" id="cancelPmtCheck" onchange="SavePaymentChanged();" /><td></tr>';
 		}
 		echo '<tr><td class="label">Payment notes</td><td><textarea id="pmtnotes" onkeyup="SavePaymentChanged();">', $this->InputSafeString($this->details['pmtnotes']), '</textarea></td></tr><tr><td class="label">&nbsp;</td><td><input type="submit" id="paySaveSubmit" class="submit" value="Save Payment Details" style="display: none;" onclick="SavePayment(', $this->id, ');" /></td></tr></table></form></div>';
 		return ob_get_clean();

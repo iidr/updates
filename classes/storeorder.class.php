@@ -673,16 +673,29 @@ class StoreOrder extends BlankItem
 			$fields = array();
 			$fields['site_url'] = $this->link->GetLink();
 			$fields['firstname'] = $user->details['firstname'];
+			
 			$fields['account_link_plain'] = $this->link->GetLink('account.php');
 			$fields['account_link'] = "<a href='". $fields['account_link_plain'] ."'>". $fields['account_link_plain'] ."</a>";
 			
+			$fields['order_id'] = '#'.$this->details['id'];
+			$fields['order_date'] = ($this->details['orderdate']!='')?date('d-m-Y @H:i', strtotime($this->details['orderdate'])):'';
+			
+			$fields['transaction_id'] = $this->details['pptransid'];
+			
+			$fields['invoice_address'] = $this->GetInvoiceAddressHTML();
+			$fields['invoice_address'] = $this->GetInvoiceAddressHTML();
+			
+			$fields['invoice_address'] = $this->GetInvoiceAddressHTML();
+			$fields['delivery_address'] = $this->GetDeliveryAddressHTML();
 			$fields['order_items'] = $this->GetOrderItemsHTML();
 			$fields['order_items_plain'] = $this->GetOrderItemsPlain();
 			
+			$fields['password_for_product'] = '';
+						
 			$t = new MailTemplate('order');
 			$mail = new HTMLMail;
 			$mail->SetSubject($t->details['subject']);
-			$mail->Send($user->details['username'], $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));
+			$mail->Send($user->details['username'], $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));			
 		}
 	} // end of fn SendCompletedEmail
 	
@@ -707,42 +720,96 @@ class StoreOrder extends BlankItem
 		}
 	} // end of fn CancelOrder
 	
-	public function GetOrderItemsHTML()
-	{
+	
+	public function GetInvoiceAddressHTML(){
+		ob_start();
+		echo $this->details['payment_firstname'],' ',$this->details['payment_surname'];
+		echo ($this->details['payment_address1']!='')	?'<br />'.$this->details['payment_address1']:'';
+		echo ($this->details['payment_address2']!='')	?'<br />'.$this->details['payment_address2']:'';
+		echo ($this->details['payment_address3']!='')	?'<br />'.$this->details['payment_address3']:'';
+		echo ($this->details['payment_city']!='')		?'<br />'.$this->details['payment_city']:'';
+		echo ($this->details['payment_postcode']!='')	?'<br />'.$this->details['payment_postcode']:'';
+		
+		/*$pay_country = new Country($this->details["payment_country"]);
+		echo ($pay_country->details['shortname']!='')	?'<br />'.$pay_country->details['shortname']:'';*/
+		
+		echo ($this->details['payment_phone']!='')		?'<br />'.$this->details['payment_phone']:'';
+		return ob_get_clean();
+	}
+	
+	public function GetDeliveryAddressHTML(){
+		ob_start();		
+		echo $this->details['delivery_firstname'],' ',$this->details['delivery_surname'];
+		echo ($this->details['delivery_address1']!='')	?'<br />'.$this->details['delivery_address1']:'';
+		echo ($this->details['delivery_address2']!='')	?'<br />'.$this->details['delivery_address2']:'';
+		echo ($this->details['delivery_address3']!='')	?'<br />'.$this->details['delivery_address3']:'';
+		echo ($this->details['delivery_city']!='')		?'<br />'.$this->details['delivery_city']:'';
+		echo ($this->details['delivery_postcode']!='')	?'<br />'.$this->details['delivery_postcode']:'';
+		
+		/*$del_country = new Country($this->details["delivery_country"]);
+		echo ($del_country->details['shortname']!='')	?'<br />'.$del_country->details['shortname']:'';*/
+		
+		echo ($this->details['delivery_phone']!='')		?'<br />'.$this->details['delivery_phone']:'';
+		return ob_get_clean();
+	}
+	
+	public function GetOrderItemsHTML(){
 		ob_start();
 		
 		$discounts = array();
-		$total_discounts = 0;
-		
+		$total_discounts = $sub_total = $total = 0;
+				
 		echo '<table style="border-collapse: collapse;">';
-		
-		foreach ($this->GetItems() as $item)
-		{	echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;">', $this->InputSafeString($item['title']), '</td><td style="border: 1px solid #000; padding: 5px 10px;">', $item['qty'], 'x</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($item['pricetax']), '</td></tr>';
-			foreach ($item['discounts'] as $item_discount)
-			{	if (!$discounts[$item_discount['discid']])
-				{	$discounts[$item_discount['discid']] = new DiscountCode($item_discount['discid']);
+		echo '<tr>
+					<th style="border: 1px solid #000; padding: 5px 10px;">Item(s)</th>
+					<th style="border: 1px solid #000; padding: 5px 10px;">Unit Price</th>	
+					<th style="border: 1px solid #000; padding: 5px 10px;">Qty</th>
+					<th style="border: 1px solid #000; padding: 5px 10px;">Discount</th>
+					<th style="border: 1px solid #000; padding: 5px 10px;">Amount</th>
+				</tr>';	
+				
+				foreach ($this->GetItems() as $item){			
+					echo '
+						<tr>
+							<td style="border: 1px solid #000; padding: 5px 10px;">', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title'])), '<span class="prodItemCode">(Code: CE'.$item['pid'].')</span></td>
+							<td style="border: 1px solid #000; padding: 5px 10px;">', $item['price'], '</td>
+							<td style="border: 1px solid #000; padding: 5px 10px;">', $item['qty'], '</td>
+							<td style="border: 1px solid #000; padding: 5px 10px;">
+								<table style="border-collapse: collapse;" border="0">';
+									foreach ($item['discounts'] as $item_discount){	
+										if(!$discounts[$item_discount['discid']]){	
+											$discounts[$item_discount['discid']] = new DiscountCode($item_discount['discid']);
+										}
+										echo '<tr><td style="border: 0px solid #000; padding: 5px 10px;">', $this->formatPrice($item_discount['discamount']), '</td></tr>';
+										$total_discounts += $item_discount['discamount'];
+									}
+									echo '
+								</table>
+							</td>
+							<td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice(floatval($item['pricetax'] - $item_discount['discamount'])), '</td>
+						</tr>';
+						$sub_total = floatval($item['pricetax'] - $item_discount['discamount']);			
 				}
-				echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;">Discount: ', $this->InputSafeString($discounts[$item_discount['discid']]->details['discdesc']), '</td><td style="border: 1px solid #000; padding: 5px 10px;"></td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">&minus; ', $this->formatPrice($item_discount['discamount']), '</td></tr>';
-				$total_discounts += $item_discount['discamount'];
-			}
+				
+		echo '<tr><td style="border: 0px solid #000; padding: 5px 10px;" colspan="4" align="right">Sub Total</td><td style="border: 0px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($sub_total), '</td></tr>';
+		echo '<tr><td style="border-bottom: 2px solid #000; padding: 5px 10px;" colspan="5">&nbsp;</td></tr>';		
+		
+		if ($total_discounts){	
+			echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;" colspan="4" align="right">Discount</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($total_discounts), '</td></tr>';
 		}
 		
-		if ($total_discounts)
-		{	echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;"></td><td style="border: 1px solid #000; padding: 5px 10px;">Discounts</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">&minus; ', $this->formatPrice($total_discounts), '</td></tr>';
-		}
-		
-		if ($del = $this->details['delivery_price'])
-		{	echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;"></td><td style="border: 1px solid #000; padding: 5px 10px;">Delivery:</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($del), '</td></tr>';	
+		if ($del = $this->details['delivery_price']){	
+			echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;" colspan="4" align="right">Delivery:</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($del), '</td></tr>';	
 		}
 		
 		$total = $this->GetTotal();
 		$today = $this->GetTotal(true);
 		
-		if (($total != $price) && ($today > 0))
-		{	echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;"></td><td style="border: 1px solid #000; padding: 5px 10px;">Paid to date:</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($today), '</td></tr>';
+		if (($total != $price) && ($today > 0)){	
+			echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;" colspan="4" align="right">Paid to date:</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($today), '</td></tr>';
 		}
 		
-		echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;"></td><td style="border: 1px solid #000; padding: 5px 10px;">Total:</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right; font-weight: bold;">', $this->formatPrice($total), '</td></tr></table>';
+		echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;" colspan="4" align="right">Total:</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right; font-weight: bold;">', $this->formatPrice($total), '</td></tr></table>';
 		
 		return ob_get_clean();
 	} // end of fn GetOrderItemsHTML

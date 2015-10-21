@@ -55,7 +55,11 @@ class BookingPage extends AccountPage
 		$totalpricetax = $this->booking->order_item['totalpricetax'];
 		$totalpricetax -= $total_discount;
 			
-		echo '</div><div class="clear"></div></div><div><span>Title</span><div class="bdContent"><a href="', $this->booking->course->Link(), '">',$this->booking->course->content['ctitle'],'</a></div><div class="clear"></div></div><div><span>Paid</span><div class="bdContent">&pound;', number_format($totalpricetax, 2), '</div><div class="clear"></div></div><div><span>Course/Event date/time</span><div class="bdContent">', $this->booking->course->DateDisplayForDetails('<br />', 'D. jS F, Y', $date_sep = ' - ', $time_sep = '<br />'), '</div><div class="clear"></div></div><div><span>Venue</span><div class="bdContent">', $this->booking->course->GetVenue()->details['vname'], '<br />', $this->booking->course->GetVenue()->GetAddress(), '<br />';
+		echo '</div><div class="clear"></div></div><div><span>Title</span><div class="bdContent"><a href="', $this->booking->course->Link(), '">',$this->booking->course->content['ctitle'],'</a></div><div class="clear"></div></div><div><span>Paid</span><div class="bdContent">&pound;', number_format($totalpricetax, 2), '</div><div class="clear"></div></div><div><span>Course/Event date/time</span><div class="bdContent">', $this->booking->course->DateDisplayForDetails('<br />', 'D. jS F, Y', $date_sep = ' - ', $time_sep = '<br />'), '</div><div class="clear"></div></div><div><span>Venue</span><div class="bdContent">', $this->booking->course->GetVenue()->details['vname'], '<br />', $this->booking->course->GetVenue()->GetAddress().'</div><div class="clear"></div></div>';
+		
+		$campusLink = $this->booking->course->GetVenue()->details['campus_link'];
+		echo ($campusLink!='')?'<div><span>Campus Link</span><div class="bdContent"><a href="'.$campusLink.'" target="_blank">Click to view</a></div></div><div><span>&nbsp;</span><div class="bdContent">':'<div><span>&nbsp;</span><div class="bdContent">';
+		
 		if (($this->booking->course->GetVenue()->details['vlat'] != 0) || ($this->booking->course->GetVenue()->details['vlng'] != 0))
 		{	echo '<div id="bdCourseMap"></div><script>showCourseMap("bdCourseMap", ', $this->booking->course->GetVenue()->details['vlng'], ', ', $this->booking->course->GetVenue()->details['vlat'], ');</script>';
 		}

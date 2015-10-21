@@ -184,49 +184,51 @@ class CourseBooking extends BlankItem
 	} // end of fn IsGift
 	
 	public function SendStudentEmail($friendName='',$friendEmail=''){
-		$friendName=trim($friendName);
-		$friendEmail=trim($friendEmail);
-			
 		if($this->ValidEmail($this->student->details['username'])){
 			$fields = array();
+			$friendName=trim($friendName);
+			$friendEmail=trim($friendEmail);
+			
 			$fields['site_url'] = $this->link->GetLink();
 			$fields['firstname'] = $this->student->details['firstname'];
-			$fields['course_title'] = $this->InputSafeString($this->course->content['ctitle'] .' (Code: CE'. $this->course->content['ccid'].')');
+			$fields['course_title'] = $this->InputSafeString($this->course->content['ctitle'] .' ('. $this->ticket->details['tname'] .')');
 			$fields['course_location'] = $this->course->GetVenue()->GetAddress(' ');
 			$fields['course_date'] = $this->OutputDate($this->course->details['starttime']);
 			$fields['friend_name'] = $this->InputSafeString($friendName);
 			
 			$fields['booking_link_plain'] = $this->link->GetLink('booking.php?id='. $this->id);
-			$fields['booking_link'] = '<a href="' . $fields['booking_link_plain'] . '">' . $fields['booking_link_plain'] . '</a>';			
+			$fields['booking_link'] = '<a href="' . $fields['booking_link_plain'] . '">' . $fields['booking_link_plain'] . '</a>';
 			
-			if($gift = $this->IsGift()){
+			if($gift = $this->IsGift())
+			{
 				$fields['payment_price_plain'] = 'This booking was booked by ' . $this->InputSafeString($gift->GetName());
 				$fields['payment_price'] = '<p>'. $fields['payment_price_plain'] .'</p>';
-			}else{	
-				if($price = $this->IsPayOnDay()){
+			} else
+			{	if($price = $this->IsPayOnDay())
+				{
 					$fields['payment_price_plain'] = 'A payment of ' . $this->formatPrice($price) . ' is due on the day of the course.';
 					$fields['payment_price'] = '<p>' . $fields['payment_price_plain'] . '</p>';
 				}
 			}
 			
-			if($friendName!='' && $friendEmail!='' && $this->student->details['username']!=$friendEmail){
-				$templateName = 'booked_by_friend';
-			}elseif($friendName=='' && $friendEmail!='' && $this->student->details['username']!=$friendEmail){
-				$templateName = 'booked_by_friend_already_member';
-			}else{
-				$templateName = 'booking';					
-			}
+			$templateName = ($friendName!='' && $friendEmail!='' && $this->student->details['username']!=$friendEmail)?'booked_by_friend':'booking';
 			
 			$t = new MailTemplate($templateName);
 			$mail = new HTMLMail;
 			
-			//$t = new MailTemplate('booking');
-			//$mail = new HTMLMail;
-			//$fields['firstname'] = $friendName;
-			//$mail->SetSubject($t->details['subject']);
-			//$mail->Send($friendEmail, $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));
-			$mail->SetSubject($t->details['subject']);	
-			$mail->Send($this->student->details["username"], $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));
+			if($friendName!='' && $friendEmail!='' && $this->student->details['username']!=$friendEmail){
+				$mail->SetSubject($fields['course_title']);
+				$mail->Send($this->student->details["username"], $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));
+				
+				/*$t = new MailTemplate('booking');
+				$mail = new HTMLMail;
+				$fields['firstname'] = $friendName;
+				$mail->SetSubject($t->details['subject']);
+				$mail->Send($friendEmail, $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));*/
+			}else{				
+				$mail->SetSubject($t->details['subject']);	
+				$mail->Send($this->student->details["username"], $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));
+			}
 		}	
 	} // end of fn SendStudentEmail
 	

@@ -35,7 +35,8 @@ class AffiliateStudent extends BlankItem
 	
 	public function SharePopupEmailForm($data= array())
 	{	ob_start();
-		echo $this->ShareListBackLink(), '<form class="spEmailForm" onsubmit="AffShareSendEmail(); return false;"><p class="spEmailFormHeader">Fill in your friend\'s email address and we will send them an email to tell them about IIDR</p><p><input type="text" id="spemailinput" value="', $this->InputSafeString($data['email']), '" /></p><p>A message for your friend</p><p><textarea id="spemailtext">', $this->InputSafeString($data['message']), '</textarea></p><p><input type="submit" value="Send" /></p></form>';
+		//echo $this->ShareListBackLink(), '<form class="spEmailForm" onsubmit="AffShareSendEmail(); return false;"><p class="spEmailFormHeader">Fill in your friend\'s email address and we will send them an email to tell them about IIDR</p><p><input type="text" id="spemailinput" value="', $this->InputSafeString($data['email']), '" /></p><p>A message for your friend</p><p><textarea id="spemailtext">', $this->InputSafeString($data['message']), '</textarea></p><p><input type="submit" value="Send" /></p></form>';
+		echo $this->ShareListBackLink(), '<form class="spEmailForm" onsubmit="AffShareSendEmail(); return false;"><p class="spEmailFormHeader">Enter your friends\' email addresses separeted by commas or spaces</p><p><input type="text" id="spemailinput" value="', $this->InputSafeString($data['email']), '" /></p><p>You can use this suggested message or, better yet, write your own below:</p><p><textarea id="spemailtext">', ($this->InputSafeString($data['message'])!='')?$this->InputSafeString($data['message']):$this->GetParameter("share_email_txt"), '</textarea></p><p><input type="submit" value="Send" /></p></form>';
 		return ob_get_clean();
 	} // end of fn SharePopupEmailForm
 	

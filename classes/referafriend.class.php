@@ -58,7 +58,7 @@ class ReferAFriend extends BlankItem
 		}
 		
 		if ($this->ValidEMail($referemail = $data['referemail']))
-		{	if ($this->AlreadyReferred($referemail))
+		{	if($this->AlreadyReferred($referemail))
 			{	$fail[] = 'Your friend already knows about us';
 			} else
 			{	$fields[] = 'referemail="' . $referemail . '"';
@@ -104,6 +104,46 @@ class ReferAFriend extends BlankItem
 		
 	} // end of fn Create
 	
+	public function createReferral($data){
+		$fail = array();
+		$success = array();
+		$fields = array('refertime="' . $this->datefn->SQLDateTime() . '"');
+		
+		$fields[] 	= 'referrer='.$data['referrerid'];		
+		$referemail = trim($data['referemail']);
+		$fields[] 	= 'referemail="' . $referemail . '"';		
+		$refername 	= $this->SQLSafe($data['refername']);
+		$fields[] 	= 'refername="' . $refername . '"';
+		$fields[] 	= 'refermessage="' . $this->SQLSafe($data['refermessage']) . '"';
+		
+		if($data['trackcode']==''){
+			do{
+				$trackcode = $this->ConfirmCode(10, false);
+			}while ($this->TrackCodeUsed($trackcode));
+		}else{
+			$trackcode = trim($data['trackcode']);
+		}
+		
+		$fields[] = 'trackcode="' . $trackcode . '"';
+		
+		$sql = 'INSERT INTO referafriend SET ' . implode(', ', $fields);
+		
+		if($result = $this->db->Query($sql)){	
+			if ($this->db->AffectedRows() && ($id = $this->db->InsertID())){	
+				$this->Get($id);
+				if($this->SendReferral($referemail,$data['refermessage'],$refername)){	
+					$success[] = 'Thank you for recommending us';
+				}
+			}else{	
+				$fail[] = 'Referral failed';
+			}
+		}else{	
+			$fail[] = 'Referral has failed';
+		}
+		
+		return array('failmessage'=>implode(', ', $fail), 'successmessage'=>implode(', ', $success));
+	}
+	
 	public function TrackCodeUsed($trackcode = '')
 	{	$sql = 'SELECT rfid FROM referafriend WHERE trackcode="' . $trackcode . '"';
 		if ($result = $this->db->Query($sql))
@@ -132,15 +172,20 @@ class ReferAFriend extends BlankItem
 		return false;
 	} // end of fn AlreadyReferred
 	
-	public function SendReferral()
+	public function SendReferral($email = '', $message = '',$name = '')
 	{	if (($referrer = new Student($this->details['referrer'])) && $referrer->id)
 		{	$mailfields = array();
+			$referToEmail	= ($email!='')?$email:$this->details['referemail'];
+			$referToName	= ($name!='')?$name:$this->details['refername'];
+			$referToMessage	= ($message!='')?$message:stripslashes($this->details['refermessage']);
+			
 			$mailfields['username'] = $referrer->details['username'];
 			$mailfields['firstname'] = $referrer->details['firstname'];
 			$mailfields['surname'] = $referrer->details['surname'];
-			$mailfields['referral_message'] = stripslashes($this->details['refermessage']);
-			$mailfields['referred_email'] = $this->details['referemail'];
-			$mailfields['referred_name'] = $this->details['refername'];
+			$mailfields['referral_message'] = $referToMessage;
+			$mailfields['referral_message_html'] = nl2br($this->InputSafeString($referToMessage));
+			$mailfields['referred_email'] = $referToEmail;
+			$mailfields['referred_name'] = $referToName;
 			$mailfields['site_url'] = $this->link->GetLink() . '?refertrack=' . $this->details['trackcode'];
 			$mailfields['site_link_html'] = '<a href="' . $mailfields['site_url'] . '">visit us here</a>';
 			$mailtemplate = new MailTemplate('refer_a_friend');

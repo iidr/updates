@@ -290,7 +290,14 @@ class AdminCourseContent extends CourseContent
 				}
 				echo 'Admin: <a href="useredit.php?userid=', $adminusers[$review->details['admincreated']]->userid, '">',  $adminusers[$review->details['admincreated']]->username, '</a>';
 			}
-			echo '</td><td>', $this->InputSafeString($review->details['reviewertext']), '</td><td>', date('d/m/y @H:i', strtotime($review->details['revdate'])), '</td><td>', $review->details['revtitle'] ? ('<strong>' . $this->InputSafeString($review->details['revtitle']) . '</strong><br />') : '', nl2br($this->InputSafeString($review->details['review'])), '</td><td>', $review->StatusString(), '</td><td>', nl2br($this->InputSafeString($review->details['adminnotes'])), '</td><td><a href="coursereview.php?id=', $review->id, '">edit</a></td></tr>';
+			echo '</td><td>', $this->InputSafeString($review->details['reviewertext']), '</td><td>', date('d/m/y @H:i', strtotime($review->details['revdate'])), '</td><td>', $review->details['revtitle'] ? ('<strong>' . $this->InputSafeString($review->details['revtitle']) . '</strong><br />') : '', nl2br($this->InputSafeString($review->details['review'])), '</td><td>', $review->StatusString(), '</td><td>', nl2br($this->InputSafeString($review->details['adminnotes'])), '</td><td><a href="coursereview.php?id=', $review->id, '">edit</a>';
+			
+			/*if ($review->CanDelete())
+			{	echo '&nbsp;|&nbsp;<a href="instructorreview.php?id=', $review->id, '&delete=1">delete</a>';
+			}*/
+			
+			echo '</td></tr>';
+		
 		}
 		echo '</table>';
 		return ob_get_clean();

@@ -4,6 +4,7 @@ class CoursePage extends BasePage
 	private $course;
 	private $content;
 	private $gallery;
+	private $multimedia;
 	
 	function __construct($course = 0)
 	{	parent::__construct('courses');
@@ -35,6 +36,32 @@ class CoursePage extends BasePage
 		if (!$this->course->id || !$this->course->CanView())
 		{	$this->Redirect('courses.php');
 		}
+		
+		$this->multimedia = $this->content->GetMultiMedia();
+		
+		/*print_r($this->multimedia);
+		
+		Array
+		(
+			[102] => Array
+				(
+					[mmid] => 102
+					[mmname] => Journey Through the Quran Book
+					[mmslug] => journey-through-the-quran-book
+					[mmdesc] => 
+					[live] => 1
+					[mmorder] => 0
+					[embedcode] => <iframe src=\"//player.vimeo.com/video/133053074?title=0&byline=0&portrait=0\" width=\"500\" height=\"281\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					[mmtype] => vimeo
+					[videocode] => 133053074
+					[author] => 
+					[posted] => 2015-07-09 17:06:00
+					[frontpage] => 0
+					[inlib] => 0
+					[socialbar] => 0
+				)		
+		)*/
+		
 		$this->title .= ' - ' . $this->InputSafeString($this->course->details['ctitle']);
 		
 		switch ($this->course->content['ctype'])
@@ -50,20 +77,25 @@ class CoursePage extends BasePage
 	
 	function CourseHeader()
 	{	ob_start();
-	//	if ($video = $this->content->GetVideo())
-	//	{	echo '<div class="col2-wrapper">';
-	//		if($src = $this->course->HasImage('default'))
-	//		{	echo '<img src="', $src, '" alt="" />';
-	//		}
-	//		echo '</div><div class="col2-wrapper">',  $video->Output(465, 290), '</div>';
-	//	} else
-	//	{	
+			//	if ($video = $this->content->GetVideo())
+			//	{	echo '<div class="col2-wrapper">';
+			//		if($src = $this->course->HasImage('default'))
+			//		{	echo '<img src="', $src, '" alt="" />';
+			//		}
+			//		echo '</div><div class="col2-wrapper">',  $video->Output(465, 290), '</div>';
+			//	} else
+			//	{	
 			echo '<div class="col4-wrapper">';
-			if($src = $this->course->HasImage('banner'))
-			{	echo '<img src="', $src, '" alt="" />';
+			if($src = $this->course->HasImage('banner')){	
+				echo '<img src="', $src, '" alt="" />';
 			}
+			
+			if(count($this->multimedia)>0){
+				echo '<div class="course_material">Buy the course video and course material today.<span><a href="', $this->link->GetLink('store.php'),'" class="button-link continue-shopping material_buy_btn">Buy Now</a></span></div>';
+			}			
+			
 			echo '</div>';
-	//	}
+			//	}
 		
 		echo '<div class="clear"></div>';
 		
@@ -238,6 +270,7 @@ class CoursePage extends BasePage
 		$reviewlist = $this->content->ReviewList(0);
 		$reviewform = $this->user->ReviewForm($this->content->id, 'course');
 		$gallerylist = $this->course->GalleryList();
+		
 		if ($reviewlist || $reviewform || $gallerylist)
 		{	echo '<div id="courseReviewContainer"><div id="reviewListContainer">', $reviewlist, $reviewform, '</div><div id="courseGalleryContainer">', $gallerylist, '</div><div class="clear"></div></div>';
 		}

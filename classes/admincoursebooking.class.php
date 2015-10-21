@@ -122,10 +122,11 @@ class AdminCourseBooking extends CourseBooking
 			$fields[] = 'course=' . $newcourse;
 			$fields[] = 'ticket=' . $newticket;
 			
-			$oldPrice	= $this->ticket->details['tprice'];
-			$new_course = new Course($newcourse);
-			$newPrice	= $new_course->tickets[$newticket]['tprice'];
+			$oldPrice	= floatval($this->order_item['totalpricetax'] - $this->order_item['discount_total']);
+			$oldPrice	= ($oldPrice>0)?$oldPrice:0.00;
 			
+			$new_course = new Course($newcourse);
+			$newPrice	= $new_course->tickets[$newticket]['tprice'];			
 			$outstandingPrice	= floatval($newPrice - $oldPrice);
 			
 			$changefields[] = 'course_new			='.(int)$newcourse;

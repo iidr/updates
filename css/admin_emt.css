@@ -1,0 +1,46 @@
+form.emtInputForm
+{	float: left;
+	width: 700px;
+	padding: 0px 5px;
+}
+form.emtInputForm label
+{	width: 100px;
+}
+form.emtInputForm textarea
+{	width: 400px;
+	height: 400px;
+}
+#emtFieldsList
+{	float: left;
+	width: 250px;
+	padding: 0px 5px;
+}
+#emtFieldsList ul
+{	padding-left: 20px;
+}
+#emtFieldsList ul>li
+{	margin: 5px 0px;
+}
+#emtFieldsList ul>li input
+{	border: none;
+	width: 200px;
+}
+.emtSample
+{	width: 500px;
+	margin: 10px auto;
+}
+.emtSample>div
+{	border: 1px solid #999;
+	padding: 5px;
+	width: 640px;
+	font-family: monospace;
+}
+.etTableSample>h4
+{	margin: 0px 0px 3px;
+}
+.etTableSample>div
+{	width: 500px;
+	height: 100px;
+	overflow: auto;
+	font-family: monospace;
+}
