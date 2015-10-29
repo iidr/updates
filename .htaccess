@@ -56,5 +56,6 @@ RewriteRule ^shared/([\w]+)/$ index.php?affcode=$1 [QSA,L]
 
 RewriteRule ^downloads.php$ xdxoxwxnxloads.php?id=$1 [QSA,L]
 RewriteRule ^download/([0-9]+)-(.*)$ xdxoxwxnxload.php?id=$1 [QSA,L]
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
 #RewriteRule ^(.*)/$ $1.php [QSA,L]
 </IfModule>

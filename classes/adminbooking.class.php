@@ -298,16 +298,5 @@ class AdminBooking extends Booking
 			}
 		}
 	} // end of fn Delete
-
-/*	function Delete()
-	{	$bookid = $this->id;
-		$courseid = $this->details["course"];
-		$linkmask = "<a href='member.php?id={$this->user->id}' target='_blank'>" . $this->InputSafeString($this->user->details["firstname"] . " " . $this->user->details["surname"]) . "</a>";
-		if (parent::Delete())
-		{	$this->RecordAdminAction(array("tablename"=>"bookings", "tableid"=>$bookid, "area"=>"bookings", "action"=>"deleted", "actiontype"=>"deleted", "deleteparentid"=>$courseid, "deleteparenttable"=>"courses", "linkmask"=>$linkmask));
-			return true;
-		}
-	} // end of fn Delete
-	*/
 } // end of defn AdminBooking
 ?>

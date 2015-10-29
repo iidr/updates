@@ -5,15 +5,18 @@ class AdminCourseTicket extends CourseTicket
 	{	parent::__construct($id);
 	} // fn __construct
 	
-	public function CanDelete()
-	{	return $this->id && !count($this->GetBookings());
+	public function CanDelete(){	
+		//return $this->id && !count($this->GetBookings());
+		return $this->id;
 	} // end of fn CanDelete
 	
 	function Delete()
 	{	if ($this->CanDelete())
 		{	if ($result = $this->db->Query('DELETE FROM coursetickets WHERE tid=' . $this->id))
-			{	if ($this->db->AffectedRows())
-				{	$this->RecordAdminAction(array('tablename'=>'coursetickets', 'tableid'=>$this->id, 'area'=>'coursetickets', 'action'=>'deleted'));
+			{	if ($this->db->AffectedRows()){	
+					$result = $this->db->Query('DELETE FROM coursebookings WHERE tid=' . $this->id);
+					
+					$this->RecordAdminAction(array('tablename'=>'coursetickets', 'tableid'=>$this->id, 'area'=>'coursetickets', 'action'=>'deleted'));
 					$this->Reset();
 					return true;
 				}

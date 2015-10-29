@@ -390,7 +390,7 @@ class Course extends Base implements Searchable
 	
 	public function GetUpcomingCourses($limit = 0){
 		$courses = array();		
-		$sql = 'SELECT *,DATEDIFF("' . $this->datefn->SQLDate() . '",`home_display_date`) AS display_day FROM courses WHERE endtime > "' . $this->datefn->SQLDate() . '" AND live=1 ORDER BY `endtime` ASC';
+		$sql = 'SELECT *,DATEDIFF("' . $this->datefn->SQLDate() . '",`home_display_date`) AS display_day FROM courses WHERE endtime >= "' . $this->datefn->SQLDate() . '" AND live=1 ORDER BY `endtime` ASC';
 		
 		if($limit){	
 			$sql .= ' LIMIT ' . (int)$limit;

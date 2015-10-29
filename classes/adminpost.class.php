@@ -322,9 +322,9 @@ class AdminPost extends Post
 		}
 	} // end of fn DeleteImages
 	
-	public function CanDelete()
-	{	
-		return $this->id && !$this->GetCommentCount();
+	public function CanDelete(){	
+		//return $this->id && !$this->GetCommentCount();
+		return $this->id;
 	} // end of fn CanDelete
 	
 	function Delete()

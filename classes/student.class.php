@@ -732,16 +732,18 @@ class Student extends Base
 		return $downloads;
 	} // end of fn GetDownloads
 	
-	public function CanDelete($justcheckbookings = false)
+	public function CanDelete($checkbookings = false)
 	{	
-		if (!$this->id)
-		{	return false;
+		if(!$this->id){	
+			return false;
 		}
 		
-		$sql = 'SELECT id FROM coursebookings WHERE student=' . $this->id;
-		if ($result = $this->db->Query($sql))
-		{	if ($row = $this->db->FetchArray($result))
-			{	return false;
+		if($checkbookings){
+			$sql = 'SELECT id FROM coursebookings WHERE student=' . $this->id;
+			if ($result = $this->db->Query($sql))
+			{	if ($row = $this->db->FetchArray($result))
+				{	return false;
+				}
 			}
 		}
 		
@@ -811,7 +813,7 @@ class Student extends Base
 	
 	public function StoreProductPurchased($productid = 0)
 	{	
-		$sql = 'SELECT storeorderitems.* FROM storeorderitems, storeorders WHERE storeorderitems.orderid=storeorders.id AND storeorders.sid=' . (int)$this->id . ' AND NOT pptransid="" AND storeorderitems.ptype="store" AND storeorderitems.pid=' . (int)$productid;
+		$sql = 'SELECT storeorderitems.* FROM storeorderitems, storeorders WHERE storeorderitems.orderid=storeorders.id AND storeorderitems.is_cancelled_refund="0" AND storeorders.sid=' . (int)$this->id . ' AND NOT storeorders.pptransid="" AND storeorderitems.ptype="store" AND storeorderitems.pid=' . (int)$productid;
 		if ($result = $this->db->Query($sql))
 		{	if ($row = $this->db->FetchArray($result))
 			{	return true;

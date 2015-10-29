@@ -449,7 +449,7 @@ class AdminCourse extends Course
 	public function GetBookingDetails($orderItemID='')
 	{	$order_detail = array();
 		if($orderItemID!=''){
-			$sql = 'SELECT * FROM storeorderitems WHERE id=' . $orderItemID . ' ORDER BY id ASC';
+			$sql = 'SELECT * FROM storeorderitems WHERE id=' . $orderItemID . ' AND is_cancelled_refund="0" ORDER BY id ASC';
 			if ($result = $this->db->Query($sql))
 			{	while ($row = $this->db->FetchArray($result))
 				{	$order_detail = $row;
@@ -457,7 +457,7 @@ class AdminCourse extends Course
 			}
 		}
 		return $order_detail;
-	} // end of fn GetBookings
+	}
 	
 	function ListBookingsTable($filter = array())
 	{	ob_start();
@@ -593,7 +593,7 @@ class AdminCourse extends Course
 	
 	public function GetBookingsPerDay()
 	{	$days = array();
-		$sql = 'SELECT COUNT(coursebookings.id) AS book_count, LEFT(storeorders.orderdate, 10) AS book_date FROM coursebookings, storeorderitems, storeorders WHERE coursebookings.orderitemid=storeorderitems.id AND storeorderitems.orderid=storeorders.id AND coursebookings.course=' . $this->id . ' GROUP BY book_date ORDER BY book_date ASC';
+		$sql = 'SELECT COUNT(coursebookings.id) AS book_count, LEFT(storeorders.orderdate, 10) AS book_date FROM coursebookings, storeorderitems, storeorders WHERE coursebookings.orderitemid=storeorderitems.id AND storeorderitems.orderid=storeorders.id AND storeorderitems.is_cancelled_refund="0" AND coursebookings.course=' . $this->id . ' GROUP BY book_date ORDER BY book_date ASC';
 		if ($result = $this->db->Query($sql))
 		{	while ($row = $this->db->FetchArray($result))
 			{	if ($nextday = $lastday)
@@ -677,7 +677,7 @@ class AdminCourse extends Course
 	
 	public function GetOrderFromBooking($booking = array())
 	{	$order = array();
-		$sql = 'SELECT storeorders.* FROM storeorders, storeorderitems WHERE storeorders.id=storeorderitems.orderid AND storeorderitems.id=' . (int)$booking['orderitemid'];
+		$sql = 'SELECT storeorders.* FROM storeorders, storeorderitems WHERE storeorders.id=storeorderitems.orderid AND storeorderitems.is_cancelled_refund="0" AND storeorderitems.id=' . (int)$booking['orderitemid'];
 		if ($result = $this->db->Query($sql))
 		{	if ($row = $this->db->FetchArray($result))
 			{	$order = $row;
@@ -688,7 +688,7 @@ class AdminCourse extends Course
 	
 	public function GetOrderItemFromBooking($booking = array())
 	{	$orderitem = array();
-		$sql = 'SELECT storeorderitems.* FROM storeorderitems WHERE storeorderitems.id=' . (int)$booking['orderitemid'];
+		$sql = 'SELECT storeorderitems.* FROM storeorderitems WHERE storeorderitems.is_cancelled_refund="0" AND storeorderitems.id=' . (int)$booking['orderitemid'];
 		if ($result = $this->db->Query($sql))
 		{	if ($row = $this->db->FetchArray($result))
 			{	$orderitem = $row;
