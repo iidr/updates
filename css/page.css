@@ -11,7 +11,7 @@
 {	font-size: 36px;
 	font-weight: 300;
 	font-family: Lato, Tahoma, Geneva, sans-serif;
-	padding: 20px 0px 20px 18px;
+	padding: 20px 0 10px;
 	margin: 5px 0px 0px;
 	background: #FFF;
 }
@@ -21,10 +21,10 @@
 }
 .page-content h1 .social_links_insert/*, .page-content h1 .fbPageLike*/
 {	float: right;
-	text-align: right;
-	margin-top: 28px;
-	margin-right: 20px;
-	height: 16px;
+    height: 16px;
+    margin-right: 27px;
+    margin-top: 8px;
+    text-align: right;
 }
 .page-content h1 .social_links_insert .fbPageLike
 {	margin-top: -30px;

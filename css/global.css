@@ -2411,6 +2411,16 @@ div#user_reg_modal_popup
 {	background: url("../img/template/sharethis_em.png") no-repeat scroll left top transparent;height:32px;display:inline-block;cursor:pointer;
 }
 
+#pipHeaderSocial .social_links_insert{margin-right:0px !important;}
+
+#pipHeaderSocial .social_links_insert .st_facebook_custom,
+#pipHeaderSocial .social_links_insert .st_youtube_custom,
+#pipHeaderSocial .social_links_insert .st_twitter_custom,
+#pipHeaderSocial .social_links_insert .st_google_custom,
+#pipHeaderSocial .social_links_insert .st_sharethis_custom,
+#pipHeaderSocial .social_links_insert .st_email_custom
+{width:32px;}
+
 #post_listing_container .pagination
 {	margin-right: 0px;
 }

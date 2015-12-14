@@ -104,7 +104,7 @@
 	width: 40px;
 	height: 32px;*/
 	/*background-color: #999999;*/
-	background-color: #2a931c;
+	background-color: #3B819F;
 	color: #FFF;
 	height: 42px;
 	padding: 5px 12px;
@@ -333,7 +333,7 @@
 }
 .continue-shopping
 {	/*background-color: #999999;*/
-	background-color: #2a931c;
+	background-color: #3B819F;
 	margin-right:16px;
 	background-image: none;
 	padding: 12px 20px;
@@ -344,7 +344,7 @@
 .checkout-link
 {	/*background: #3B819F url('../img/template/button_arrow.png') no-repeat right 10px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 10px center;*/
-	background: #800000 url('../img/template/button_arrow.png') no-repeat right 10px center;
+	background: #3B819F url('../img/template/button_arrow.png') no-repeat right 10px center;
 	border: none;
 	float: right;
     margin-right: 10px;
@@ -459,17 +459,31 @@ ul.attendee_listing>li>ul>li div.al_email, ul.attendee_listing>li>ul>li div.al_f
 }
 
 .cart_failmessage
-{	margin: 10px auto;
-	text-align: center;
-	color: #CC0000;
-	font-weight: bold;
-	width:550px;
-	padding:10px;
-	background: #f8f5f6;
-	color:#003747;
-	border:10px solid #f66;
-	box-shadow:0px 0px 11px #D4D4D4;
-	font-size: 14px;
+{	margin: 11px auto;
+    text-align: left;
+    width: 821px;
+    padding: 10px 70px;
+    background: #CE3635 none repeat scroll 0% 0%;
+    color: #FFF;
+    box-shadow: 0px 0px 11px #D4D4D4;
+    font-weight: 400;
+    z-index: 10;
+    font-size: 16px;
+    position: relative;
+    letter-spacing: 0.5px;
+}
+.cart_failmessage::before {
+    content: "X";
+    width: 50px;
+    background: rgba(0, 0, 0, 0.2) none repeat scroll 0% 0%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    line-height: 59px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgba(255,255,255,0.5);
 }
 .cart_failmessage li
 {	padding: 10px 0px;

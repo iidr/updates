@@ -27,9 +27,15 @@ class UserListPage extends AdminPage
 		if ($result = $this->db->Query($sql))
 		{	while ($row = $this->db->FetchArray($result))
 			{	$user = new AdminUser($row["auserid"], 1);
-				echo "<tr class='stripe", $i++ % 2, "'>\n<td>", $user->fullname, "</td>\n<td>", $user->username, "</td>\n<td>", $user->UserAccessList(), "</td>\n<td><a href='useredit.php?userid=", $row["auserid"], "'>edit</a>";
-				if ($this->user->userid != $user->userid && $user->fullname!=='iidr')
-				{	echo "&nbsp;|&nbsp;", $user->DeleteLink("delete");
+				if ($this->user->username==='iidr'){					
+					if($this->user->userid != $user->userid){
+						echo "<tr class='stripe", $i++ % 2, "'>\n<td>", $user->fullname, "</td>\n<td>", $user->username, "</td>\n<td>", $user->UserAccessList(), "</td>\n<td><a href='useredit.php?userid=", $row["auserid"], "'>edit</a>";
+						echo "&nbsp;|&nbsp;", $user->DeleteLink("delete");					
+					}
+				}elseif($this->user->userid != $user->userid){
+					if ($user->username!=='iidr'){
+						echo "<tr class='stripe", $i++ % 2, "'>\n<td>", $user->fullname, "</td>\n<td>", $user->username, "</td>\n<td>", $user->UserAccessList(), "</td>\n<td><a href='useredit.php?userid=", $row["auserid"], "'>edit</a>";
+					}
 				}
 				echo "</td>\n</tr>\n";
 			}

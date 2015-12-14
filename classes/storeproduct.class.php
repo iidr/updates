@@ -1,5 +1,4 @@
 <?php
-
 class StoreProduct extends Product implements Searchable
 {
 	public $rating;
@@ -91,6 +90,40 @@ class StoreProduct extends Product implements Searchable
 					//$download = new StoreProductDownload($dl_row);
 					//echo '<li><a href="', $download->DownloadLink(), '" target="_blank">', $this->InputSafeString($download->details['filetitle']), '</a></li>';
 					//$this->VarDump($mm->details);
+				}
+				echo '</ul></div>';
+			}
+		}
+		return ob_get_clean();
+	} // end of fn ListPurchasedMM
+	
+	public function ListCustomDownloads($user = false)
+	{	ob_start();
+		if (($downloads = $this->GetDownloads()))
+		{	if (($userid = (int)$user->id) && $user->StoreProductPurchased($this->id))
+			{	echo '<div id="product_downloads"><h4>(Click to download)</h4><ul>';
+				foreach ($downloads as $dl_row)
+				{	$download = new StoreProductDownload($dl_row);
+					echo '<li><a href="', $download->DownloadLink(), '" target="_blank">', $this->InputSafeString($download->details['filetitle']), '</a>';
+					if ($download->details['filepass'])
+					{	echo '<br />Password: ', $download->details['filepass'];
+					}
+					echo '</li>';
+				}
+				echo '</ul></div>';
+			}
+		}
+		return ob_get_clean();
+	} // end of fn ListDownloads
+	
+	public function ListCustomPurchasedMM($user = false)
+	{	ob_start();
+		if (($mmpurchased = $this->GetMultiMediaPurchase()))
+		{	if (($userid = (int)$user->id) && $user->StoreProductPurchased($this->id))
+			{	echo '<div id="product_downloads"><h4>(Click to view Multimedia)</h4><ul>';
+				foreach ($mmpurchased as $mm_row)
+				{	$mm = new Multimedia($mm_row);
+					echo '<li><a href="', $mm->Link(), '">', $this->InputSafeString($mm->details['mmname']), '</a></li>';
 				}
 				echo '</ul></div>';
 			}
@@ -438,7 +471,7 @@ class StoreProduct extends Product implements Searchable
 		
 		// get users who bought this product
 		$tables = array('storeorders', 'storeorderitems');
-		$where = array('storeorders.id=storeorderitems.orderid', 'NOT storeorders.pptransid=""', 'storeorderitems.pid=' . (int)$this->id, 'storeorderitems.ptype="store"');
+		$where = array('storeorders.id=storeorderitems.orderid', 'NOT storeorders.pptransid=""', 'storeorderitems.pid=' . (int)$this->id, 'storeorderitems.ptype="store"','storeorderitems.is_cancelled_refund="0"');
 		$sql = 'SELECT DISTINCT storeorders.sid FROM ' . implode(',', $tables) . ' WHERE ' . implode(' AND ', $where);
 		if ($result = $this->db->Query($sql))
 		{	while ($row = $this->db->FetchArray($result))
@@ -450,7 +483,7 @@ class StoreProduct extends Product implements Searchable
 		if ($userlist = implode(',', $users))
 		{	//echo $userlist;
 			$tables = array('storeproducts', 'storeorders', 'storeorderitems');
-			$where = array('storeproducts.id=storeorderitems.pid', 'storeproducts.live=1', 'storeorders.id=storeorderitems.orderid', 'NOT storeorders.pptransid=""', 'storeorderitems.ptype="store"', 'storeorders.sid IN (' . $userlist . ')', 'NOT storeproducts.id=' . (int)$this->id);
+			$where = array('storeproducts.id=storeorderitems.pid', 'storeproducts.live=1', 'storeorders.id=storeorderitems.orderid', 'NOT storeorders.pptransid=""', 'storeorderitems.ptype="store"', 'storeorderitems.is_cancelled_refund="0"','storeorders.sid IN (' . $userlist . ')', 'NOT storeproducts.id=' . (int)$this->id);
 			$sql = 'SELECT storeproducts.*, COUNT(storeorderitems.id) AS bought_count FROM ' . implode(',', $tables) . ' WHERE ' . implode(' AND ', $where) . ' GROUP BY storeproducts.id ORDER BY bought_count DESC';
 			if ($result = $this->db->Query($sql))
 			{	while ($row = $this->db->FetchArray($result))

@@ -76,30 +76,22 @@ class ContactUsPage extends BasePage
 				}
 			}
 			
-			if (!$errors)
-			{
-				// Mail of sender
-				$mail_from = $_POST["field2"];
-				$name = $_POST["field1"];
-				// From
-				$header="from: $name <$mail_from>";
-				// Details
+			if (!$errors){				
+				$subject= 'IIDR - Contact Form';
+					
+				$mail = new HTMLMail();			
+				$mail->SetSubject($subject);
 				
-				$message = "name: " . $_POST['field1'] . "\n";
+				$message = "A new contact request is received with the following details\n";
+				$message .= "name: " . $_POST['field1'] . "\n";
 				$message .= "email: " . $_POST['field2'] . "\n";
 				$message .= "telephone: " . $_POST['field3'] . "\n";
 				$message .= "details: " . $_POST['field5'] . "\n";
 				$message .= "sent: " . date('d/m/Y @H:i');
-				// Enter your email address
-				//$to = CONTACT_EMAIL;
-				$to = Base::GetParameter('compemail');
-				$subject= 'IIDR - Contact Form';
 				
-				if ($send_contact = mail($to, $subject, $message, $header))
-				{	$this->successmessage = 'Thank you for your query. We will respond to your query as soon as possible.';
-				} else
-				{	$this->failmessage = 'Your message could not be sent. Please try again later.';
-				}
+				$mail->SendEMailForArea('CONTACTUS', '', $message);
+				
+				$this->successmessage = 'Thank you for your query. We will respond to your query as soon as possible.';
 			} else 
 			{	$this->failmessage = implode(', ', $errors);
 			}

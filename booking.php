@@ -27,6 +27,8 @@ class BookingPage extends AccountPage
 		$this->js[] = 'jqModal.js';
 		$this->css[] = 'studentreviews.css';
 		$this->js[] = 'productreview.js';
+		$this->js[] = 'fancybox/jquery.fancybox.pack.js';
+		$this->css[] = 'fancybox/jquery.fancybox.css';
 		
 		$this->booking = new CourseBooking($_GET['id']);
 		$this->content = new CourseContent($this->booking->course->content);
@@ -62,6 +64,20 @@ class BookingPage extends AccountPage
 		
 		if (($this->booking->course->GetVenue()->details['vlat'] != 0) || ($this->booking->course->GetVenue()->details['vlng'] != 0))
 		{	echo '<div id="bdCourseMap"></div><script>showCourseMap("bdCourseMap", ', $this->booking->course->GetVenue()->details['vlng'], ', ', $this->booking->course->GetVenue()->details['vlat'], ');</script>';
+			/*echo '<div id="bdCourseMap"><a href="/show-map.php?lat='.$this->booking->course->GetVenue()->details['vlat'].'&lng='.$this->booking->course->GetVenue()->details['vlng'].'" id="view_campus_link">View Campus Map</a></div>';
+			echo '<script type="text/javascript">
+					$(document).ready(function(){
+						$("#view_campus_link").fancybox({
+							type		: "iframe",
+							autoSize 	: true,
+							minWidth  	: "200",
+							minHeight 	: "200",
+							padding     : 0,
+							autoResize	: true,
+							closeBtn	: true
+						});
+					});
+				</script>';*/
 		}
 		echo '</div><div class="clear"></div></div></div>';
 	} // end of fn LoggedInMainBody

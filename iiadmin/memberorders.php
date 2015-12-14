@@ -47,13 +47,18 @@ class MemberDetailsPage extends MemberPage
 		echo '<table>';
 		$discounts = array();
 		$total_discounts = 0;
+		
+		if(!$user instanceof Student){
+			$orderer = new Student($order->details['sid']);
+		}
+		
 		foreach ($order->GetItems() as $item)
 		{	
 			echo '<tr><td class="oilType">', $this->InputSafeString($item['ptype']), '</td><td class="oilDesc">', (int)$item['qty'], ' &times; ', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title']));
 			switch ($item['ptype'])
 			{	case 'store':
 					$product = new StoreProduct($item['pid']);
-					echo '&nbsp;<span class="prodItemCode">Code: ', $product->ProductID(), '</span>', $product->ListDownloads($this), $product->ListPurchasedMM($this);
+					echo '&nbsp;<span class="prodItemCode">Code: ', $product->ProductID(), '</span>', $product->ListCustomDownloads($orderer), $product->ListCustomPurchasedMM($orderer);
 					break;
 				case 'course':
 					$ticket = new CourseTicket($item['pid']);

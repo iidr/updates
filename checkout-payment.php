@@ -260,6 +260,7 @@ class CheckoutReviewPayment extends CheckoutPage
 		{	$this->order = new StoreOrder($success);
 			// unset order sessions
 			$this->cart->Destroy();
+			unset($_SESSION['order']);
 			return $_SESSION['order_id'] = $success;
 		}
 	} // end of fn CreateOrder

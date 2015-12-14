@@ -5,6 +5,7 @@ class Course extends Base implements Searchable
 	public $content = array();
 	public $dates = array();
 	public $tickets = array();
+	public $all_tickets = array();
 	public $venue;
 	public $id = 0;
 	protected $imagelocation = '';
@@ -34,6 +35,7 @@ class Course extends Base implements Searchable
 	{	$this->id = 0;
 		$this->instructors = array();
 		$this->tickets = array();
+		$this->all_tickets = array();
 		$this->content = array();
 		$this->dates = array();
 		$this->venue = null;
@@ -118,20 +120,23 @@ class Course extends Base implements Searchable
 		
 	} // end of fn GetInstructors
 	
-	public function GetTickets()
-	{	$this->tickets = array();
+	public function GetTickets(){	
+		$this->tickets = array();
 		$where = array('cid = '. (int)$this->id);
+		$today = $this->datefn->SQLDate();
 		
-		if ($this->liveonly)
-		{	$where[] = 'live=1';
-			$today = $this->datefn->SQLDate();
-			$where[] = 'startdate<="' . $today . '"';
-			$where[] = '(enddate>="' . $today . '" OR enddate="0000-00-00")';
+		if ($this->liveonly){
+			$where[] = 'live=1';
 		}
+		
 		$sql = 'SELECT * FROM coursetickets WHERE ' . implode(' AND ', $where);
-		if ($result = $this->db->Query($sql))
-		{	while ($row = $this->db->FetchArray($result))
-			{	$this->tickets[$row['tid']] = $row;
+		if($result = $this->db->Query($sql)){	
+			while ($row = $this->db->FetchArray($result)){	
+				$this->all_tickets[$row['tid']] = $row;
+				
+				if(($row['startdate']!="0000-00-00" && $today >=$row['startdate']) && ($row['enddate']>=$today || $row['enddate']="0000-00-00")){
+					$this->tickets[$row['tid']] = $row;
+				}
 			}
 		}
 	} // end of fn GetTickets
@@ -460,16 +465,18 @@ class Course extends Base implements Searchable
 		return $text;
 	} // end of fn DatesDisplay
 	
-	public function DateDisplayForDetails($sep = '<br />', $date_format = 'l jS F, Y', $date_sep = ' until ', $time_sep = ', ')
+	public function DateDisplayForDetails($sep = '<br />', $date_format = 'l jS F, Y', $date_sep = ' until ', $time_sep = ', ',$showEndDate = true)
 	{	$dates = array();
 		foreach ($this->dates as $date)
 		{	ob_start();
 			echo date($date_format, strtotime($date['startdate']));
-			if ($date['startdate'] != $date['enddate'])
-			{	echo $date_sep, date($date_format, strtotime($date['enddate']));
+			
+			if ($showEndDate && $date['startdate'] != $date['enddate']){	
+				echo $date_sep, date($date_format, strtotime($date['enddate']));
 			}
-			if ($date['timetext'])
-			{	echo $time_sep, $this->InputSafeString($date['timetext']);
+			
+			if ($date['timetext']){	
+				echo $time_sep, $this->InputSafeString($date['timetext']);
 			}
 			$dates[] = ob_get_clean();
 		}

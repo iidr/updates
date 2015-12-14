@@ -142,7 +142,7 @@ table.myacList th
 {	color: #3A809F;
 	padding: 12px 20px;
 	font-size: 14px;
-	text-align: left;
+	/*text-align: left;*/
 }
 table.myacList td
 {	padding: 12px 20px;

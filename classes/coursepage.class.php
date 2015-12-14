@@ -27,6 +27,8 @@ class CoursePage extends BasePage
 		$this->js[] = 'productreview.js';
 		$this->js[] = 'jquery.lightbox-0.5.js';
 		$this->css[] = 'jquery.lightbox-0.5.css';
+		$this->js[] = 'fancybox/jquery.fancybox.pack.js';
+		$this->css[] = 'fancybox/jquery.fancybox.css';
 		$this->facebookLike = true;
 
 		$this->course = new Course($course);
@@ -204,10 +206,31 @@ class CoursePage extends BasePage
 	public function CourseVenueDisplay()
 	{	ob_start();
 		if ($venue = $this->course->GetVenue())
-		{	echo '<div class="course_details_sidelist"><h4>Venue</h4><div class="course_details_sidelist_content"><p>', $this->InputSafeString($venue->details['vname']), '</p><p>', $venue->GetAddress(), '</p>';
-			echo '</div><div class="clear"></div></div>';
-			if (($venue->details['vlat'] != 0) || ($venue->details['vlng'] != 0))
-			{	echo '<div id="coursemap"></div><script>showCourseMap("coursemap", ', $venue->details['vlng'], ', ', $venue->details['vlat'], ');</script>';	
+		{	
+			echo '<div class="course_details_sidelist">';
+				echo '<h4>Venue</h4><div class="course_details_sidelist_content"><p>', $this->InputSafeString($venue->details['vname']), '</p><p>', $venue->GetAddress(), '</p></div>';
+				echo '<div class="clear"></div>';
+			echo '</div>';	
+			
+			if (($venue->details['vlat'] != 0) || ($venue->details['vlng'] != 0)){	
+				/*echo '<div id="coursemap"></div><script>showCourseMap("coursemap", ', $venue->details['vlng'], ', ', $venue->details['vlat'], ');</script>';	*/
+				echo '<div class="course_details_sidelist">';
+					echo '<div class="course_details_sidelist_content"><a href="/show-map.php?lat='.$venue->details['vlat'].'&lng='.$venue->details['vlng'].'" id="view_campus_link"><h4 style="color:#b54e61;">View Campus Map</h4></a></div>';
+					echo '<div class="clear"></div>';
+					echo '<script type="text/javascript">
+							$(document).ready(function(){
+								$("#view_campus_link").fancybox({
+									type		: "iframe",
+									autoSize 	: true,
+									minWidth  	: "200",
+									minHeight 	: "200",
+									padding     : 0,
+									autoResize	: true,
+									closeBtn	: true
+								});
+							});
+						</script>';
+				echo '</div>';
 			}
 		}
 		return ob_get_clean();
@@ -215,15 +238,27 @@ class CoursePage extends BasePage
 	
 	public function CourseTicketsDisplay()
 	{	ob_start();
-		if ($this->course->tickets)
-		{	echo '<div class="course_details_sidelist"><h4>Tickets</h4><div class="course_details_sidelist_content">';
-			foreach ($this->course->tickets as $ticket_row)
-			{	echo '<p>', $this->formatPrice($ticket_row['tprice']), ' ', $this->InputSafeString($ticket_row['tname']), '</p>';
+		if($this->course->tickets){	
+			echo '<div class="course_details_sidelist"><h4>Tickets</h4><div class="course_details_sidelist_content">';
+			foreach ($this->course->tickets as $ticket_row){	
+				echo '<p>', $this->formatPrice($ticket_row['tprice']), ' (', $this->InputSafeString($ticket_row['tname']), ')</p>';
 			}
 			echo '</div><div class="clear"></div></div>';
 		}
 		return ob_get_clean();
 	} // end of fn CourseTicketsDisplay
+	
+	public function AllCourseTicketsDisplay(){
+		ob_start();
+		if($this->course->all_tickets){	
+			echo '<div class="course_details_sidelist"><h4>Tickets</h4><div class="course_details_sidelist_content">';
+			foreach ($this->course->all_tickets as $ticket_row){	
+				echo '<p>', $this->formatPrice($ticket_row['tprice']), ' (', $this->InputSafeString($ticket_row['tname']), ')</p>';
+			}
+			echo '</div><div class="clear"></div></div>';
+		}
+		return ob_get_clean();
+	}
 	
 	public function CourseSpecialOfferDisplay()
 	{	ob_start();
@@ -266,7 +301,7 @@ class CoursePage extends BasePage
 		if ($video = $this->content->GetVideo())
 		{	echo $video->Output(590, 350);
 		}
-		echo '<div class="the-content" id="course_detail_overview">', stripslashes($this->course->content['coverview']), '</div></div><div id="course_detail_right">', $this->BookButton(), $this->CourseCodeDisplay(), $this->CourseDateDisplay(), $this->CourseVenueDisplay(), $this->CourseTicketsDisplay(), $this->CourseSpecialOfferDisplay(), $this->BookButton(), '</div><div class="clear"></div>', $this->BundleList(), $this->InstructorsList();
+		echo '<div class="the-content" id="course_detail_overview">', stripslashes($this->course->content['coverview']), '</div></div><div id="course_detail_right">', $this->BookButton(), $this->CourseCodeDisplay(), $this->CourseDateDisplay(), $this->CourseVenueDisplay(), $this->AllCourseTicketsDisplay(), $this->CourseSpecialOfferDisplay(), $this->BookButton(), '</div><div class="clear"></div>', $this->BundleList(), $this->InstructorsList();
 		$reviewlist = $this->content->ReviewList(0);
 		$reviewform = $this->user->ReviewForm($this->content->id, 'course');
 		$gallerylist = $this->course->GalleryList();

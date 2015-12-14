@@ -113,12 +113,13 @@ class HTMLMail extends Base
 		
 	} // end of fn EMailsForArea
 
-	function SendEMailForArea($area = '', $htmlbody = '', $plainbody = '', $css = '')
-	{	if ($addresses = $this->EMailsForArea($area))
-		{	$tolist = array();
-			foreach($addresses as $add)
-			{	$tolist[] = $add['email'];
+	function SendEMailForArea($area = '', $htmlbody = '', $plainbody = '', $css = ''){
+		if ($addresses = $this->EMailsForArea($area)){	
+			$tolist = array();
+			foreach($addresses as $add){	
+				$tolist[] = $add['email'];
 			}
+			
 			$this->Send(implode(',', $tolist), $htmlbody, $plainbody, $css);
 		}
 	} // end of fn SendEMailForArea

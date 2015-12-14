@@ -39,7 +39,7 @@ class CourseBooking extends BlankItem
 	
 	public function GetOrder()
 	{	$order = array();
-		$sql = 'SELECT storeorders.* FROM storeorders, storeorderitems WHERE storeorders.id=storeorderitems.orderid AND storeorderitems.id=' . (int)$this->details['orderitemid'];
+		$sql = 'SELECT storeorders.* FROM storeorders, storeorderitems WHERE storeorders.id=storeorderitems.orderid AND storeorderitems.is_cancelled_refund="0" AND storeorderitems.id=' . (int)$this->details['orderitemid'];
 		if ($result = $this->db->Query($sql))
 		{	if ($row = $this->db->FetchArray($result))
 			{	$order = $row;
@@ -65,7 +65,7 @@ class CourseBooking extends BlankItem
 		if(is_array($id))
 		{	return $id;
 		} else
-		{	if($result = $this->db->Query('SELECT * FROM storeorderitems WHERE id='. (int)$id))
+		{	if($result = $this->db->Query('SELECT * FROM storeorderitems WHERE storeorderitems.is_cancelled_refund="0" AND id='. (int)$id))
 			{	if($row = $this->db->FetchArray($result))
 				{	return $this->SetOrderItem($row);	
 				}

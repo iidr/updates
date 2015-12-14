@@ -164,6 +164,11 @@ class AdminStoreOrder extends StoreOrder
 	{	ob_start();
 		$discounts = array();
 		$total_discounts = 0;
+		
+		if(!$user instanceof Student){
+			$orderer = new Student($this->details['sid']);
+		}
+		
 		echo '<table class="itemsTable"><tr><th rowspan="2">Type</th><th rowspan="2">Item name</th><th rowspan="2">Qty</th><th colspan="2">Unit Price</th><th colspan="2">Total Price</th></tr><tr><th class="num">Before tax</th><th class="num">After tax</th><th class="num">Before tax</th><th class="num">After tax</th></tr>';
 		foreach ($this->GetItems() as $item)
 		{	
@@ -172,12 +177,12 @@ class AdminStoreOrder extends StoreOrder
 			switch ($item['ptype'])
 			{	case 'store':
 					$product = new StoreProduct($item['pid']);
-					echo '<span class="prodItemCode">Code: ', $product->ProductID(), '</span>';
+					echo '&nbsp;<span class="prodItemCode">Code: ', $product->ProductID(), '</span>', $product->ListCustomDownloads($orderer), $product->ListCustomPurchasedMM($orderer);
 					break;
 				case 'course':
 					$ticket = new CourseTicket($item['pid']);
 					$course = new Course($ticket->details['cid']);
-					echo '<span class="prodItemCode">Code: ', $course->ProductID(), '</span>';
+					echo '&nbsp;<span class="prodItemCode">Code: ', $course->ProductID(), '</span>';
 					break;
 			}
 			

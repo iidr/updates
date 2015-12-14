@@ -9,6 +9,9 @@
 	font-weight: normal;
 	margin: 0px 0px 5px;
 }
+.mmDisplay h2 a {
+    color: #666699 !important;
+}
 .mmDisplay .mmdPosted
 {	color: #666699;
 	font-size: 12px;

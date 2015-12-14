@@ -16,7 +16,7 @@ class StoreOrder extends BlankItem
 	public function GetItems()
 	{	
 		if (!$this->items)
-		{	if ($result = $this->db->Query('SELECT * FROM storeorderitems WHERE orderid=' . (int)$this->id))
+		{	if ($result = $this->db->Query('SELECT * FROM storeorderitems WHERE is_cancelled_refund="0" AND orderid=' . (int)$this->id))
 			{	while ($row = $this->db->FetchArray($result))
 				{	$this->items[$row['id']] = $row;
 					if ($sub = $this->GetItemSub($row['id']))
@@ -114,7 +114,7 @@ class StoreOrder extends BlankItem
 	{	
 		$bookings = array();
 		foreach ($this->GetItems as $item)
-		{	if ($result = $this->db->Query('SELECT * FROM storeorderitems WHERE orderid=' . (int)$this->id))
+		{	if ($result = $this->db->Query('SELECT * FROM storeorderitems WHERE is_cancelled_refund="0" AND orderid=' . (int)$this->id))
 			{	while ($row = $this->db->FetchArray($result))
 				{	$bookings[] = $row;	
 				}
@@ -678,7 +678,7 @@ class StoreOrder extends BlankItem
 			$fields['account_link'] = "<a href='". $fields['account_link_plain'] ."'>". $fields['account_link_plain'] ."</a>";
 			
 			$fields['order_id'] = '#'.$this->details['id'];
-			$fields['order_date'] = ($this->details['orderdate']!='')?date('d-m-Y @H:i', strtotime($this->details['orderdate'])):'';
+			$fields['order_date'] = ($this->details['orderdate']!='')?date('j M y | H:i:s', strtotime($this->details['orderdate'])):'';
 			
 			$fields['transaction_id'] = $this->details['pptransid'];
 			
@@ -687,7 +687,7 @@ class StoreOrder extends BlankItem
 			
 			$fields['invoice_address'] = $this->GetInvoiceAddressHTML();
 			$fields['delivery_address'] = $this->GetDeliveryAddressHTML();
-			$fields['order_items'] = $this->GetOrderItemsHTML();
+			$fields['order_items'] = $this->GetOrderItemsHTML($user);
 			$fields['order_items_plain'] = $this->GetOrderItemsPlain();
 			
 			$fields['password_for_product'] = '';
@@ -695,7 +695,7 @@ class StoreOrder extends BlankItem
 			$t = new MailTemplate('order');
 			$mail = new HTMLMail;
 			$mail->SetSubject($t->details['subject']);
-			$mail->Send($user->details['username'], $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));			
+			$mail->Send($user->details['username'], $t->BuildHTMLEmailText($fields), $t->BuildHTMLPlainText($fields));		
 		}
 	} // end of fn SendCompletedEmail
 	
@@ -753,63 +753,89 @@ class StoreOrder extends BlankItem
 		return ob_get_clean();
 	}
 	
-	public function GetOrderItemsHTML(){
+	public function GetOrderItemsHTML($user = 0){
 		ob_start();
 		
+		if(!$user instanceof Student){
+			$user = new Student($this->details['sid']);
+		}
+		
 		$discounts = array();
-		$total_discounts = $sub_total = $total = 0;
+		$subTotal = $TOTAL = 0.00;
 				
-		echo '<table style="border-collapse: collapse;">';
+		echo '<table width="100%" style="border-collapse: collapse;">';
 		echo '<tr>
-					<th style="border: 1px solid #000; padding: 5px 10px;">Item(s)</th>
-					<th style="border: 1px solid #000; padding: 5px 10px;">Unit Price</th>	
-					<th style="border: 1px solid #000; padding: 5px 10px;">Qty</th>
-					<th style="border: 1px solid #000; padding: 5px 10px;">Discount</th>
-					<th style="border: 1px solid #000; padding: 5px 10px;">Amount</th>
-				</tr>';	
-				
-				foreach ($this->GetItems() as $item){			
-					echo '
-						<tr>
-							<td style="border: 1px solid #000; padding: 5px 10px;">', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title'])), '<span class="prodItemCode">(Code: CE'.$item['pid'].')</span></td>
-							<td style="border: 1px solid #000; padding: 5px 10px;">', $item['price'], '</td>
-							<td style="border: 1px solid #000; padding: 5px 10px;">', $item['qty'], '</td>
-							<td style="border: 1px solid #000; padding: 5px 10px;">
-								<table style="border-collapse: collapse;" border="0">';
-									foreach ($item['discounts'] as $item_discount){	
-										if(!$discounts[$item_discount['discid']]){	
-											$discounts[$item_discount['discid']] = new DiscountCode($item_discount['discid']);
-										}
-										echo '<tr><td style="border: 0px solid #000; padding: 5px 10px;">', $this->formatPrice($item_discount['discamount']), '</td></tr>';
-										$total_discounts += $item_discount['discamount'];
-									}
-									echo '
-								</table>
-							</td>
-							<td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice(floatval($item['pricetax'] - $item_discount['discamount'])), '</td>
-						</tr>';
-						$sub_total = floatval($item['pricetax'] - $item_discount['discamount']);			
-				}
-				
-		echo '<tr><td style="border: 0px solid #000; padding: 5px 10px;" colspan="4" align="right">Sub Total</td><td style="border: 0px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($sub_total), '</td></tr>';
-		echo '<tr><td style="border-bottom: 2px solid #000; padding: 5px 10px;" colspan="5">&nbsp;</td></tr>';		
-		
-		if ($total_discounts){	
-			echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;" colspan="4" align="right">Discount</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($total_discounts), '</td></tr>';
-		}
-		
-		if ($del = $this->details['delivery_price']){	
-			echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;" colspan="4" align="right">Delivery:</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($del), '</td></tr>';	
-		}
-		
-		$total = $this->GetTotal();
-		$today = $this->GetTotal(true);
-		
-		if (($total != $price) && ($today > 0)){	
-			echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;" colspan="4" align="right">Paid to date:</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right;">', $this->formatPrice($today), '</td></tr>';
-		}
-		
-		echo '<tr><td style="border: 1px solid #000; padding: 5px 10px;" colspan="4" align="right">Total:</td><td style="border: 1px solid #000; padding: 5px 10px; text-align: right; font-weight: bold;">', $this->formatPrice($total), '</td></tr></table>';
+					<th colspan="2" align="left" style="border: 1px solid #000; padding: 5px 10px;">Item(s)</th>
+					<th align="right" style="border: 1px solid #000; padding: 5px 10px;">Unit Price</th>	
+					<th align="right" style="border: 1px solid #000; padding: 5px 10px;">Qty</th>
+					<th align="right" style="border: 1px solid #000; padding: 5px 10px;">Discount</th>
+					<th align="right" style="border: 1px solid #000; padding: 5px 10px;">Amount</th>
+			  </tr>';	
+			  
+			  foreach ($this->GetItems() as $item){
+				  echo '<tr>
+							  <td class="oilDesc" colspan="2">', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title']));
+								  switch ($item['ptype']){	
+									  case 'store':
+										  $product = new StoreProduct($item['pid']);
+										  echo '<span class="prodItemCode"> (',$product->ProductID(),')</span><br /><div style="padding-left:40px;">', $product->ListCustomDownloads($user), $product->ListCustomPurchasedMM($user),'</div>';
+										  break;
+									  case 'course':
+										  $ticket = new CourseTicket($item['pid']);
+										  $course = new Course($ticket->details['cid']);
+										  echo '<span class="prodItemCode">Code: ', $course->ProductID(), '</span>';
+										  break;
+								  }
+						  echo '</td><td class="oilPrice num" align="right">', $this->formatPrice($item['price']), '</td>';
+						  echo '<td class="oilPrice num" align="right">', intval($item['qty']), '</td>';
+						  echo '<td class="oilPrice num" align="right" valign="top">&minus;', $this->formatPrice($item['discount_total']),'</td>';
+						  $lineTotal = 0.00;
+						  $lineTotal = floatval($item['totalpricetax'] - $item['discount_total']);
+						  $subTotal += $lineTotal;
+						  $TOTAL += $lineTotal;
+						  echo '<td class="oilPrice num" align="right">', $this->formatPrice($lineTotal), '</td>';	  
+				  echo '</tr>';
+			  }
+			  
+			  echo '<tr><td colspan="6">&nbsp;</td></tr>';
+			  echo '<tr><td colspan="6">&nbsp;</td></tr>';
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Sub-total</td><td class="oilPrice num" align="right">', $this->formatPrice($subTotal), '</td></tr>';	
+			  echo '<tr><td colspan="6"><hr /></td></tr>';
+			  
+			  $orderDiscount = 0.00;
+			  if($this->details['discid']){	
+				  $discount = new DiscountCode($this->details['discid']);
+				  $orderDiscount = $this->details['discamount'];										
+			  }							
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Discount</td><td class="oilPrice num" align="right">', $this->formatPrice($orderDiscount), '</td></tr>';	
+			  
+			  $totalVAT = 0.00;
+			  if($this->details['taxrate']){	
+				  $vatAmount = 0.00;
+				  $totalVAT = $this->details['taxrate'];
+				  $TOTAL += $totalVAT;
+			  }
+			  
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">VAT</td><td class="oilPrice num" align="right">', $this->formatPrice($totalVAT), '</td></tr>';
+			  
+			  $totalDlvAmount = 0.00;
+			  if ($this->details['delivery_price'] > 0){	
+				  $deliveryAmount = 0.00;
+				  $deliveryAmount = $this->details['delivery_price'];
+				  $TOTAL += $deliveryAmount;
+				  $totalDlvAmount =$deliveryAmount; 
+			  }							
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Delivery</td><td class="oilPrice num" align="right">', $this->formatPrice($totalDlvAmount), '</td></tr>';
+			  
+			  $transAmount = 0.00;								
+			  if($this->details['txfee'] > 0){	
+				  $transAmount = $this->details['txfee'];
+				  $TOTAL += $transAmount;
+			  }
+			  
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Transaction fee</td><td class="oilPrice num" align="right">', $this->formatPrice($transAmount), '</td></tr>';
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right"><strong>Total</strong></td><td class="oilPrice num" align="right">', $this->formatPrice($TOTAL), '</td></tr>';
+  		echo '</table>';
 		
 		return ob_get_clean();
 	} // end of fn GetOrderItemsHTML

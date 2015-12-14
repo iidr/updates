@@ -419,45 +419,6 @@ class Student extends Base
 		}
 	} // end of fn SendRegEmail
 	
-/*	public function RegisterForm($submit_page = "")
-	{	if (!$submit_page) $submit_page = $_SERVER['SCRIPT_NAME'];
-		class_exists('Form');
-		ob_start();
-		if (($d = (int)$_POST['ddob']) && ($m = (int)$_POST['mdob']) && ($y = (int)$_POST['ydob']))
-		{	$dob = $this->datefn->SQLDate(mktime(0,0,0,$m, $d, $y));
-		}
-		echo "<form action='", $submit_page, "' method='post' class='form' id='register_form' />\n",
-				"<div class='register_form_group'>\n",
-					"<p><label>First name</label><input type='text' class='text' name='firstname' value='", $this->InputSafeString($_POST["firstname"]), "' /></p>\n",
-					"<p><label>Surname</label><input type='text' class='text' name='surname' value='", $this->InputSafeString($_POST["surname"]), "' /></p>\n",
-					$this->DOBInputField($dob),
-					"<p><label>Male</label><input type='radio' class='radio' name='morf' value='M' ", $_POST["morf"] == "M" ? "checked='checked' " : "", "/>",
-					"<br class='clear' /><label>Female</label><input type='radio' class='radio' name='morf' value='F' ", $_POST["morf"] == "F" ? "checked='checked' " : "", "/>",
-					"</p>\n",
-				"</div>\n",
-				"<div class='register_form_group'>\n",
-					"<p><label>Email</label><input type='text' class='text' name='username' value='", $this->InputSafeString($_POST["username"]), "' /></p>\n",
-					"<p><label>Password</label><input type='password' class='text' name='pword' value='' /></p>\n",
-					"<p><label>Confirm password</label><input type='password' class='text' name='rtpword' value='' /></p>\n",
-				"</div>\n",
-				"<div class='register_form_group'>\n",
-					"<p><label>Address</label><input type='text' class='text' name='address1' value='", $this->InputSafeString($_POST["address1"]), "' /></p>\n",
-					"<p><label>&nbsp;</label><input type='text' class='text' name='address2' value='", $this->InputSafeString($_POST["address2"]), "' /></p>\n",
-					"<p><label>&nbsp;</label><input type='text' class='text' name='address3' value='", $this->InputSafeString($_POST["address3"]), "' /></p>\n",
-					"<p><label>Town / City</label><input type='text' class='text' name='city' value='", $this->InputSafeString($_POST["city"]), "' /></p>\n",
-					"<p><label>Postcode</label><input type='text' class='text' name='postcode' value='", $this->InputSafeString($_POST["postcode"]), "' /></p>\n",
-					
-					"<p><label>Phone</label><input type='text' class='text' name='phone' value='", $this->InputSafeString($_POST["phone"]), "' /></p>\n",
-					"<p><label>Alternative Phone</label><input type='text' class='text' name='phone2' value='", $this->InputSafeString($_POST["phone2"]), "' /></p>\n",
-				"</div>\n",
-				"<div class='register_form_group'>\n",
-					"<p><label>How did you hear about us?</label><input type='text' class='text' name='howheard' value='", $this->InputSafeString($_POST["howheard"]), "' /></p>\n",
-					"<p class='t_and_c'><input type='checkbox' class='check' name='newsletter' value='1' ", ($_POST["newsletter"] || !$_POST) ? "checked='checked' " : "", "/>I would like to be kept informed about IIDR</p>\n", $this->TAndCCheckBox($_POST["tandc"], true),
-				"</div>\n",
-				"<p><input type='submit' class='submit' value='Register' /></p></form>\n";
-		return ob_get_clean();
-	} // end of fn RegisterForm*/
-	
 	public function TAndCCheckBox($confirmed = false, $force_checkbox = false)
 	{	ob_start();
 		if ($confirmed && !$force_checkbox)
@@ -812,8 +773,7 @@ class Student extends Base
 	} // end of fn GetReviewForProduct
 	
 	public function StoreProductPurchased($productid = 0)
-	{	
-		$sql = 'SELECT storeorderitems.* FROM storeorderitems, storeorders WHERE storeorderitems.orderid=storeorders.id AND storeorderitems.is_cancelled_refund="0" AND storeorders.sid=' . (int)$this->id . ' AND NOT storeorders.pptransid="" AND storeorderitems.ptype="store" AND storeorderitems.pid=' . (int)$productid;
+	{	$sql = 'SELECT storeorderitems.* FROM storeorderitems, storeorders WHERE storeorderitems.orderid=storeorders.id AND storeorderitems.is_cancelled_refund="0" AND storeorders.sid=' . (int)$this->id . ' AND NOT storeorders.pptransid="" AND storeorderitems.ptype="store" AND storeorderitems.pid=' . (int)$productid;
 		if ($result = $this->db->Query($sql))
 		{	if ($row = $this->db->FetchArray($result))
 			{	return true;
@@ -867,14 +827,14 @@ class Student extends Base
 					if($src = $course['course']->HasImage('thumbnail-small'))
 					{	echo '<a href="', $course_link, '"><img src="', $src, '" alt="', $course_title, '" title="', $course_title, '" /></a>';
 					}
-					echo '</div></td><td class="prodName" rowspan="', $rowspan, '"><a href="', $course_link, '">', $course_title, '</a><p class="prodItemCode">Code: ', $course['course']->ProductID(), '</p></td><td rowspan="', $rowspan, '">', $course['course']->DateDisplayForDetails('<br />', 'D. jS M y', ' - ', '<br />'), '<br />', $venues[$course['course']->details['cvenue']], '</td>';
+					echo '</div></td><td class="prodName" rowspan="', $rowspan, '"><a href="', $course_link, '">', $course_title, '</a><p class="prodItemCode">Code: ', $course['course']->ProductID(), '</p></td><td rowspan="', $rowspan, '">', $course['course']->DateDisplayForDetails('<br />', 'jS M y', ' - ', '<br />'), '<br />', $venues[$course['course']->details['cvenue']], '</td>';
 					$bcount = 0;
 					foreach ($course['bookings'] as $booking)
 					{	$total_discount = $totalpricetax = 0.00;
 						$total_discount = $booking->order_item['discount_total'];
 						$totalpricetax 	= $booking->order_item['totalpricetax'];
 						$totalpricetax -= $total_discount;
-						echo $bcount++ ? '</tr><tr class="myacListSubRow">' : '', '<td align="right">&pound;', $this->InputSafeString($totalpricetax), '</td><td><a href="booking.php?id=', $booking->id, '">',$booking->id,'</a></td>';
+						echo $bcount++ ? '</tr><tr class="myacListSubRow">' : '', '<td align="right">', $this->InputSafeString($totalpricetax), '</td><td><a href="booking.php?id=', $booking->id, '">',$booking->id,'</a></td>';
 					}
 					echo '</tr>';
 				}
@@ -896,35 +856,111 @@ class Student extends Base
 	{	echo '<div id="orders_container">', $this->OrdersListTable(), '</div>';
 	} // end of fn OrdersList
 	
-	public function OrdersListTable()
-	{	ob_start();
-		if ($orders = $this->GetOrders(true))
-		{	if ($_GET['page'] > 1)
-			{	$start = ($_GET['page'] - 1) * $this->orders_perpage;
-			} else
-			{	$start = 0;
+	public function OrdersListTable(){	
+		ob_start();
+		if ($orders = $this->GetOrders(true)){	
+			if ($_GET['page'] > 1){	
+				$start = ($_GET['page'] - 1) * $this->orders_perpage;
+			}else{	
+				$start = 0;
 			}
+			
 			$end = $start + $this->orders_perpage;
 			
-			echo '<table class="myacList"><tr><th>Date</th><th>Item(s)</th><th>Total Paid</th><th>Order/Booking Ref</th></tr>';
+			/*echo '<table class="myacList"><tr><th>Date</th><th>Item(s)</th><th>Total Paid</th><th>Order/Booking Ref</th></tr>';
 			foreach($orders as $o)
 			{	if (++$count > $start)
 				{	if ($count > $end)
 					{	break;
 					}
 					
-					echo '<tr><td>', date('j M y', strtotime($o->details['orderdate'])), '</td><td class="orderItemList">', $this->ItemsList($o), '</td><td class="num orderTotal">&pound;', number_format($o->GetRealTotal(), 2), '</td><td><a href="order.php?id=', $o->id, '">', $o->id, '</a></td></tr>';
+					echo '<tr><td>', date('j M y', strtotime($o->details['orderdate'])), '</td><td class="orderItemList">', $this->ItemsList($o), '</td><td class="num orderTotal">', $this->formatPrice($o->GetRealTotal()), '</td><td><a href="order.php?id=', $o->id, '">', $o->id, '</a></td></tr>';
 				}
 			}
-			echo '</table>';
-
-			if (count($orders) > $this->perpage)
-			{	
+			echo '</table>';*/
+			
+			
+			foreach($orders as $o){	
+				if(++$count > $start){	
+					if($count > $end){	
+						break;
+					}	
+					echo '<table width="94%" class="myacList">
+							<tr><td colspan="6" align="left">Order date: ',date('j M y', strtotime($o->details['orderdate'])),'</td></tr>
+							<tr><td colspan="6" align="left">Order ID: #',$o->id,'</td></tr>
+							<tr><td colspan="6" align="left">Transaction ID: ',$o->details['pptransid'],'</td></tr>															
+							<tr><th colspan="2" align="left">Item(s)</th><th align="right">Unit Price</th><th align="right">Qty</th><th align="right">Discount</th><th align="right">Amount</th></tr>';									
+							$TOTAL = 0.00;
+							foreach ($o->GetItems() as $item){
+								echo '<tr>
+											<td class="oilDesc" colspan="2">', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title']));
+												switch ($item['ptype']){	
+													case 'store':
+														$product = new StoreProduct($item['pid']);
+														echo '<span class="prodItemCode"> (', $product->ProductID(),')</span><br /><div style="padding-left:40px;">', $product->ListCustomDownloads($this), $product->ListCustomPurchasedMM($this),'</div>';
+														break;
+													case 'course':
+														$ticket = new CourseTicket($item['pid']);
+														$course = new Course($ticket->details['cid']);
+														echo '<span class="prodItemCode">Code: ', $course->ProductID(), '</span>';
+														break;
+												}
+										echo '</td><td class="oilPrice num" align="right">', $this->formatPrice($item['price']), '</td>';
+										echo '<td class="oilPrice num" align="right">', intval($item['qty']), '</td>';
+										echo '<td class="oilPrice num" align="right" valign="top">&minus;', $this->formatPrice($item['discount_total']),'</td>';
+										$subTotal = 0.00;
+										$subTotal = floatval($item['totalpricetax'] - $item['discount_total']);
+										$TOTAL += $subTotal;
+										echo '<td class="oilPrice num" align="right">', $this->formatPrice($subTotal), '</td>';	  
+								echo '</tr>';
+							}
+							
+							echo '<tr><td colspan="6"><hr /></td></tr>';
+							
+							$orderDiscount = 0.00;
+							if($o->details['discid']){	
+								$discount = new DiscountCode($o->details['discid']);
+								$orderDiscount = $o->details['discamount'];										
+							}							
+							echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Discount</td><td class="oilPrice num" align="right">', $this->formatPrice($orderDiscount), '</td></tr>';	
+							
+							$totalVAT = 0.00;
+							if($o->details['taxrate']){	
+								$vatAmount = 0.00;
+								$totalVAT = $o->details['taxrate'];
+								$TOTAL += $totalVAT;
+							}
+							
+							echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">VAT</td><td class="oilPrice num" align="right">', $this->formatPrice($totalVAT), '</td></tr>';
+							
+							$totalDlvAmount = 0.00;
+							if ($o->details['delivery_price'] > 0){	
+								$deliveryAmount = 0.00;
+								$deliveryAmount = $o->details['delivery_price'];
+								$TOTAL += $deliveryAmount;
+								$totalDlvAmount =$deliveryAmount; 
+							}							
+							echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Delivery</td><td class="oilPrice num" align="right">', $this->formatPrice($totalDlvAmount), '</td></tr>';
+							
+							$transAmount = 0.00;								
+							if($o->details['txfee'] > 0){	
+								$transAmount = $o->details['txfee'];
+								$TOTAL += $transAmount;
+							}
+							
+							echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Transaction fee</td><td class="oilPrice num" align="right">', $this->formatPrice($transAmount), '</td></tr>';
+							echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right"><strong>Total</strong></td><td class="oilPrice num" align="right">', $this->formatPrice($TOTAL), '</td></tr>';
+					echo '<tr><td colspan="6"><hr size="7" noshade color="black"/></td></tr>';
+					echo '</table>';
+				}
+			}
+				
+			if (count($orders) > $this->perpage){	
 				$pag = new AjaxPagination($_GET['page'], count($orders), $this->orders_perpage, 'orders_container', 'ajax_orderslist.php', $_GET);
 				echo '<div class="pagination">', $pag->Display(), '</div><div class="clear"></div>';
 			}
-		} else
-		{	echo '<p>No orders</p>';
+		}else{	
+			echo '<p>No orders</p>';
 		}
 		return ob_get_clean();
 	} // end of fn OrdersList
@@ -946,28 +982,28 @@ class Student extends Base
 					echo '<span class="prodItemCode">Code: ', $course->ProductID(), '</span>';
 					break;
 			}
-			echo '</td><td class="oilPrice num">&pound;', number_format($item['totalpricetax'], 2), '</td></tr>';
+			echo '</td><td class="oilPrice num">', $this->formatPrice($item['totalpricetax']), '</td></tr>';
 		}
 		foreach ($order->GetAllReferrerRewards() as $reward)
-		{	echo '<tr><td class="oilType">Reward</td><td class="oilDesc">Refer-a-Friend</td><td class="oilPrice num">&minus;&pound;', number_format($reward['amount'], 2), '</td></tr>';
+		{	echo '<tr><td class="oilType">Reward</td><td class="oilDesc">Refer-a-Friend</td><td class="oilPrice num">', $this->formatPrice($reward['amount']), '</td></tr>';
 		}
 		foreach ($order->GetAllAffRewards() as $reward)
-		{	echo '<tr><td class="oilType">Reward</td><td class="oilDesc">Affiliate scheme</td><td class="oilPrice num">&minus;&pound;', number_format($reward['amount'], 2), '</td></tr>';
+		{	echo '<tr><td class="oilType">Reward</td><td class="oilDesc">Affiliate scheme</td><td class="oilPrice num">', $this->formatPrice($reward['amount']), '</td></tr>';
 		}
 		foreach ($order->GetBundles() as $bundle)
 		{	
-			echo '<tr><td class="oilType">Discount</td><td class="oilDesc">', (int)$bundle['qty'], ' &times; ', $this->InputSafeString($bundle['bname']), '</td><td class="oilPrice num">&minus;&pound;', number_format($bundle['totaldiscount'], 2), '</td></tr>';
+			echo '<tr><td class="oilType">Discount</td><td class="oilDesc">', (int)$bundle['qty'], ' &times; ', $this->InputSafeString($bundle['bname']), '</td><td class="oilPrice num">', $this->formatPrice($bundle['totaldiscount']), '</td></tr>';
 		}
 		if ($order->details['discid'])
 		{	$discount = new DiscountCode($order->details['discid']);
-			echo '<tr><td class="oilType">Discount</td><td class="oilDesc">', $this->InputSafeString($discount->details['discdesc']), '</td><td class="oilPrice num">&minus;&pound;', number_format($order->details['discamount'], 2), '</td></tr>';
+			echo '<tr><td class="oilType">Discount</td><td class="oilDesc">', $this->InputSafeString($discount->details['discdesc']), '</td><td class="oilPrice num">', $this->formatPrice($order->details['discamount']), '</td></tr>';
 		}
 		if ($order->details['delivery_price'] > 0)
 		{	
-			echo '<tr><td class="oilType">delivery</td><td class="oilDesc">', ($order->details['delivery_id'] && ($deloption = new DeliveryOption($order->details['delivery_id'])) && $deloption->id) ? $this->InputSafeString($deloption->details['title']) : '','</td><td class="oilPrice num">&pound;', number_format($order->details['delivery_price'], 2), '</td></tr>';
+			echo '<tr><td class="oilType">delivery</td><td class="oilDesc">', ($order->details['delivery_id'] && ($deloption = new DeliveryOption($order->details['delivery_id'])) && $deloption->id) ? $this->InputSafeString($deloption->details['title']) : '','</td><td class="oilPrice num">', $this->formatPrice($order->details['delivery_price']), '</td></tr>';
 		}
 		if ($order->details['txfee'] > 0)
-		{	echo '<tr><td class="oilType"></td><td class="oilDesc">Transaction fee</td><td class="oilPrice num">&pound;', number_format($order->details['txfee'], 2), '</td></tr>';
+		{	echo '<tr><td class="oilType"></td><td class="oilDesc">Transaction fee</td><td class="oilPrice num">', $this->formatPrice($order->details['txfee']), '</td></tr>';
 		}
 		echo '</table>';
 		return ob_get_clean();
