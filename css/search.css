@@ -1,0 +1,27 @@
+.searchresults
+{	margin: 20px 0px;
+	padding-top: 20px;
+	background: #ffffff;
+}
+.searchresults li
+{	/*border-bottom: 1px solid #000;*/
+	padding: 0px 30px 30px;
+}
+.searchresults li h4
+{	font-size: 20px;
+	font-weight: normal;
+}
+.searchresults li h4 span
+{	margin-right: 20px;
+	color: #999;
+}
+.searchresults li h4 a
+{	color: #000;
+}
+.searchresults li p
+{	font-size: 14px;
+	padding-left: 
+}
+.searchresults li p a
+{	font-style: italic;
+}

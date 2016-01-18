@@ -1,0 +1,12 @@
+ul.dropdown li span
+{	color:#ffffff;
+	display:block;
+	font-weight:bold;
+	padding:7px;
+}
+ul.dropdown li:hover > span
+{	color: #49c2fb;
+}
+ul.dropdown ul
+{	padding-left: 0px;
+}

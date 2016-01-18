@@ -13,7 +13,6 @@ class OrderCancelPage extends BasePage
 	{
 		echo "<h1>Order Cancelled</h1>";
 		echo "<p>Your order has been cancelled and you have not been charged.</p>";
-		/*echo "<p><a href='". $this->link->GetLink('') ."'>Return to homepage?</a></p>";*/	
 	}
 }
 

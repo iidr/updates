@@ -101,16 +101,16 @@ class StoreProduct extends Product implements Searchable
 	{	ob_start();
 		if (($downloads = $this->GetDownloads()))
 		{	if (($userid = (int)$user->id) && $user->StoreProductPurchased($this->id))
-			{	echo '<div id="product_downloads"><h4>(Click to download)</h4><ul>';
+			{	echo '<div style="clear:both;padding: 5px;"></div><div id="product_downloads" style="float:left !important;margin: 0px !important;padding:0px !important;"><h4 style="margin: 0px;padding:0px;">(Click to download)</h4><ul style="list-style:none;list-style-type:none;margin: 0px;padding:0px;">';
 				foreach ($downloads as $dl_row)
 				{	$download = new StoreProductDownload($dl_row);
-					echo '<li><a href="', $download->DownloadLink(), '" target="_blank">', $this->InputSafeString($download->details['filetitle']), '</a>';
+					echo '<li style="float:left !important;margin: 0px !important;padding:0px !important;"><a href="', $download->DownloadLink(), '" target="_blank">', $this->InputSafeString($download->details['filetitle']), '</a>';
 					if ($download->details['filepass'])
 					{	echo '<br />Password: ', $download->details['filepass'];
 					}
 					echo '</li>';
 				}
-				echo '</ul></div>';
+				echo '</ul></div><div style="clear:both;"></div>';
 			}
 		}
 		return ob_get_clean();
@@ -120,12 +120,12 @@ class StoreProduct extends Product implements Searchable
 	{	ob_start();
 		if (($mmpurchased = $this->GetMultiMediaPurchase()))
 		{	if (($userid = (int)$user->id) && $user->StoreProductPurchased($this->id))
-			{	echo '<div id="product_downloads"><h4>(Click to view Multimedia)</h4><ul>';
+			{	echo '<div style="clear:both;padding: 5px;"></div><div id="product_downloads"><h4 style="margin: 0px;padding:0px;">(Click to view Multimedia)</h4><ul style="list-style:none;list-style-type:none;margin: 0px;padding:0px;">';
 				foreach ($mmpurchased as $mm_row)
 				{	$mm = new Multimedia($mm_row);
 					echo '<li><a href="', $mm->Link(), '">', $this->InputSafeString($mm->details['mmname']), '</a></li>';
 				}
-				echo '</ul></div>';
+				echo '</ul></div><div style="clear:both;"></div>';
 			}
 		}
 		return ob_get_clean();

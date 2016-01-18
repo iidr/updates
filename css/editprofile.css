@@ -1,0 +1,7 @@
+.register-wrapper
+{	margin: 20px 100px;
+	background-color: #ffffff;
+}
+#register_form label
+{	width: 125px;
+}

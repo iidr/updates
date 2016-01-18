@@ -694,6 +694,23 @@ class Base
 				echo "</div>";
 				break;
 			case 3:
+				$links = array();
+				$links[] = '<span class="st_sharethis_custom" displayText="ShareThis"></span>';
+				$links[] = '<span class="st_facebook_custom" displayText="Facebook"></span>';
+				$links[] = '<span class="st_twitter_custom" displayText="Tweet"></span>';
+				$links[] = '<span class="st_google_custom" displayText="Google"></span>';
+				$links[] = '<span class="st_email_custom" displayText="Email"></span>';
+				
+				echo '<div class="social_links_insert social_links_end">', 
+				'<script type="text/javascript">var switchTo5x=false;</script>
+				<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+				<script type="text/javascript">stLight.options({publisher: "ur-961a8a43-dd22-fcd3-9641-1f9cd9c3754"});</script>';
+				foreach ($links as $link)
+				{	echo $link;
+				}
+				echo '</div><div class="clear"></div>';
+
+				break;
 			case 5:
 				$links = array();
 				$links[] = '<span class="st_sharethis_custom" displayText="ShareThis"></span>';

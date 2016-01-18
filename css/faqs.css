@@ -1,0 +1,29 @@
+/* #40ADA4 */
+.page-faqs  { }
+.page-faqs .page-content .col3-wrapper-with-sidebar h2, h3 {color:#40ADA4;}
+.page-faqs #breadcrumbs {background-color:#40ADA4;}
+.page-faqs .sidebar-menu li.current-subpage>a
+{	color:#ffffff;
+	background: url('../img/template/sidebar_current_40ADA4.png') no-repeat top right;
+}
+.page-faqs .pagination span
+{	background-color: #40ADA4;
+}
+
+.question {
+	margin-bottom:10px;
+}
+.question h3 {
+	background: transparent url(../img/template/q.png) no-repeat 0 0;
+	padding: 0 0 10px 34px;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-weight:bold;
+	font-size:14px;
+}
+.question .answer {
+	display:none;
+	background: transparent url(../img/template/a.png) no-repeat 0 0;
+	padding: 0 10px 20px 34px;
+	color:#404040;
+	font-size:14px;
+}

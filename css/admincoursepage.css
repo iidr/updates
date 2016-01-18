@@ -1,0 +1,27 @@
+.course_edit_menu
+{	margin-top: -20px;
+	float: left;
+}
+.course_edit_menu ul
+{	float: left;
+	list-style: none;
+	margin: 0px 0px 5px 0px;
+	padding: 0px;
+}
+.course_edit_menu ul li
+{	float: left;
+}
+.course_edit_menu ul li a
+{	padding: 3px 10px 0px;
+	display: block;
+	height: 20px;
+	font-size: 15px;
+	border: 1px solid #999;
+	text-decoration: none;
+}
+.course_edit_menu ul li.selected a
+{	background-color: #111133;
+	color: #ffffff;
+	border: 1px solid #111133;
+	font-weight: bold;
+}

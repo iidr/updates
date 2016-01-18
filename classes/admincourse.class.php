@@ -308,7 +308,7 @@ class AdminCourse extends Course
 		if ($this->id)
 		{	echo '<table><tr class="newlink"><th colspan="10"><a href="courseticket.php?cid=', $this->id, '">Create new ticket</a></th></tr><tr><th>Ticket name</th><th>Description</th><th>Price</th><th>Qty</th><th>Booked</th><th>On sale</th><th>Tax Rate</th><th>Allow no<br />registration?</th><th>Live?</th><th>Actions</th></tr>';
 			$taxrates = $this->TaxRatesForDropDown();
-			foreach ($this->tickets as $ticket_row)
+			foreach ($this->all_tickets as $ticket_row)
 			{	$ticket = new AdminCourseTicket($ticket_row);
 				echo '<tr><td>', $this->InputSafeString($ticket->details['tname']), '</td><td>', $this->InputSafeString($ticket->details['tdesc']), '</td><td>&pound;', number_format($ticket->details['tprice'], 2), '</td><td>', (int)$ticket->details['tqty'], '</td><td>', (int)$ticket->details['tbooked'], '</td><td>', $ticket->OnSaleDatesText(), '</td><td>', $taxrates[$ticket->details['taxid']], '</td><td>', $ticket->details['no_reg'] ? 'Yes' : '', '</td><td>', $ticket->details['live'] ? 'Live' : 'Offline', '</td><td><a href="courseticket.php?id=', $ticket->id, '">edit</a>';
 				if ($ticket->CanDelete())

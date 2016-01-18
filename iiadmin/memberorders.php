@@ -27,7 +27,7 @@ class MemberDetailsPage extends MemberPage
 	
 	private function OrdersList($orders = array())
 	{	if ($orders)
-		{	echo '<table><tr><th>Order No.</th><th>Date / time</th><th>Items</th><th>Order value</th><th>Paid</th><th>Delivered</th><th>Notes</th><th>Actions</th></tr>';
+		{	echo '<table><tr><th>Order No.</th><th>Date / time</th><th>Items</th><th>Order value</th><th>Paid On</th><th>Delivered</th><th>Notes</th><th>Actions</th></tr>';
 			foreach ($orders as $order_row)
 			{	$order = new AdminStoreOrder($order_row);
 				echo '<tr><td>', $order->details['id'], '</td><td>', date('d-M-y @H:i', strtotime($order->details['orderdate'])), '</td><td class="orderItemList">', $this->ItemsList($order), '</td><td class="num">', number_format($order->GetRealTotal(), 2), '</td><td>', (int)$order->details['paiddate'] ? date('d/m/y @H:i', strtotime($order->details['paiddate'])) : '', '</td><td>', $order->details['delivered'] ? 'Yes' : '', '</td><td>', $this->InputSafeString($order->details['pmtnotes']), '</td><td><a href="order.php?id=', $order->id, '">edit</a>';

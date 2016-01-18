@@ -1,0 +1,38 @@
+/* Menu top */
+.header-container ul.menu {
+	float:left;
+	font: 18px/27px 'CardoBold', Arial, sans-serif;
+	margin:0 0 0 20px;
+	height:80px;
+	overflow:hidden;
+}
+.header-container ul.menu>li {
+	float:left;
+}
+.header-container ul.menu>li:hover {
+	opacity:0.9;
+}
+.header-container ul.menu > li > a {
+	display:block;
+	height: 80px;
+	padding:0 20px 0 10px;
+	line-height:80px;
+	border:none;
+	background:url(../img/template/3angle-menu.png) no-repeat center right;
+}
+.header-container ul.submenu {
+	margin:0;
+	position:relative;
+}
+.header-container ul.submenu li {
+	float:none!important;
+	padding:5px 10px;
+	font-size:0.65em;
+	line-height:18px;
+
+}
+.header-container ul.submenu li:hover { opacity:0.9; }
+.green ul.submenu li, dark-green ul.submenu li { width:119px;}
+.blue ul.submenu li { width:112px;}
+.violet ul.submenu li { width:132px;}
+.red ul.submenu li {width:147px;}

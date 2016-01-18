@@ -77,7 +77,7 @@ class ProductPurchasesPage extends AdminProductPage
 	{	ob_start();
 		if ($purchases)
 		{	$students = array();
-			echo '<table><tr><th>Date / time</th><th>Ordered by</th><th>Item qty</th><th>Item value</th><th>Item discount</th><th>Order value</th><th>Paid</th><th>Delivered</th><th>Actions</th></tr>';
+			echo '<table><tr><th>Date / time</th><th>Ordered by</th><th>Item qty</th><th>Item value</th><th>Item discount</th><th>Order value</th><th>Paid On</th><th>Delivered</th><th>Actions</th></tr>';
 			foreach ($purchases as $order_row)
 			{	$order = new AdminStoreOrder($order_row);
 				if (!$students[$order->details['sid']])

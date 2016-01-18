@@ -93,7 +93,7 @@ class CoursePage extends BasePage
 			}
 			
 			if(count($this->multimedia)>0){
-				echo '<div class="course_material">Buy the course video and course material today.<span><a href="', $this->link->GetLink('store.php'),'" class="button-link continue-shopping material_buy_btn">Buy Now</a></span></div>';
+				echo '<div class="course_material">'.$this->GetParameter("buy_course_video").'<span><a href="', $this->link->GetLink('store.php'),'" class="button-link continue-shopping material_buy_btn">Buy now</a></span></div>';
 			}			
 			
 			echo '</div>';
@@ -213,7 +213,6 @@ class CoursePage extends BasePage
 			echo '</div>';	
 			
 			if (($venue->details['vlat'] != 0) || ($venue->details['vlng'] != 0)){	
-				/*echo '<div id="coursemap"></div><script>showCourseMap("coursemap", ', $venue->details['vlng'], ', ', $venue->details['vlat'], ');</script>';	*/
 				echo '<div class="course_details_sidelist">';
 					echo '<div class="course_details_sidelist_content"><a href="/show-map.php?lat='.$venue->details['vlat'].'&lng='.$venue->details['vlng'].'" id="view_campus_link"><h4 style="color:#b54e61;">View Campus Map</h4></a></div>';
 					echo '<div class="clear"></div>';
@@ -231,6 +230,7 @@ class CoursePage extends BasePage
 							});
 						</script>';
 				echo '</div>';
+				echo '<div id="coursemap"></div><script>showCourseMap("coursemap", ', $venue->details['vlng'], ', ', $venue->details['vlat'], ');</script>';
 			}
 		}
 		return ob_get_clean();

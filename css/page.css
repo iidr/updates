@@ -1,6 +1,6 @@
 .the-content
 {	padding:10px 20px;
-	background-color:#FFF;
+	background-color:#ffffff;
 	color:#373737;
 	font-size: 14px;
 }
@@ -11,9 +11,9 @@
 {	font-size: 36px;
 	font-weight: 300;
 	font-family: Lato, Tahoma, Geneva, sans-serif;
-	padding: 20px 0 10px;
+	padding: 20px 20px;
 	margin: 5px 0px 0px;
-	background: #FFF;
+	background: #ffffff;
 }
 .page-content h1 span.headertextWithSM
 {	display: inline-block;
@@ -22,10 +22,15 @@
 .page-content h1 .social_links_insert/*, .page-content h1 .fbPageLike*/
 {	float: right;
     height: 16px;
-    margin-right: 27px;
+    margin-right: -9px;
     margin-top: 8px;
     text-align: right;
 }
+
+.page-content h1 .social_links_end{	
+    margin-right: -28px;
+}
+
 .page-content h1 .social_links_insert .fbPageLike
 {	margin-top: -30px;
 }
@@ -40,9 +45,10 @@
 {	margin-right: 0px;
 }
 .page-content h1 .social_links_insert .st_facebook_custom
-{	background: url("../img/page_sm/sharethis_fb.png") no-repeat scroll left top transparent;width:32px;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
+{	/*background: url("../img/template/sharethis_fb.png") no-repeat scroll left top transparent;width:32px;height:32px;display:inline-block;cursor:pointer;margin-right:2px;*/
 	/*padding:12px;
 	margin: 20px 5px 10px 0px;*/
+	background: url("../img/page_sm/sharethis_fb.png") no-repeat scroll left top transparent;width:32px;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
 }
 .page-content h1 .social_links_insert .st_youtube_custom
 {	background: url("../img/page_sm/sharethis_yt.png") no-repeat scroll left top transparent;width:32px;height:32px;display:inline-block;cursor:pointer;margin-right:2px;
@@ -202,7 +208,7 @@ div.image img{ display:block;}
 }
 #register_login label
 {	float:left;
-	color: #FFF;
+	color: #ffffff;
 	display:inline-block;
 	padding:7px 20px 7px 35px;
 	font-size: 14px;
@@ -225,9 +231,9 @@ div.image img{ display:block;}
 #register_login input[type=submit]
 {	/*background: #336699 url('../img/template/button_arrow.png') no-repeat right 7px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 7px center;*/
-	background: #800000 url('../img/template/button_arrow.png') no-repeat right 7px center;
+	background: #ff0000 url('../img/template/button_arrow.png') no-repeat right 7px center;
 	text-align:left;
-	color:#fff;
+	color:#ffffff;
 	padding:12px 40px 12px 10px;
 	height: 40px;
 	width: 100px;
@@ -240,7 +246,7 @@ div.image img{ display:block;}
 {	opacity:0.8;
 }
 #register_login .lfForgotLink a
-{	color: #FFF;
+{	color: #ffffff;
 }
 /*
 .register-page #register_login input[type=text], .register-page #register_login input[type=password]
@@ -250,7 +256,7 @@ div.image img{ display:block;}
 
 /* Contact Page */
 .contactpage-wrapper
-{	background: #FFF;
+{	background: #ffffff;
 /*	font-family: 'Belgrano', serif;*/
 	font-size:13px;
 	color: #044D64;
@@ -290,9 +296,9 @@ div.image img{ display:block;}
 .contactform input[type='submit']
 {	/*background: #003747; */
 	/*background: #800000;*/ 
-	background:#800000;
+	background:#ff0000;
 	text-align:left; 
-	color:#fff; 
+	color:#ffffff; 
 	padding:11px 15px 11px 15px; 
 /*	font-family: 'Belgrano', serif; */
 	cursor:pointer; 
@@ -312,10 +318,10 @@ div.image img{ display:block;}
 }
 .postCommentContainer form input[type="submit"]
 {	border: none;
-	color: #FFF;
+	color: #ffffff;
 	/*background: #61ACD1 url('../img/template/button_arrow_white.png') no-repeat right 5px center;*/
 	/*background: #800000 url('../img/template/button_arrow_white.png') no-repeat right 5px center;*/
-	background: #800000 url('../img/template/button_arrow_white.png') no-repeat right 5px center;
+	background: #ff0000 url('../img/template/button_arrow_white.png') no-repeat right 5px center;
 	padding: 10px 30px 10px 10px;
 	margin: 10px 20px;
 	float: right;
@@ -333,28 +339,19 @@ div.image img{ display:block;}
 	font-weight: normal;
 	margin-top: 10px;
 }
-
-.page-grants  h1
-{	/*display: none;*/
-}
-/*.page-grants .the-content
-{	background: none;
-	padding-left: 0px;
-	padding-right: 0px;
-}*/
 #grants_header
-{	color: #FFF;
+{	color: #ffffff;
 	background-color: #7F94CC;
 	padding: 30px;
 	margin: -10px -20px;
 }
 #grants_header h2
 {	font-size: 18px;
-	color: #FFF;
+	color: #ffffff;
 }
 a.referFriendLink
 {	display: inline-block;
-	background: #cc9900 url('../img/template/button_arrow_white.png') no-repeat right 12px center;
+	background: #FF0000 url('../img/template/button_arrow_white.png') no-repeat right 12px center;
 	padding: 12px 35px 12px 13px;
 	font-size: 14px;
 	color: #FFF !important;

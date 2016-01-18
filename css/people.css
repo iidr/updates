@@ -1,0 +1,217 @@
+/* People */
+.page-people .page-content {}
+.page-people .page-content h1
+{	padding-left: 0px;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+.page-content h1 span.headertextWithSM
+{	width: 400px;
+}
+
+.instructors-images {}
+.instructors-images li
+{	float:left;
+	width:231px;
+	height: 330px;
+	margin: 0px 12px 20px 0px;
+	background-color: #339999;
+}
+.instructors-images li:last-child
+{	margin-right: 0px;
+}
+.instructors-images li .inst_info_image
+{	width: 231px;
+	height: 247px;
+	overflow: hidden;
+}
+.instructor-info
+{	height: 68px;
+	padding: 15px 20px 0px 22px;
+	font-size: 24px;
+	font-family: Lato, Tahoma, Geneva, sans-serif;
+	color: #ffffff;
+}
+.instructor-info a
+{	color:#fff;
+}
+.instructor-info img { display:block; width:188px; height:210px;}
+
+#people_inner
+{	background-color: #ffffff;
+	width: 960px;
+	margin: 20px 0px 40px;
+	padding: 0px 0px 30px;
+	font-size: 14px;
+}
+
+#people_inner_left
+{	float: left;
+	padding: 30px 0px 0px 30px;
+	width: 231px;
+}
+#people_inner_main
+{	float: left;
+	padding: 25px 30px 0px;
+	width: 639px;
+}
+#people_inner_main h2
+{	font-size: 18px;
+}
+#people_galleries
+{	margin-top: 50px;
+}
+#people_galleries ul
+{	/*margin-top: 20px;*/
+}
+#people_galleries ul li
+{	float: left;
+	margin: 5px;
+}
+#inst_reviews .reviews_wrapper
+{	margin-left: 0px;
+	width: 230px;
+}
+#inst_reviews .review_list li
+{	padding: 40px 0px 10px;
+	width: 230px;
+	height: 210px;
+	overflow: hidden;
+	color: #333333;
+	background: url('../img/template/sidebar_quote.png') no-repeat top left;
+}
+#inst_reviews .review_list li h4
+{	color: #333333;
+}
+#inst_reviews .review_list li .review_text
+{	padding: 0px;
+	margin: 0px 0px 12px;
+	font-style: italic;
+	width: 180px;
+	font-size: 14px;
+}
+
+#inst_reviews .reviews_wrapper .reviews_prev, #inst_reviews .reviews_wrapper .reviews_next
+{	width: 28px;
+	height: 20px;
+	top: 10px;
+	filter: alpha(opacity=40);
+	opacity: 0.4;	
+}
+
+#inst_reviews .reviews_wrapper .reviews_prev
+{	left: 180px;
+	background: url('../img/template/button_arrow_339999_back.png') no-repeat center;
+}
+#inst_reviews .reviews_wrapper .reviews_next
+{	left: 210px;
+	background: url('../img/template/button_arrow_339999.png') no-repeat center;
+}
+#inst_reviews .reviews_none
+{	color: #000;
+	font-size: 16px;
+}
+#inst_reviews .reviewOpener a
+{	display: block;
+	width: 140px;
+	padding: 5px 25px 0px 0px;
+	background: url('../img/template/button_arrow_339999.png') no-repeat bottom right;
+	color: #339999;
+	font-size: 18px;
+}
+#inst_reviews .review_list .review_text_container
+{	width: 180px;
+}
+#people_bottom h3
+{	margin-bottom: 20px;
+}
+#people_bottom .people_bottom_col
+{	float: left;
+	margin-right: 15px;
+	width: 310px;
+	background-color: #ffffff;
+}
+#people_bottom .people_bottom_col:last-child
+{	margin-right: 0px;
+}
+#people_bottom .people_bottom_col h4
+{	background-color: #339999;
+	color: #ffffff;
+	padding: 22px;
+	font-weight: 300;
+	font-family: Lato, Tahoma, Geneva, sans-serif;
+	font-size: 26px;
+	margin-bottom: 22px;
+}
+#people_bottom .people_bottom_col ul>li
+{	margin: 0px 15px 15px;
+	width: 280px;
+	height: 67px;
+}
+#people_bottom .people_bottom_col ul>li .pb_event_image
+{	width: 100px;
+	height: 67px;
+	float: left;
+	overflow: hidden;
+	position: relative;
+}
+#people_bottom .people_bottom_col ul>li .pb_event_image .pb_event_image_link
+{	display: block;
+	position: absolute;
+	width: 100px;
+	height: 67px;
+	top: 0px;
+	left: 0px;
+	background: url('../img/template/mm_linkbg.png') no-repeat top left;
+}
+#people_bottom .people_bottom_col ul>li .pb_event_image img
+{	width: 100px;
+}
+#people_bottom .people_bottom_col ul>li .pb_event_text
+{	padding-left: 10px;
+	width: 170px;
+	height: 67px;
+	float: left;
+	overflow: hidden;
+}
+#people_bottom .people_bottom_col ul>li .pb_event_text_full
+{	width: 280px;
+	height: 67px;
+	overflow: hidden;
+}
+#people_bottom .people_bottom_col ul>li .pb_text_header
+{	margin: 0px 0px 3px;
+	padding: 0px;
+	font-size: 16px;
+	line-height: 1em;
+}
+
+#people_bottom .people_bottom_col ul>li .pb_text_sub
+{	margin: 0px;
+	padding: 0px;
+	font-size: 12px;
+}
+
+#interviewtext p
+{	padding: 5px 0px 10px 30px;
+}
+#interviewtext ul, #interviewtext ol
+{	margin-left: 30px;
+}
+#interviewtext ul li
+{	padding: 5px 0px 10px 0px;
+	list-style: disc inside;
+}
+#interviewtext ol li
+{	padding: 5px 0px 10px 0px;
+	list-style-position: inside;
+}
+#interviewtext p.ivQuestion
+{	padding: 10px 0px 10px 0px;
+	font-weight: bold;
+	font-weight: italic;
+	color: #339999;
+}
+.pagination
+{	margin-right: 0px;
+}

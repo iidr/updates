@@ -6,10 +6,10 @@
 	background-color: #000;
 }
 #courseReviewContainer h3
-{	color: #FFF;
+{	color: #ffffff;
 }
 .reviews_none
-{	color: #FFF;
+{	color: #ffffff;
 	font-size: 18px;
 }
 .reviewOpener a
@@ -18,7 +18,7 @@
 	padding: 5px 25px 0px 0px;
 	margin: 20px 0px 0px;
 	background: url('../img/template/button_arrow.png') no-repeat bottom right;
-	color: #FFF;
+	color: #ffffff;
 	font-size: 18px;
 }
 
@@ -75,7 +75,7 @@
 	width: 450px;
 	height: 195px;
 	overflow: hidden;
-	color: #FFF;
+	color: #ffffff;
 }
 .review_list .review_text_container
 {	background: url('../img/template/white_quote.png') no-repeat top 5px left;
@@ -84,7 +84,7 @@
 	margin: 0px 0px 20px;	
 }
 .review_list li h4
-{	color: #FFF;
+{	color: #ffffff;
 	font-size: 18px;
 	font-weight: normal;
 	margin: 0px 0px 20px;
@@ -185,9 +185,10 @@
 }
 #yourReviewContainer form .addtobasket, #review_modal_popup form .addtobasket
 {	/*background: #3b819f url('../img/template/button_arrow.png') 94% center no-repeat;*/
-	background: #800000 url('../img/template/button_arrow.png') 94% center no-repeat;
+	background: #ff0000 url('../img/template/button_arrow.png') 94% center no-repeat;
 	margin: 0px;
 	float: right;
+	color:#ffffff;
 }
 .reviewPlaceHolder
 {	font-style: italic;
@@ -226,7 +227,7 @@
 	left: 0px;
 	top: 0px;
 	background: url('../img/template/gallery_overlay.png') no-repeat bottom center;
-	color: #FFF;
+	color: #ffffff;
 	font-size: 10px;
 }
 div#galHolder

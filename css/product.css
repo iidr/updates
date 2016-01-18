@@ -2,7 +2,7 @@
 {	width: 655px;
 	margin-bottom: 20px;
 	padding: 20px;
-	background-color: #FFF;
+	background-color: #ffffff;
 }
 #pipHeaderImage
 {	float: left;
@@ -122,7 +122,7 @@
 	transition: none;
 }
 #pipTabsSelector>ul>li a.selected
-{	background-color: #FFF;
+{	background-color: #ffffff;
 	border-top: 1px solid #E2E2DC;
 	border-left: 1px solid #E2E2DC;
 	border-right: 1px solid #E2E2DC;
@@ -147,7 +147,7 @@
 	margin-bottom: 20px;
 }
 #prodReviewContainer
-{	background-color: #FFF;
+{	background-color: #ffffff;
 }
 
 .page-store .page-content .storeBundles h3, .page-store .page-content #prodReviewContainer h3
@@ -185,7 +185,7 @@
 	width: 140px;
 	padding: 10px 0px;
 	background: #469ABF;
-	color: #FFF;
+	color: #ffffff;
 	font-size: 14px;
 	margin-top: 0px;
 }

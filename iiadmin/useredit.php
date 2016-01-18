@@ -31,7 +31,7 @@ class UserEditPage extends AdminPage
 		}
 	} // end of fn LoggedInConstruct
 
-	function Save(){	
+	function Save(){
 		$fail = array();
 		if($this->edituser->userid == $this->user->userid && !$_POST["access"][1]){	
 			$fail[] = "you can't remove your own admin privileges";
@@ -55,6 +55,12 @@ class UserEditPage extends AdminPage
 
 		if(!preg_match("{^[A-Za-z0-9]{3,30}$}i", $_POST["username"])){	
 			$fail[] = "invalid username";
+		}		
+			
+		if($this->edituser->username!='' && $this->edituser->username != $_POST["username"] && $this->user->doUserExists('ausername',$_POST["username"])){
+			$fail[] = "user with given username already exists.";
+		}elseif($this->edituser->username=='' && $this->user->doUserExists('ausername',$_POST["username"])){
+			$fail[] = "user with given username already exists.";
 		}
 
 		if(!preg_match("{^[A-Za-z0-9 ]*$}i", $_POST["firstname"])){
@@ -69,17 +75,55 @@ class UserEditPage extends AdminPage
 			if(!$this->ValidEMail($_POST["email"])){
 				$fail[] = "invalid e-mail";
 			}
+			
+			if($this->edituser->email!='' && $this->edituser->email != $_POST["email"] && $this->user->doUserExists('email',$_POST["email"])){
+				$fail[] = "user with given e-mail already exists.";
+			}elseif($this->edituser->email=='' && $this->user->doUserExists('email',$_POST["email"])){
+				$fail[] = "user with given e-mail already exists.";
+			}
 		}
 		
-		if(!$this->failmessage = implode(", ", $fail)){
+		$this->failmessage = trim(implode(", ", $fail));
+		
+		if(count($fail)<=0){
 			if($this->edituser->Save($_POST["username"], $_POST["pword"], $_POST["firstname"], $_POST["surname"], $_POST["access"], $_POST["email"])){
-				$return['successmessage'] = 'User details saved successfully';
+				$return['successmessage'] = 'User details saved successfully';				
+				// now send email
+				$email 			= trim($_POST["email"]);
+				$newpassword 	= $_POST["pword"];
+				$access 		= array();
+				
+				if(count($_POST["access"])>0){
+					foreach($_POST["access"] as $key=>$value){
+						$access[]= ucfirst($value);
+					}
+				}
+				
+				$subject 	 = ($this->edituser->email!='')?'Account details updated at IIDR':'Your account is created at IIDR';
+				$htmlbody  	 = ($this->edituser->email!='')?'<p>Your account is update for administration area.</p>':'<p>Your account is created for administration area.</p>';
+				$htmlbody  	.= '<p>You can now access the following areas of IIDR.</p>';
+				$htmlbody  	.= '<p>'.implode('<br />', $access).'</p>';
+				$htmlbody  	.= '<p>Log in at <a href="'.SITE_URL.'iiadmin">'.SITE_URL.'</a> with following details:</p><p><strong>Username:</strong> '.$email.'</p><p><strong>Password:</strong> '.$newpassword.'</p>';
+				
+				$plainbody   = ($this->edituser->email!='')?'Your account is created for administration area.':'Your account is update for administration area.';
+				$plainbody 	.= '\nYou can now access the following areas of IIDR.';				
+				$plainbody  .= '\n'.implode('\n', $access).'\n';				
+				$plainbody 	.= '<p>Log in at '.SITE_URL.'iiadmin with following details: \nUsername: '.$email.'\nPassword: '.$newpassword;
+				
+				$mail = new HTMLMail();
+				$mail->SetSubject($subject);
+				$mail->Send($email, $htmlbody, $plainbody);
+				
 				$this->edituser = new AdminUser((int)$_POST["userid"], 1);
+				
 			}else{
 				$return['failmessage'] = 'Something went wrong when saving given user details';					
 			}
-			return $return;
+		}else{
+			$return['failmessage'] = $this->failmessage;					
 		}
+		
+		return $return;
 	} // end of fn Save
 	
 	function AdminBodyMain(){	

@@ -8,7 +8,7 @@
 	height: 147px;
 	margin: 0px 18px 18px 0px;
 	padding: 25px 25px 28px;
-	color: #FFF;
+	color: #ffffff;
 	position: relative;
 }
 #myac_mainmenu>ul>li#myac_main_li_details
@@ -27,7 +27,7 @@
 {	margin-right: 0px;
 }
 #myac_mainmenu>ul>li a
-{	color: #FFF;
+{	color: #ffffff;
 }
 #myac_mainmenu>ul>li .myac_main_text
 {	width: 175px;
@@ -49,7 +49,8 @@
 	font-size: 14px;
 	/*background: #336699 url('../img/template/button_arrow.png') no-repeat 80px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat 80px center;*/
-	background: #800000 url('../img/template/button_arrow.png') no-repeat 80px center;
+	background: #ff0000 url('../img/template/button_arrow.png') no-repeat 80px center;
+	color:#ffffff;
 }
 #myacMenu
 {	margin: 0px 0px 15px;
@@ -59,7 +60,7 @@
 	margin: 0px 1px 2px 1px;
 }
 #myacMenu ul>li a
-{	color: #FFF;
+{	color: #ffffff;
 	background: #003546 no-repeat 194px top;
 	font-size: 16px;
 	display: block;
@@ -99,10 +100,10 @@
 }
 
 #myAcContainer
-{	background: #FFF;
+{	background: #ffffff;
 }
 #myAcContainer h1, #myAcContainer #myacAffiliateContainer h2
-{	color: #FFF;
+{	color: #ffffff;
 	background-color: #3B819F;
 	font-size: 26px;
 	padding: 15px;
@@ -111,11 +112,11 @@
 {	display: block;
 	float: right;
 	font-size: 16px;
-	color: #FFF;
+	color: #ffffff;
 	padding: 5px 0px;
 }
 #myAcContainer h1 #myAcContainerRight a, #myAcContainer #myacAffiliateContainer h2 #myAcAffHeaderRight a
-{	color: #FFF;
+{	color: #ffffff;
 }
 span.prodItemCode
 {	font-size: 10px;
@@ -140,12 +141,12 @@ table.myacList>tbody>tr:last-child
 }
 table.myacList th
 {	color: #3A809F;
-	padding: 12px 20px;
+	padding: 4px 20px;
 	font-size: 14px;
 	/*text-align: left;*/
 }
 table.myacList td
-{	padding: 12px 20px;
+{	padding: 4px 20px;
 	text-align: left;
 	vertical-align: top;
 	font-size: 14px;
@@ -200,7 +201,7 @@ table.itemsTable th, table.itemsTable td
 table.itemsTable th
 {	border-color: #a22a2b;
 	background-color: #a22a2b;
-	color: #FFF;
+	color: #ffffff;
 }
 table.itemsTable .num
 {	text-align: right;
@@ -298,7 +299,7 @@ table.itemsTable .num
 	font-size: 16px;
 }
 #dbCrumbsRight a
-{	color: #FFF;
+{	color: #ffffff;
 }
 
 .myacSubsList
@@ -325,7 +326,7 @@ table.itemsTable .num
 	right: -15px;
 	display: none;
 	border: 1px solid #3B819F;
-	background-color: #FFF;
+	background-color: #ffffff;
 	padding: 20px;
 	color: #002B38;
 	width: 250px;
@@ -357,9 +358,9 @@ table.itemsTable .num
 #affShareContainer #affSharePopup form.spEmailForm input[type="submit"]
 {	/*background: #336699 url('../img/template/button_arrow.png') no-repeat right 10px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 10px center;*/
-	background: #800000 url('../img/template/button_arrow.png') no-repeat right 10px center;
+	background: #ff0000 url('../img/template/button_arrow.png') no-repeat right 10px center;
 	text-align:left; 
-	color:#fff; 
+	color:#ffffff; 
 	padding:5px 30px 5px 10px; 
 	cursor:pointer; 
 	font-size:14px; 

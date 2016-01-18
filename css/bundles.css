@@ -1,0 +1,64 @@
+.storeBundles ul li
+{	margin: 10px 0px;
+	padding: 0px;
+	/*border: 2px solid #CCC;*/
+	background: #ffffff;
+}
+.storeBundles ul li>h3
+{	margin: 0px 0px 5px;
+	padding: 10px 20px;
+}
+.storeBundles ul li>p
+{	font-size: 14px;
+	padding: 10px 20px;
+}
+.storeBundles ul li>p>span
+{	font-weight: bold;
+	font-size: 16px;
+}
+.storeBundles ul li div.bundleProducts
+{	padding: 10px 20px;
+}
+.storeBundles ul li div.bundleProducts>div
+{	float: left;
+	margin: 0px;
+	text-align: center;
+}
+.storeBundles ul li div.bundleProducts>div.sb_store, .storeBundles ul li div.bundleProducts>div.sb_course
+{	width: 120px;
+	overflow: hidden;
+}
+.storeBundles ul li div.bundleProducts>div.sb_store a img, .storeBundles ul li div.bundleProducts>div.sb_course a img
+{	height: 110px;
+}
+.page-content .col3-wrapper-with-sidebar .storeBundles ul li div.bundleProducts>div.sb_store h4, .page-content .col3-wrapper-with-sidebar .storeBundles ul li div.bundleProducts>div.sb_course h4
+{	height: 40px;
+	padding: 5px 0px;
+	color: #3B819F;
+}
+.page-content .col3-wrapper-with-sidebar .storeBundles ul li div.bundleProducts>div.sb_store h4 a, .page-content .col3-wrapper-with-sidebar .storeBundles ul li div.bundleProducts>div.sb_course h4 a
+{	color: #3B819F;
+}
+.storeBundles ul li div.bundleProducts>div.sb_store .bundleProdPrice, .storeBundles ul li div.bundleProducts>div.sb_course .bundleProdPrice
+{	margin-bottom: 10px;
+}
+.storeBundles ul li div.bundleProducts>div.sbSeparator
+{	margin: 30px 10px 0px 10px;
+	font-size: 30px;
+	font-weight: bold;
+	color: #666;
+}
+.storeBundles ul li .addtobasket
+{	margin-left: 20px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+.page-courses .storeBundles ul li .addtobasket
+{	background-color: #b54e61;
+}
+.page-events .storeBundles ul li .addtobasket
+{	background-color: #336699;
+}
+.page-store .storeBundles ul li .addtobasket
+{	background-color: #3b819f;
+}

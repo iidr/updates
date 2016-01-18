@@ -83,7 +83,7 @@ class OrderListingPage extends AccountsMenuPage
 	{	ob_start();
 		if ($orders)
 		{	$students = array();
-			echo '<table><tr><th>Order No.</th><th>Date / time</th><th>Ordered by</th><th>Items</th><th>Order value</th><th>Paid</th><th>Delivered</th><th>Notes</th><th>Actions</th></tr>';
+			echo '<table><tr><th>Order No.</th><th>Date / time</th><th>Ordered by</th><th>Items</th><th>Order value</th><th>Paid On</th><th>Delivered</th><th>Notes</th><th>Actions</th></tr>';
 			foreach ($orders as $order_row)
 			{	$order = new AdminStoreOrder($order_row);
 				if (!$students[$order->details['sid']])

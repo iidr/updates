@@ -5,7 +5,7 @@
 }
 #sidebar-right h3
 {	background-color: #716b4a;
-	color: #FFF;
+	color: #ffffff;
 	padding: 7px 15px;
 }
 #sidebar-right ul
@@ -29,7 +29,7 @@
 
 .askQuestionList>li
 {	margin: 5px 0px 10px;
-	background: #FFF;
+	background: #ffffff;
 }
 .askQuestionList>li .askImamLeft
 {	float: left;
@@ -112,7 +112,7 @@ a.jqmClose
 {	background: #716b4a url('../img/template/question_logo.png') no-repeat top left;
 	padding: 10px 10px 10px 50px;
 	font-size: 13px;
-	color: #FFF;
+	color: #ffffff;
 	height: auto;
 }
 #rlpModalInner .qanswerText
@@ -168,14 +168,14 @@ a.jqmClose
 }
 
 #askExpertHeader
-{	color: #FFF;
+{	color: #ffffff;
 	background-color: #92A583;
 	padding: 24px 33px;
 	font-size: 14px;
 	margin-top: 21px;
 }
 #askExpertHeader *
-{	color: #FFF;
+{	color: #ffffff;
 }
 #askExpertHeader .pageTopText, #askExpertHeader p
 {	padding: 5px 0px 10px;
@@ -191,14 +191,14 @@ a.jqmClose
 }
 
 #sidebar-submitq-wrapper
-{	background: #FFF;
+{	background: #ffffff;
 	margin: 10px 0px;
 }
 #sidebar-submitq-wrapper h3
 {	background-color: #92A583;
 	padding: 15px 23px;
 	margin: 7px 0px 0px;
-	color: #FFF;
+	color: #ffffff;
 }
 #sidebar-submitq-wrapper #sidebar-submitq-content
 {	padding: 22px;
@@ -217,7 +217,7 @@ a.jqmClose
 {	display: block;
 	float: left;
 	padding: 10px 30px 10px 10px;
-	color: #FFF;
+	color: #ffffff;
 	background: #92A583 url('../img/template/button_arrow_white.png') no-repeat 90% center;
 	font-size: 14px;
 }
@@ -254,10 +254,10 @@ a.jqmClose
 {	display: block;
 	float: right;
 	padding: 10px 30px 10px 10px;
-	color: #FFF;
+	color: #ffffff;
 	/*background: #92A583 url('../img/template/button_arrow_white.png') no-repeat right 10px center;*/
 	/*background: #800000 url('../img/template/button_arrow_white.png') no-repeat right 10px center;*/
-	background: #800000 url('../img/template/button_arrow_white.png') no-repeat right 10px center;
+	background: #ff0000 url('../img/template/button_arrow_white.png') no-repeat right 10px center;
 	font-size: 14px;
 }
 

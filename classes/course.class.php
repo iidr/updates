@@ -134,8 +134,14 @@ class Course extends Base implements Searchable
 			while ($row = $this->db->FetchArray($result)){	
 				$this->all_tickets[$row['tid']] = $row;
 				
-				if(($row['startdate']!="0000-00-00" && $today >=$row['startdate']) && ($row['enddate']>=$today || $row['enddate']="0000-00-00")){
+				if($row['startdate']=="0000-00-00" && $row['enddate']=="0000-00-00"){
 					$this->tickets[$row['tid']] = $row;
+				}elseif($row['startdate']!="0000-00-00" && $row['enddate']=="0000-00-00" && $today>=$row['startdate']){
+					$this->tickets[$row['tid']] = $row;	
+				}elseif($row['startdate']=="0000-00-00" && $row['enddate']!="0000-00-00" && $row['enddate']>=$today){
+					$this->tickets[$row['tid']] = $row;
+				}elseif($row['startdate']!="0000-00-00" && $row['enddate']!="0000-00-00" && $today>=$row['startdate'] && $row['enddate']>=$today){
+					$this->tickets[$row['tid']] = $row;	
 				}
 			}
 		}

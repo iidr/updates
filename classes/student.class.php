@@ -810,7 +810,7 @@ class Student extends Base
 			$end = $start + $this->bookings_perpage;
 			
 			$venues = array();
-			echo '<table class="myacList"><tr><th colspan="2">Course(s)</th><th>Date/Time/Location</th><th>Amount</th><th>Order/Booking Ref.</th></tr>';
+			echo '<table class="myacList"><tr><th colspan="2" style="text-align:left;">Course(s)</th><th colspan="2" style="text-align:center;">Date/Time/Location</th><th>Amount</th><th>Order/Booking Ref.</th></tr>';
 			foreach ($courses as $course)
 			{	if (++$count > $start)
 				{	if ($count > $end)
@@ -823,18 +823,20 @@ class Student extends Base
 					}
 					$course_title = $this->InputSafeString($course['course']->content['ctitle']);
 					$course_link = $this->link->GetCourseLink($course['course']);
-					echo '<tr><td class="thumbnail" rowspan="', $rowspan = count($course['bookings']), '"><div>';
+					echo '<tr><td class="thumbnail"><div>';
 					if($src = $course['course']->HasImage('thumbnail-small'))
 					{	echo '<a href="', $course_link, '"><img src="', $src, '" alt="', $course_title, '" title="', $course_title, '" /></a>';
+					}else{
+						echo '<img width="100px" title="', $course_title, '" alt="', $course_title, '" src="default_image.php?width=100&amp;height=100">';
 					}
-					echo '</div></td><td class="prodName" rowspan="', $rowspan, '"><a href="', $course_link, '">', $course_title, '</a><p class="prodItemCode">Code: ', $course['course']->ProductID(), '</p></td><td rowspan="', $rowspan, '">', $course['course']->DateDisplayForDetails('<br />', 'jS M y', ' - ', '<br />'), '<br />', $venues[$course['course']->details['cvenue']], '</td>';
+					echo '</div></td><td class="prodName"><a href="', $course_link, '">', $course_title, '</a><p class="prodItemCode">Code: ', $course['course']->ProductID(), '</p></td><td colspan="2">', $course['course']->DateDisplayForDetails('<br />', 'jS M \'y', ' - ', '<br />'), '<br />', $venues[$course['course']->details['cvenue']], '</td>';
 					$bcount = 0;
 					foreach ($course['bookings'] as $booking)
 					{	$total_discount = $totalpricetax = 0.00;
 						$total_discount = $booking->order_item['discount_total'];
 						$totalpricetax 	= $booking->order_item['totalpricetax'];
 						$totalpricetax -= $total_discount;
-						echo $bcount++ ? '</tr><tr class="myacListSubRow">' : '', '<td align="right">', $this->InputSafeString($totalpricetax), '</td><td><a href="booking.php?id=', $booking->id, '">',$booking->id,'</a></td>';
+						echo $bcount++ ? '</tr><tr class="myacListSubRow">' : '', '<td style="text-align:center;">&pound;', $this->InputSafeString($totalpricetax), '</td><td style="text-align:center;"><a href="booking.php?id=', $booking->id, '">',$booking->id,'</a></td>';
 					}
 					echo '</tr>';
 				}
@@ -886,18 +888,18 @@ class Student extends Base
 						break;
 					}	
 					echo '<table width="94%" class="myacList">
-							<tr><td colspan="6" align="left">Order date: ',date('j M y', strtotime($o->details['orderdate'])),'</td></tr>
+							<tr><td colspan="6" align="left">Order date: ',date('j M \'y', strtotime($o->details['orderdate'])),'</td></tr>
 							<tr><td colspan="6" align="left">Order ID: #',$o->id,'</td></tr>
 							<tr><td colspan="6" align="left">Transaction ID: ',$o->details['pptransid'],'</td></tr>															
 							<tr><th colspan="2" align="left">Item(s)</th><th align="right">Unit Price</th><th align="right">Qty</th><th align="right">Discount</th><th align="right">Amount</th></tr>';									
 							$TOTAL = 0.00;
 							foreach ($o->GetItems() as $item){
 								echo '<tr>
-											<td class="oilDesc" colspan="2">', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title']));
+											<td class="oilDesc" colspan="2" style="text-align:left;">', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title']));
 												switch ($item['ptype']){	
 													case 'store':
 														$product = new StoreProduct($item['pid']);
-														echo '<span class="prodItemCode"> (', $product->ProductID(),')</span><br /><div style="padding-left:40px;">', $product->ListCustomDownloads($this), $product->ListCustomPurchasedMM($this),'</div>';
+														echo '<span class="prodItemCode"> (', $product->ProductID(),')</span>', $product->ListCustomDownloads($this), $product->ListCustomPurchasedMM($this);
 														break;
 													case 'course':
 														$ticket = new CourseTicket($item['pid']);
@@ -949,8 +951,9 @@ class Student extends Base
 							}
 							
 							echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Transaction fee</td><td class="oilPrice num" align="right">', $this->formatPrice($transAmount), '</td></tr>';
+							echo '<tr><td colspan="6"><hr /></td></tr>';
 							echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right"><strong>Total</strong></td><td class="oilPrice num" align="right">', $this->formatPrice($TOTAL), '</td></tr>';
-					echo '<tr><td colspan="6"><hr size="7" noshade color="black"/></td></tr>';
+							echo '<tr><td colspan="6"><hr /></td></tr>';
 					echo '</table>';
 				}
 			}

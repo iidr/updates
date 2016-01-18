@@ -1,0 +1,50 @@
+#courses_container>ul>li
+{	height: auto;
+}
+#courses_container>ul>li .courselist_image
+{	height: 120px;
+	width: 120px;
+}
+.courselist_details_container
+{	float: left;
+	width: 575px;
+}
+#courses_container > ul > li .courselist_slogan, #courses_container > ul > li .courselist_date
+{	background-color: #003546;
+}
+#courses_container>ul>li .courselist_details
+{	padding: 10px 8px 0px 18px;
+	width: 549px;
+	height: auto;
+}
+#courses_container>ul>li .courselist_details h2
+{	height: 30px;
+	overflow: hidden;
+}
+#courses_container>ul>li .courselist_details .subslist_showmore
+{	height: 20px;
+	padding-top: 10px;
+	color: #666666;
+	font-size: 14px;
+}
+#courses_container>ul>li .courselist_date
+{	width: 415px;
+	text-align: right;
+}
+#courses_container>ul>li .courselist_date a
+{	color: #ffffff;
+	margin-right: 50px;
+}
+
+#subdetails_popup
+{	padding-bottom: 5px;
+	width: 640px;
+	margin-left: -320px;
+	top: 50px;
+}
+#subdetails_popup #subdetails_popup_inner
+{	/*height: 500px; overflow:auto;*/
+}
+.subslist_showless_link
+{	font-size: 14px;
+}

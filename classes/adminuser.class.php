@@ -33,7 +33,7 @@ class AdminUser extends Base
 				
 				if($row['useraccess']!=''){
 					$accessChunks = explode(',',$row['useraccess']);
-					if(count($accessChunks)>0){
+					if(count($accessChunks)>0){						
 						foreach($accessChunks as $value){
 							if($this->accessAreas[$value]!=''){
 								$this->useraccess[$value] = $this->accessAreas[$value];
@@ -46,6 +46,20 @@ class AdminUser extends Base
 			}
 		}
 	} // end of fn GetUserInfo
+	
+	function doUserExists($checkField = 'ausername',$checkvalue=''){
+		$response = false;
+		if($checkvalue!=''){
+			$sql = "SELECT `$checkField` FROM adminusers WHERE `$checkField`='".$checkvalue."'";
+			if($result = $this->db->Query($sql)){
+				$row = $this->db->FetchArray($result);
+				print_r($row);
+				$response = count($row);
+			}
+		}
+		
+		return $response;
+	}
 
 	function CanUserAccess($area = ''){
 		if($area!=''){

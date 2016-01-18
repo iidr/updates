@@ -1,5 +1,5 @@
 #grantform_container
-{	background-color: #FFF;
+{	background-color: #ffffff;
 }
 div.page-content h4
 {	font-size: 13px;
@@ -130,9 +130,9 @@ form input[type='text'].number
 .contactform  input[type="submit"]
 {	/*background: #336699 url('../img/template/button_arrow.png') no-repeat right 14px center;*/
 	/*background: #800000 url('../img/template/button_arrow.png') no-repeat right 14px center;*/
-	background: #800000 url('../img/template/button_arrow.png') no-repeat right 14px center;
+	background: #ff0000 url('../img/template/button_arrow.png') no-repeat right 14px center;
 	text-align:left; 
-	color:#fff; 
+	color:#ffffff; 
 	padding:11px 45px 11px 15px; 
 	cursor:pointer; 
 	font-size:14px; 

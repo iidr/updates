@@ -774,11 +774,11 @@ class StoreOrder extends BlankItem
 			  
 			  foreach ($this->GetItems() as $item){
 				  echo '<tr>
-							  <td class="oilDesc" colspan="2">', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title']));
+							  <td class="oilDesc" colspan="2" style="text-align:left;padding-bottom:20px;">', $this->InputSafeString(preg_replace("/\(\([^)]+\)\)/","",$item['title']));
 								  switch ($item['ptype']){	
 									  case 'store':
 										  $product = new StoreProduct($item['pid']);
-										  echo '<span class="prodItemCode"> (',$product->ProductID(),')</span><br /><div style="padding-left:40px;">', $product->ListCustomDownloads($user), $product->ListCustomPurchasedMM($user),'</div>';
+										  echo '<span class="prodItemCode"> (',$product->ProductID(),')</span>', $product->ListCustomDownloads($user), $product->ListCustomPurchasedMM($user);
 										  break;
 									  case 'course':
 										  $ticket = new CourseTicket($item['pid']);
@@ -786,20 +786,20 @@ class StoreOrder extends BlankItem
 										  echo '<span class="prodItemCode">Code: ', $course->ProductID(), '</span>';
 										  break;
 								  }
-						  echo '</td><td class="oilPrice num" align="right">', $this->formatPrice($item['price']), '</td>';
-						  echo '<td class="oilPrice num" align="right">', intval($item['qty']), '</td>';
-						  echo '<td class="oilPrice num" align="right" valign="top">&minus;', $this->formatPrice($item['discount_total']),'</td>';
+						  echo '</td><td class="oilPrice num" align="right" style="text-align:right;vertical-align:top" valign="top">', $this->formatPrice($item['price']), '</td>';
+						  echo '<td class="oilPrice num" align="right" style="text-align:right;vertical-align:top" valign="top">', intval($item['qty']), '</td>';
+						  echo '<td class="oilPrice num" align="right" valign="top" style="text-align:right;vertical-align:top">&minus;', $this->formatPrice($item['discount_total']),'</td>';
 						  $lineTotal = 0.00;
 						  $lineTotal = floatval($item['totalpricetax'] - $item['discount_total']);
 						  $subTotal += $lineTotal;
 						  $TOTAL += $lineTotal;
-						  echo '<td class="oilPrice num" align="right">', $this->formatPrice($lineTotal), '</td>';	  
+						  echo '<td class="oilPrice num" align="right" style="text-align:right;vertical-align:top" valign="top">', $this->formatPrice($lineTotal), '</td>';	  
 				  echo '</tr>';
 			  }
 			  
 			  echo '<tr><td colspan="6">&nbsp;</td></tr>';
 			  echo '<tr><td colspan="6">&nbsp;</td></tr>';
-			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Sub-total</td><td class="oilPrice num" align="right">', $this->formatPrice($subTotal), '</td></tr>';	
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right" style="text-align:right;">Sub-total</td><td class="oilPrice num" align="right" style="text-align:right;">', $this->formatPrice($subTotal), '</td></tr>';	
 			  echo '<tr><td colspan="6"><hr /></td></tr>';
 			  
 			  $orderDiscount = 0.00;
@@ -807,7 +807,7 @@ class StoreOrder extends BlankItem
 				  $discount = new DiscountCode($this->details['discid']);
 				  $orderDiscount = $this->details['discamount'];										
 			  }							
-			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Discount</td><td class="oilPrice num" align="right">', $this->formatPrice($orderDiscount), '</td></tr>';	
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right" style="text-align:right;">Discount</td><td class="oilPrice num" align="right" style="text-align:right;">', $this->formatPrice($orderDiscount), '</td></tr>';	
 			  
 			  $totalVAT = 0.00;
 			  if($this->details['taxrate']){	
@@ -816,7 +816,7 @@ class StoreOrder extends BlankItem
 				  $TOTAL += $totalVAT;
 			  }
 			  
-			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">VAT</td><td class="oilPrice num" align="right">', $this->formatPrice($totalVAT), '</td></tr>';
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right" style="text-align:right;">VAT</td><td class="oilPrice num" align="right" style="text-align:right;">', $this->formatPrice($totalVAT), '</td></tr>';
 			  
 			  $totalDlvAmount = 0.00;
 			  if ($this->details['delivery_price'] > 0){	
@@ -825,7 +825,7 @@ class StoreOrder extends BlankItem
 				  $TOTAL += $deliveryAmount;
 				  $totalDlvAmount =$deliveryAmount; 
 			  }							
-			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Delivery</td><td class="oilPrice num" align="right">', $this->formatPrice($totalDlvAmount), '</td></tr>';
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right" style="text-align:right;">Delivery</td><td class="oilPrice num" align="right" style="text-align:right;">', $this->formatPrice($totalDlvAmount), '</td></tr>';
 			  
 			  $transAmount = 0.00;								
 			  if($this->details['txfee'] > 0){	
@@ -833,8 +833,8 @@ class StoreOrder extends BlankItem
 				  $TOTAL += $transAmount;
 			  }
 			  
-			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right">Transaction fee</td><td class="oilPrice num" align="right">', $this->formatPrice($transAmount), '</td></tr>';
-			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right"><strong>Total</strong></td><td class="oilPrice num" align="right">', $this->formatPrice($TOTAL), '</td></tr>';
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right" style="text-align:right;">Transaction fee</td><td class="oilPrice num" align="right" style="text-align:right;">', $this->formatPrice($transAmount), '</td></tr>';
+			  echo '<tr><td colspan="3">&nbsp;</td><td colspan="2" class="num" align="right" style="text-align:right;"><strong>Total</strong></td><td class="oilPrice num" align="right" style="text-align:right;">', $this->formatPrice($TOTAL), '</td></tr>';
   		echo '</table>';
 		
 		return ob_get_clean();

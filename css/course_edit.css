@@ -1,0 +1,37 @@
+form textarea.desc_text
+{	width: 400px;
+	height: 80px;
+}
+span.ce_cursymbol
+{	font-weight: bold;
+	font-size: 1.5em;
+}
+.cvpLink
+{	
+}
+
+#xfer_modal_popup
+{	padding-bottom: 20px;
+	width: 680px;
+	margin-left: -340px;
+	top: 100px;
+}
+#xferModalInner form label
+{	width: 80px;
+}
+#xferModalInner form select#xferCourseID
+{	width: 450px;
+}
+.xferError, .xferSuccess
+{	text-align: center;
+	padding: 10px;
+	margin-top: 20px;
+	font-size: 16px;
+	color: #F00;
+	border: 2px solid #F00;
+	background-color: #ffffff;
+}
+.xferSuccess
+{	color: #0A0;
+	border: 2px solid #0A0;
+}

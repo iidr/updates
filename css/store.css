@@ -1,8 +1,8 @@
 .coursecart, .storecart
-{	background: #FFF;
+{	background: #ffffff;
 }
 .cartTotals
-{	background: #FFF;
+{	background: #ffffff;
 	padding: 20px;
 	margin-top: 30px;
 }
@@ -23,7 +23,7 @@
 	text-align:left;
 	font-size: 14px;
 	font-weight:normal;
-	background-color:#FFF;
+	background-color:#ffffff;
 }
 .coursecart .cartlisting th
 {	/*color: #B54E61;*/
@@ -56,7 +56,7 @@
 }
 .page-store .page-content .storecart h2, .page-store .page-content .coursecart h2, .page-store .page-content .checkout-address-boxes h2
 {	background-color: #3B819F;
-	color: #FFF;
+	color: #ffffff;
 	padding: 12px 20px;
 	margin: 0px 0px 15px;
 }
@@ -105,7 +105,7 @@
 	height: 32px;*/
 	/*background-color: #999999;*/
 	background-color: #3B819F;
-	color: #FFF;
+	color: #ffffff;
 	height: 42px;
 	padding: 5px 12px;
 	float: left;
@@ -152,7 +152,7 @@
 {	color: #900;
 }
 
-.checkout-address-boxes { position:relative; background:#FFF; color:#387a97; line-height:18px; margin:20px 0; }
+.checkout-address-boxes { position:relative; background:#ffffff; color:#387a97; line-height:18px; margin:20px 0; }
 .checkout-address-deliverybox { width:50%; float:left;}
 .checkout-address-paymentbox { width:50%; float:left;}
 .checkout-address-boxes h3 { color:#fff; background:#044d64; padding:10px; margin:0;}
@@ -398,11 +398,11 @@ input[type="submit"].checkout-link
 	border-radius: 5px;
 }
 #checkoutGiftContainer
-{	background-color: #FFF;
+{	background-color: #ffffff;
 }
 #checkoutGiftContainer h2
 {	background-color: #3B819F;
-	color: #FFF;
+	color: #ffffff;
 	padding: 12px 20px;
 }
 #checkoutGiftContainer>form
@@ -464,7 +464,7 @@ ul.attendee_listing>li>ul>li div.al_email, ul.attendee_listing>li>ul>li div.al_f
     width: 821px;
     padding: 10px 70px;
     background: #CE3635 none repeat scroll 0% 0%;
-    color: #FFF;
+    color: #ffffff;
     box-shadow: 0px 0px 11px #D4D4D4;
     font-weight: 400;
     z-index: 10;
